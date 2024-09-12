@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2</title>
+</head>
+<script type="text/javascript">
+    // Sacar el promedio de 4 notas según indique el usuario "5,5,5,5"
+    var total = 0;
+    var notas = prompt("Dime las notas separadas por comas");
+    var arrsplit = notas.split(",");
+    var arrnot = arrsplit.map(Number);
+    for (let i in arrnot) {
+        var total = total + arrnot[i];
+        //document.write(i);
+        if(i == arrnot.length-1){
+            var media = total/arrnot.length;
+            console.log(total);
+            console.log(media);
+            alert("La nota media es: " + media);        
+        }
+    }    
+    
+</script>
+<body>
+    
+</body>
+</html>

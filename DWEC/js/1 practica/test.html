@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testeo</title>
+</head>
+<script type="text/javascript">
+    let arr = [3,5,7];
+    arr.foo = "hello";
+    /*for (let i in arr) {
+        console.log(i);
+        //document.write(i);
+    }*/
+
+    for (let i in arr) {
+        //console.log(i + ": " + arr[i]);
+        console.log(arr[i]);
+        //document.write(i);
+    }
+
+    let frutas = ["Manzana", "Banana"];
+
+    frutas.forEach(function(elemento, indice, array){
+        console.log(elemento,indice);
+    });
+        
+</script>
+<body>
+    
+</body>
+</html>
