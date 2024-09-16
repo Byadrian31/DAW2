@@ -14,7 +14,7 @@
     var minutos = fecha.getMinutes();
     var segundos = fecha.getSeconds();
     var fechactual = hora + ":" + minutos + ":" + segundos 
-    var mashoras = parseInt(prompt("Estamos en la hora : " + fechactual + " ¿cuántas horas quieres calcular?"), 10);
+    var mashoras = parseInt(prompt("Estamos en la hora : " + fechactual + " ¿cuántas horas quieres calcular?"));
     var nuevahora = (hora + mashoras) % 24 + ":" + minutos + ":" + segundos;
     alert("La nueva hora será = " + nuevahora); 
 </script>
