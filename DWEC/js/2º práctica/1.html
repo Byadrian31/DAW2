@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+</head>
+<script type="text/javascript">
+    // Escribir un programa que en primera instancia nos pida el número de elementos de un array, y en
+    // segunda cada uno de ellos (números enteros).
+    // Al finalizar deberá decir cuál es el número más alto.
+
+    var num = prompt("¿Cuál es el número de elementos del array?");
+    var elementos = prompt("Dime los elementos separados por comas");
+    var array = elementos.split(",");
+
+    if (array.length == num) {
+        var arrnot = array.map(Number);
+        max = 0;
+        for (let i in arrnot) {
+            if (arrnot[i] > max) {
+                max = arrnot[i];
+            }
+
+        }
+        alert("El número máximo es " + max);
+
+    } else {
+        alert("Hay mas/menos elementos de la cantidad indicada");
+    }
+
+
+</script>
+
+<body>
+
+</body>
+
+</html>

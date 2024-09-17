@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 9</title>
+</head>
+<script type="text/javascript">
+    // Obtener palabra y decir si es palíndroma o no
+
+    function Palindrome(string) {
+        // Se convierte todo a minúsculas, se eliminan todos los carácteres no alfanuméricos
+        var palabranormal = string.toLowerCase().replace(/[\W_]/g, '');
+
+        // Da la vuelta a la palabra
+        var palabrainversa = palabranormal.split('').reverse().join('');
+
+        // Devolverá true si las cadenas son iguales.
+        return palabranormal === palabrainversa;
+    }
+
+    var palabra = prompt("Dime que palabra quieres saber si es palíndroma o no");
+    
+    if (Palindrome(palabra)) {
+        alert(palabra + " es palíndroma");
+    } else {
+        alert(palabra + " no es palíndroma");
+    }
+    
+</script>
+
+<body>
+
+</body>
+
+</html>

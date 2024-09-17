@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+</head>
+<script type="text/javascript">
+    // Escribir un programa que en primera instancia nos pida el número de elementos de un array, y en
+    // segunda cada uno de ellos (números enteros).
+    // Al finalizar deberá decir cuál es el número más alto.
+
+    var num = prompt("¿Cuál es el número de elementos del array?");
+    var array = [];
+    var elemento = 0;
+    var max = 0;
+    for (let i = 0; i < num; i++) {
+        elemento = parseInt(prompt("Dime el numero de la posicion " + i));
+        array.push(elemento);
+        if (elemento > max) {
+            max = elemento;
+        }
+    }
+    alert("El número máximo del array es " + max);
+
+
+</script>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8</title>
+</head>
+<script type="text/javascript">
+    // Tomar diferentes tramos de un viaje introducido por el usuario para sacar el tiempo total del viaje. Devolver en horas:minutos
+
+    var tramos = parseInt(prompt("¿Cuántos tramos has realizado?"));
+    var totalm = 0;
+    var min = 0;
+    var hora = 0;
+    while (tramos > 0) {
+        min = parseInt(prompt("¿Cuánto ha durado el tramo?"));
+
+        totalm += min;
+
+        while (totalm > 59) {
+            totalm -= 60;
+            hora++;
+        }
+
+        tramos--;
+    }
+    alert("El tramo total ha sido = " + hora + ":" + totalm); 
+</script>
+
+<body>
+
+</body>
+
+</html>
