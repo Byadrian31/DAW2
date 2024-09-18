@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Número Feliz</title>
+    <script>
+        function feliz(num) {
+            var divnum = num.split("");
+            var i = 0;
+            var cont = 0;
+            var total = 0;
+            var encontrado = false;
+            var resultado = false;
+            while (encontrado == false) {
+                cont = 0;
+                while (cont < divnum.length) {
+                    total += Math.pow(parseInt(divnum[cont]), 2);
+                    cont++;
+                }
+
+                //
+                // volvemos a dividir el resultado para preparar la siguiente interacción
+                divnum = total.toString().split("");
+                if (total === 1) {
+                    resultado = true;
+
+                }
+
+                if (i == 9) {
+
+                    encontrado = true;
+                }
+
+                total = 0;
+
+
+                i++;
+
+            }
+            return resultado;
+        }
+
+        var numero = prompt("Vamos a comprobar si el número indicado es feliz");
+        if (feliz(numero)) {
+            alert("El número es feliz");
+        } else {
+            alert("El número no es feliz");
+        }
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

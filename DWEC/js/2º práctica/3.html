@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprobar documentación</title>
+    <script>
+        function esDNI(dni) {
+            if (dni.length == 9) {
+            var resultado = false;
+            var num_dni = dni.split("");
+            // Para sacar bien el resto se resta 1 al resultado 
+            var resto = parseInt(num_dni[0, 8]) % 23 - 1;
+            //console.log(resto);
+            var letras = ["T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E"];
+            var let_dni = letras[resto];
+            if (num_dni[9] === let_dni) {
+                resultado = true;
+            }
+            return resultado;
+            }
+            
+        }
+
+        function esCorreo(correo) {
+            // Restricciones:
+            // Empezar la cadena /^
+            // Permitir carácteres de A-Z (tanto minúsculas como mayúsculas)
+            // Permitir carácteres numéricos 0-9
+            // Permitir carácteres especiales ._%+-
+            // El + entre secciones indica que la sección puede repetir tantos carácteres como se desee
+            // Hay tres secciones divididas en 
+            // 1º /^[a-zA-Z0-9._%+-]
+            // 2º @[a-zA-Z0-9.-]
+            // 3º \.[a-zA-Z]{2,}
+            // Requiere mínimo dos letras {2,}
+            // Finalizar cadena $/
+            var restricciones = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return restricciones.test(correo);
+        }
+
+        function estlf(tlf) {
+
+        }
+
+        function esip(ip) {
+
+        }
+
+        function esurl(url) {
+
+        }
+
+        var dni = prompt("DNI");
+        if (esDNI(dni)) {
+            alert("DNI correcto");
+        } else {
+            while (!esDNI(dni)) {
+                dni = prompt("DNI INCORRECTO");
+                if (esDNI(dni)) {
+                    alert("DNI correcto");
+                }
+            }
+        }
+
+        var correo = prompt("Correo");
+        if (esCorreo(correo)) {
+            alert("Correo correcto");
+        } else {
+            while (!esCorreo(correo)) {
+                correo = prompt("Correo INCORRECTO");
+                if (esCorreo(correo)) {
+                    alert("Correo correcto");
+                }
+            }
+        }
+
+        var tlf = prompt("Teléfono");
+
+        var ip = prompt("IP");
+
+        var url = prompt("URL");
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
