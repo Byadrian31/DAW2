@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Días del Mes</title>
+</head>
+<script type="text/javascript">
+    // Función para obtener el número de días de un mes
+    function obtenerDiasMes(mes, año) {
+        return new Date(año, mes, 0).getDate();
+    }
+
+    document.write(obtenerDiasMes(1, 2012) + "<br>"); // Resultado: 31
+    document.write(obtenerDiasMes(2, 2016) + "<br>");
+    document.write(obtenerDiasMes(3, 2020)); 
+</script>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piramide</title>
+</head>
+<script type="text/javascript">
+    // Crear piramide de *
+    function piramide(num) {
+        var numint = parseInt(num);
+        for (let i = 0; i < numint; i++) {
+            document.write("*"); 
+            for (let a = 0; a < i; a++) {
+                document.write("*");
+            }
+            document.write("<br>");
+            
+        }
+    }
+
+    var num = prompt("¿Cuán grande quieres la pirámide?")
+    piramide(num);
+</script>
+
+<body>
+
+</body>
+
+</html>

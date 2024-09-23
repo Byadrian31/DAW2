@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nombre del Mes</title>
+</head>
+<script type="text/javascript">
+    // Función para obtener el nombre del mes en castellano
+    function nombreMes(fechaStr) {
+        // Paso el valor de la fecha introducida al formato Date
+        var [dia, mes, año] = fechaStr.split('/');
+        var fecha = new Date(`${año}-${mes}-${dia}`);
+        // Pido el nombre entero del mes
+        var opciones = { month: 'long' };
+        // Devuelve el mes en español
+        return fecha.toLocaleDateString('es-ES', opciones);
+    }
+
+    // Ejemplo de uso
+    document.write(nombreMes("10/11/2009") + "<br>");
+    document.write(nombreMes("10/08/2012") + "<br>");
+    document.write(nombreMes("10/05/2014"));
+</script>
+
+<body>
+
+</body>
+
+</html>

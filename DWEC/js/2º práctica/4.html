@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Date?</title>
+</head>
+<script type="text/javascript">
+    // Función para comprobar si es tipo Date
+    function esDate(fecha) {
+        return fecha instanceof Date && !isNaN(fecha);
+    }
+
+    var fechaRecibida = prompt("Dime la fecha (formato: YYYY-MM-DD)");
+    var fecha = new Date(fechaRecibida);
+
+    if (esDate(fecha)) {
+        alert("Fecha correcta");
+    } else {
+        while (!esDate(fecha)) {
+            fechaRecibida = prompt("Fecha INCORRECTA. Inténtalo de nuevo (formato: YYYY-MM-DD)");
+            fecha = new Date(fechaRecibida);
+            if (esDate(fecha)) {
+                alert("Fecha correcta");
+            }
+        }
+    }
+</script>
+
+<body>
+
+</body>
+
+</html>
