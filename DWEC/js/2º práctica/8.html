@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadena</title>
+</head>
+<script type="text/javascript">
+    // Obtener la subcadena de la frase indicada
+    function extraer(frase,num,lugar) {
+        var resultado = ""
+        if (lugar === "fin") {
+            resultado = frase.substring(frase.length - num)
+        } else if (lugar === "principio"){
+            resultado = frase.substring(0, num)
+        }
+        return resultado;
+    }
+
+   document.write(extraer("Cristiano Ronaldo Apesta", 4, "fin") + "<br>"); 
+   document.write(extraer("Cristiano Ronaldo Apesta", 4, "principio")); 
+</script>
+
+<body>
+
+</body>
+
+</html>
