@@ -8,19 +8,19 @@
     <script>
         function esDNI(dni) {
             if (dni.length == 9) {
-            var resultado = false;
-            var num_dni = dni.split("");
-            // Para sacar bien el resto se resta 1 al resultado 
-            var resto = parseInt(num_dni[0, 8]) % 23 - 1;
-            //console.log(resto);
-            var letras = ["T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E"];
-            var let_dni = letras[resto];
-            if (num_dni[9] === let_dni) {
-                resultado = true;
+                var resultado = false;
+                var num_dni = dni.split("");
+                // Para sacar bien el resto se resta 1 al resultado 
+                var resto = parseInt(num_dni[0, 8]) % 23 - 1;
+                //console.log(resto);
+                var letras = ["T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E"];
+                var let_dni = letras[resto];
+                if (num_dni[9] === let_dni) {
+                    resultado = true;
+                }
+                return resultado;
             }
-            return resultado;
-            }
-            
+
         }
 
         function esCorreo(correo) {
@@ -41,15 +41,46 @@
         }
 
         function estlf(tlf) {
-
+            if (tlf.length == 9) {
+                var resultado = false;
+                var num = parseInt(tlf);
+                if (!isNaN(num)) {
+                    resultado = true;
+                }
+            }
+            return resultado;
         }
 
         function esip(ip) {
+            res = 0;
+            resultadoTotal = false;
+            var split = ip.split(".");
+            if (split.length == 4) {
+                for (let i = 0; i < split.length; i++) {
+                    var numero = parseInt(split[i]);
+                    if (numero >= 0 && numero <= 255 && !isNaN(numero)) {
+                        res++;
+                    } else {
+                        res--;
+                    }
+                }
+                console.log(res);
+                if (res == 4) {
+                    resultadoTotal = true;
+                }
+            }
+
+            return resultadoTotal;
 
         }
 
         function esurl(url) {
-
+            try {
+                new URL(url);
+                return true;
+            } catch (err) {
+                return false;
+            }
         }
 
         var dni = prompt("DNI");
@@ -77,10 +108,42 @@
         }
 
         var tlf = prompt("Teléfono");
+        if (estlf(tlf)) {
+            alert("Teléfono correcto");
+        } else {
+            while (!estlf(tlf)) {
+                tlf = prompt("Teléfono INCORRECTO");
+                if (estlf(tlf)) {
+                    alert("Teléfono correcto");
+                }
+            }
+        }
 
         var ip = prompt("IP");
+        if (esip(ip)) {
+            alert("IP correcta");
+        } else {
+            while (!esip(ip)) {
+                ip = prompt("IP INCORRECTA");
+                if (esip(ip)) {
+                    alert("IP correcta");
+                }
+            }
+        }
 
         var url = prompt("URL");
+        if (esurl(url)) {
+            alert("Url correcta");
+        } else {
+            while (!esurl(url)) {
+                url = prompt("Url INCORRECTA");
+                if (esurl(url)) {
+                    alert("Url correcta");
+                }
+            }
+        }
+
+        alert("TODO CORRECTO");
 
     </script>
 </head>
