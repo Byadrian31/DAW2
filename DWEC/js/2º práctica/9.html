@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proteger email</title>
+</head>
+<script type="text/javascript">
+    // Escribir una función que proteja una dirección de email pasada como argumento.
+    function protejerEmail(correo) {
+        var letra = correo.substring(0,5);
+        var final = correo.split("@");
+        var correofin = letra + "..." + "@" + final[1];
+
+        return correofin;
+    }
+
+    document.write(protejerEmail("diego.garcia@ieslasenia.org" + "<br>"))
+   // Resultado: diego...@ieslasenia.org
+   document.write(protejerEmail("adrianlp922@gmail.com") + "<br>")
+   document.write(protejerEmail("alopez10@iesfuentesanluis.org"))
+</script>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>camelCase</title>
+</head>
+<script type="text/javascript">
+    // Escribir una función que convierta cualquier String en el formato “camelCase”.
+    function camelCase(frase) {
+        var palabras = frase.split(" ");
+        var letra = ""
+        var nuevafrase = palabras[0];
+        for (let i = 1; i < palabras.length; i++) {
+            letra = palabras[i].substring(0, 1).toUpperCase();
+            nuevafrase += letra + palabras[i].substring(1);
+
+        }
+
+        /* Otra manera de realizarlo con {for in} 
+        for (const item in palabras) {
+             if (item > 0) {
+                 letra = palabras[item].substring(0, 1).toUpperCase();
+                 nuevafrase += letra + palabras[item].substring(1);
+ 
+             }
+         }*/
+
+        return nuevafrase;
+    }
+
+    document.write(camelCase("superman es Débil") + "<br>");
+    // Resultado: supermanEsDébil
+    document.write(camelCase("batman es Mejor que Superman") + "<br>")
+    document.write(camelCase("spiderman es El mejor Superhéroe de todos"))
+</script>
+
+<body>
+
+</body>
+
+</html>

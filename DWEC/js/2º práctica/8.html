@@ -9,6 +9,8 @@
 <script type="text/javascript">
     // Obtener la subcadena de la frase indicada
     function extraer(frase,num,lugar) {
+        console.log(frase.length);
+        console.log(frase.length - num);
         var resultado = ""
         if (lugar === "fin") {
             resultado = frase.substring(frase.length - num)
@@ -19,7 +21,7 @@
     }
 
    document.write(extraer("Cristiano Ronaldo Apesta", 4, "fin") + "<br>"); 
-   document.write(extraer("Cristiano Ronaldo Apesta", 4, "principio")); 
+   document.write(extraer("Cristiano Ronaldo Apesta", 10, "principio")); 
 </script>
 
 <body>
