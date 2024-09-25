@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Total</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Formulario Total</h2>
+        <form>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" onblur="checkNombre()">
+
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" name="apellidos" onblur="checkApellido()">
+
+            <label for="email">E-mail:</label>
+            <input type="text" id="email" name="email" onblur="checkCorreo()">
+
+            <label for="dni">DNI:</label>
+            <input type="text" id="dni" name="dni" onblur="checkDNI()">
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" onblur="checkPass()">
+
+            <label for="password2">Repetir password:</label>
+            <input type="password" id="password2" name="password2" onblur="checkPass2()">
+
+            <label for="ip">IP Equipo:</label>
+            <input type="text" id="ip" name="ip" onblur="checkIp()">
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <script src="check.js"></script>
+</body>
+</html>
