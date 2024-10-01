@@ -7,21 +7,21 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" >
         <div class="color-container">
-            <div class="color-box red" id="red" onmouseover="changeCircle()"></div>
+            <div class="color-box red" id="red" onmouseover="changeCircle(this)" onmouseleave="changeSquare(this)" onclick="shadowOut(this)" ></div>
             <button class="delete-btn">Eliminar</button>
         </div>
         <div class="color-container">
-            <div class="color-box blue" id="blue"></div>
+            <div class="color-box blue" id="blue" onmouseover="changeCircle(this)" onmouseleave="changeSquare(this)" onclick="shadowOut(this)"></div>
             <button class="delete-btn">Eliminar</button>
         </div>
         <div class="color-container">
-            <div class="color-box green" id="green"></div>
+            <div class="color-box green" id="green" onmouseover="changeCircle(this)" onmouseleave="changeSquare(this)" onclick="shadowOut(this)"></div>
             <button class="delete-btn">Eliminar</button>
         </div>
         <div class="color-container">
-            <div class="color-box black" id="black"></div>
+            <div class="color-box black" id="black" onmouseover="changeCircle(this)" onmouseleave="changeSquare(this)" onclick="shadowOut(this)"></div>
             <button class="delete-btn">Eliminar</button>
         </div>
     </div>
