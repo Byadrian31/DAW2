@@ -70,7 +70,7 @@ function checkDNI() {
     if (!resultado || dni.trim() === "") {
         labelDNI.textContent = "DNI incorrecto:";
         labelDNI.style.color = "red";
-        
+
     } else {
 
         labelDNI.textContent = "DNI:";
@@ -80,58 +80,52 @@ function checkDNI() {
     return encontrado;
 }
 
-function checkForm() {
+function checkForm(listadoId) {
     if (checkNombre() && checkCorreo() && checkDNI()) {
         var nombre = document.getElementById("nombre").value;
         var correo = document.getElementById("email").value;
         var dni = document.getElementById("dni").value;
         var copia = nombre + " " + correo + " " + dni;
 
-        var nodoPadre = document.getElementById("listado");
+        var nodoPadre = document.getElementById(listadoId);
         var parrafo = document.createElement("p");
+        parrafo.addEventListener("dblclick", changeValue, false);
         var texto = document.createTextNode(copia);
         parrafo.appendChild(texto);
         nodoPadre.appendChild(parrafo);
-
     } else {
         alert("Valores incorrectos");
     }
 }
 
-function checkForm2() {
-    if (checkNombre() && checkCorreo() && checkDNI()) {
-        var nombre = document.getElementById("nombre").value;
-        var correo = document.getElementById("email").value;
-        var dni = document.getElementById("dni").value;
-        var copia = nombre + " " + correo + " " + dni;
-
-        var nodoPadre = document.getElementById("listado2");
-        var parrafo = document.createElement("p");
-        var texto = document.createTextNode(copia);
-        parrafo.appendChild(texto);
-        nodoPadre.appendChild(parrafo);
-
-    } else {
-        alert("Valores incorrectos");
-    }
-}
-
-function changeInfo() {
-    var copia = document.getElementById("listado").getElementsByTagName("p");
-    var ultimo = copia[copia.length-1].textContent;
-
-    for (let i = 0; i < copia.length-1; i++) {
-       copia[i].textContent = ultimo;
-    }
-}
 
 function select() {
     var opcion = document.getElementById("select").value;
-    if (opcion == "list1") {
-        checkForm();
-    } else if(opcion == "list2") {
-        checkForm2();
+    if (opcion) {
+        checkForm(opcion);
     } else {
-        alert ("Selecciona una opcion")
+        alert("Selecciona una opción");
     }
+}
+
+function changeValue(event) {
+    var opcion = document.getElementById("select").value;
+    // Comprobar si el texto que seleccionamos el id del nodoPadre no sea el mismo que a donde se va a desplazar
+    if (event.target.parentNode.id === opcion) {
+        alert("No puedes desplazarte al mismo sitio");
+    } else {
+
+        var texto = event.target.textContent;
+        var nodoPadre = document.getElementById(opcion);
+
+        // Crear un nuevo párrafo con el texto
+        var nuevoParrafo = document.createElement("p");
+        nuevoParrafo.textContent = texto;
+        nuevoParrafo.addEventListener("dblclick", changeValue, false);
+        nodoPadre.appendChild(nuevoParrafo);
+
+        // Eliminar el párrafo original
+        event.target.remove();
+    }
+
 }
