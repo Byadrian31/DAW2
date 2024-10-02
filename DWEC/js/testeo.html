@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Número Feliz, Par/Impar y Primo</title>
+    <script>
+        // Función para comprobar si un número es feliz
+        function feliz(num) {
+            var divnum = num.split("");
+            var i = 0;
+            var cont = 0;
+            var total = 0;
+            var encontrado = false;
+            var resultado = false;
+            while (!encontrado) {
+                cont = 0;
+                while (cont < divnum.length) {
+                    total += Math.pow(parseInt(divnum[cont]), 2);
+                    cont++;
+                }
+                divnum = total.toString().split("");
+                if (total === 1) {
+                    resultado = true;
+                    break;
+                }
+                if (i == 9) {
+                    encontrado = true;
+                }
+                total = 0;
+                i++;
+            }
+            return resultado;
+        }
+
+        // Función para comprobar si un número es par o impar
+        function parImpar(num) {
+            return num % 2 === 0 ? "par" : "impar";
+        }
+
+        // Función para comprobar si un número es primo
+        function esPrimo(num) {
+            if (num <= 1) return false;
+            for (var i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        var numero = parseInt(prompt("Introduce un número para comprobar si es feliz, par/impar y si es primo"));
+
+        // Verificación de número feliz
+        var mensajeFeliz = feliz(numero.toString()) ? "feliz" : "no es feliz";
+
+        // Verificación de par o impar
+        var mensajeParImpar = parImpar(numero);
+
+        // Verificación de si es primo
+        var mensajePrimo = esPrimo(numero) ? "primo" : "no es primo";
+
+        // Mostrar resultados
+        alert("El número " + numero + " es " + mensajeFeliz + ", " + mensajeParImpar + " y " + mensajePrimo + ".");
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

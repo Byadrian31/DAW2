@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Números Felices, Pares/Impares y Primos en un Array</title>
+    <script>
+        // Función para comprobar si un número es feliz
+        function feliz(num) {
+            var divnum = num.split("");
+            var i = 0;
+            var cont = 0;
+            var total = 0;
+            var encontrado = false;
+            var resultado = false;
+            while (!encontrado) {
+                cont = 0;
+                while (cont < divnum.length) {
+                    total += Math.pow(parseInt(divnum[cont]), 2);
+                    cont++;
+                }
+                divnum = total.toString().split("");
+                if (total === 1) {
+                    resultado = true;
+                    break;
+                }
+                if (i == 9) {
+                    encontrado = true;
+                }
+                total = 0;
+                i++;
+            }
+            return resultado;
+        }
+
+        // Función para comprobar si un número es par o impar
+        function parImpar(num) {
+            return num % 2 === 0 ? "par" : "impar";
+        }
+
+        // Función para comprobar si un número es primo
+        function esPrimo(num) {
+            if (num <= 1) return false;
+            for (var i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Función principal para procesar el array de números
+        function procesarNumeros(arrayNumeros) {
+            arrayNumeros.forEach(function (numero) {
+                // Convertir el número a cadena para la función feliz
+                var mensajeFeliz = feliz(numero.toString()) ? "feliz" : "no es feliz";
+
+                // Verificar si es par o impar
+                var mensajeParImpar = parImpar(numero);
+
+                // Verificar si es primo
+                var mensajePrimo = esPrimo(numero) ? "primo" : "no es primo";
+
+                // Mostrar los resultados para cada número
+                alert("El número " + numero + " es " + mensajeFeliz + ", " + mensajeParImpar + " y " + mensajePrimo + ".");
+            });
+        }
+
+        // Solicitar al usuario que introduzca un array de números
+        var inputArray = prompt("Introduce un array de números separados por comas (ejemplo: 1,2,3,4)");
+
+        // Convertir el input en un array de números
+        var numeros = inputArray.split(",").map(function (item) {
+            return parseInt(item.trim());
+        });
+
+        // Llamar a la función para procesar el array
+        procesarNumeros(numeros);
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
