@@ -1,0 +1,28 @@
+table {
+    border: 1px solid #333;
+    border-collapse: collapse;
+    font-family: Arial;
+}
+
+th, td {
+    border: 1px solid #333; 
+    text-align: center;
+}
+
+th {
+    background-image: url("../img/fondo_gris.gif");
+    background-size: cover;
+}
+
+tr:nth-child(even){
+    background-color: #FFFFCC;
+}
+
+.subrayado:hover {
+    background-color: #FFFF66;
+}
+
+
+.moneda{
+    background-color: #E6F3FF;
+}
