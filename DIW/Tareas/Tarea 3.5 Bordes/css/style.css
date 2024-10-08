@@ -1,0 +1,33 @@
+body {
+    background-color: aquamarine;
+}
+
+#container{
+    margin-top: 20px;
+    margin-left: 300px;
+    margin-right: 300px;
+    background-color: white;
+}
+
+header h1{
+    text-align: center;
+    padding-top: 10px;
+}
+
+#articulos{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#bloque1{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+footer{
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
