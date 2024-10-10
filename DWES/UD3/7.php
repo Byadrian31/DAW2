@@ -11,5 +11,5 @@ $date2 = new DateTime($fechaDeseada);
 
 $interval = $date1->diff($date2);
 
-echo $interval->format(' %d dia(s), %m mes(es), %y año(s), %h hora(s), %i minuto(s), %s segundo(s)') . "\n";
+echo $interval->format(' %d día(s), %m mes(es), %y año(s), %h hora(s), %i minuto(s), %s segundo(s)') . "\n";
 ?>

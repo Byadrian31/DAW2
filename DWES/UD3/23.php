@@ -35,7 +35,7 @@ $trabajadores = [];
 $cant = readline("¿Cuántos trabajadores hay? ");
 for ($i=0; $i < $cant; $i++) { 
     $trabajador = readline("¿Cuál es el nombre del trabajador? ");
-    $salario = readline("¿Cuanto es el sueldo del trabajador? ");
+    $salario = readline("¿Cuánto es el sueldo del trabajador? ");
     $trabajadores[$trabajador] = $salario;
 }
 

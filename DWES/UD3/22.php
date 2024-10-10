@@ -13,7 +13,7 @@ for ($i = 0; $i < 10; $i++) {
     $numeros[$i] = $num;
     if ($num < 0) {
         $negativos++;
-    } else {
+    } else if($num > 0) {
         $positivos++;
     }
 }

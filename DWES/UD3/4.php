@@ -6,10 +6,10 @@
 
 $encontrado = false;
 while (!$encontrado) {
-    $tiempo = readline("Dime la horas, minutos, segundos: (h:m:s) ");
+    $tiempo = readline("Dime las horas, minutos, segundos: (h:m:s) ");
     $time = explode(":", $tiempo);
     if (count($time) < 3) {
-        $tiempo = readline("Dime la horas, minutos, segundos: (h:m:s) ");
+        $tiempo = readline("Dime las horas, minutos, segundos: (h:m:s) ");
 
     } else {
 
