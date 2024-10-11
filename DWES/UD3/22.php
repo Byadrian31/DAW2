@@ -4,9 +4,16 @@
  * @author Adrián López Pascual
  */
 
+/*
+Escribe un programa que lea una lista de diez números y determine cuántos son positivos, y
+cuántos son negativos (muestra los números, la cantidad de positivos y negativos y el porcentaje
+de cada grupo)
+*/
+
 $positivos = 0;
 $negativos = 0;
 $numeros = [];
+
 
 for ($i = 0; $i < 10; $i++) {
     $num = readline("Dime el número " . $i+1 . ": ");
@@ -20,10 +27,13 @@ for ($i = 0; $i < 10; $i++) {
 
 echo "Lista de números: \n";
 echo "-------------- \n";
+// For para mostrar los números
 foreach ($numeros as $value) {
     echo $value . "\n";
 }
 echo "-------------- \n";
+
+// Porcentaje de los numeros positivos y negativos
 $posP = $positivos / 10 * 100;
 $negP = $negativos / 10 * 100;
 

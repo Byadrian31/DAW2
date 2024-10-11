@@ -2,6 +2,14 @@
 /**
  * @author: Adrián López Pascual
  */
+
+ /*
+ Dado un vector asociativo de trabajadores con su salario creado solicitando al usuario el nombre
+y salario de cada trabajador, crea usando funciones el salario máximo, el salario mínimo y el
+salario medio.
+ */
+
+ // Función para sacar el salario máximo
 function salarioMax($trabajadores) {
     $max = 0;
     foreach ($trabajadores as $salario) {
@@ -12,6 +20,7 @@ function salarioMax($trabajadores) {
     return $max;
 }
 
+// Función para sacar el salario mínimo
 function salarioMin($trabajadores) {
     $min = salarioMax($trabajadores);
     foreach ($trabajadores as $salario) {
@@ -22,6 +31,7 @@ function salarioMin($trabajadores) {
     return $min;
 }
 
+// Función para sacar el salario medio
 function salarioMedio($trabajadores) {
     $media = 0;
     foreach ($trabajadores as $salario) {
@@ -31,6 +41,7 @@ function salarioMedio($trabajadores) {
     return $media;
 }
 
+// Relleno el array con trabajadores y sus respectivos salarios
 $trabajadores = [];
 $cant = readline("¿Cuántos trabajadores hay? ");
 for ($i=0; $i < $cant; $i++) { 

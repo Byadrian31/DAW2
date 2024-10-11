@@ -3,6 +3,10 @@
 /**
  * @author Adrián López Pascual
  */
+
+  /*
+ Mismo ejercicio que el 15 pero usando la funcion array_reverse()
+ */
 $cant = readline("Dime la cantidad del array siempre par ");
 $V = [];
 
