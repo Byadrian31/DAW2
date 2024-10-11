@@ -4,6 +4,11 @@
  * @author Adrián López Pascual
  */
 
+ /*
+ Escribe un programa que calcule la media aritmética de 7 notas y la muestre junto con su
+ correspondencia en el boletín que has realizado en el ejercicio anterior
+ */
+//Función para sacar el texto del boletín según la nota
 
 function boletin($nota)
 {
@@ -24,6 +29,7 @@ function boletin($nota)
     return $texto;
 }
 
+//Sacar 7 notas para realizar su media
 $media = 0;
 for ($i = 0; $i < 7; $i++) {
     $nota = rand(0, 10);

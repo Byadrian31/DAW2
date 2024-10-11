@@ -2,22 +2,34 @@
 /**
  * @author Adrián López Pascual
  */
+
+ /*
+Realiza un programa que pida 8 números enteros, los almacene en un vector junto con la
+palabra “par” o “impar” según proceda y los muestre. Además debe indicar la cantidad de
+números en cada caso y el porcentaje de pares e impares.
+ */
+
+
 $numeros = [];
 $contPar = 0;
 $contImpar = 0;
+
 for ($i=0; $i < 8; $i++) { 
     $num = rand(0,50);
     if ($num % 2 == 0) {
+        //Agrego el valor par al array par de $numeros
         $numeros["par"][] = $num;
         printf("Número %d es par\n",$num);
         $contPar++;
     }else{
+        //Agrego el valor par al array impar de $numeros
         $numeros["impar"][] = $num;
         printf("Número %d es impar\n",$num);
         $contImpar++;
     }
 }
 
+//Uso bucles for para sacar los valores de par e impar
 echo "Lista de Pares: \n";
 echo "---------------\n";
 
