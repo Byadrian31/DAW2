@@ -1,31 +1,32 @@
 body {
     background-color: #f7f9fc;
     font-family: 'Arial', sans-serif;
-    margin-top: 350px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 300px;
+    min-height: 100vh; /* Ocupa toda la altura de la ventana */
+    margin: 0; /* Eliminar margen por defecto */
+    background: linear-gradient(135deg, #f14949, #02692d);
 }
 
 main {
     text-align: center;
-    padding: 20px;
+    padding: 15px; /* Reducir padding */
     background: white;
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    margin-bottom: 20px;
-    font-size: 2.5em;
+    margin-bottom: 15px; /* Reducir margen inferior */
+    font-size: 2em; /* Reducir tamaño de fuente */
     color: #333;
 }
 
 .grid {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px; /* Reducir el espacio entre filas */
 }
 
 .fila {
@@ -33,32 +34,34 @@ h1 {
     justify-content: center;
 }
 
-.fila>.letra {
+.fila > .letra {
     border: 2px solid #4CAF50;
     border-radius: 8px;
-    width: 70px;
-    height: 70px;
+    width: 60px; /* Reducir ancho */
+    height: 60px; /* Reducir altura */
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2em;
+    font-size: 1.5em; /* Reducir tamaño de fuente */
     color: #333;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
+    margin-right: 3px;
+    margin-left: 3px;
 }
 
-.fila>.letra:hover {
+.fila > .letra:hover {
     background-color: #e0f7e9;
 }
 
 .restart-btn {
     margin: 0 5px;
-    font-size: 1.5em;
-    width: 120px;
+    font-size: 1.2em; /* Reducir tamaño de fuente */
+    width: 100px; /* Reducir ancho */
     background-color: #4CAF50;
     color: black;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
 .restart-btn:hover {
@@ -66,34 +69,37 @@ h1 {
 }
 
 .teclado {
-    margin-top: 20px;
+    margin-top: 15px; /* Reducir margen superior */
 }
 
 .fila-teclado {
     display: flex;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: 8px; /* Reducir margen inferior */
 }
 
 .tecla {
     border: 2px solid #4CAF50;
     border-radius: 8px;
-    width: 50px;
-    height: 50px;
-    font-size: 1.5em;
-    margin: 0 5px;
+    width: 40px; /* Reducir ancho */
+    height: 40px; /* Reducir altura */
+    font-size: 1.2em; /* Reducir tamaño de fuente */
+    margin: 0 4px; /* Reducir margen horizontal */
     cursor: pointer;
     background-color: white;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
 .tecla:hover {
-    background-color: #e0f7e9;
+    background-color: #2b4435;
+    transform: scale(1.6);
 }
 
-.tecla.borrar, .tecla.enviar , .tecla.restart-btn {
-    width: 100px; /* Ajusta el ancho según lo necesites */
-    margin: 0 5px;
+.tecla.borrar,
+.tecla.enviar,
+.tecla.restart-btn {
+    width: 80px; /* Ajustar el ancho según lo necesites */
+    margin: 0 4px; /* Reducir margen horizontal */
 }
 
 .tecla.borrar {
@@ -110,4 +116,8 @@ h1 {
 
 .tecla.enviar:hover {
     background-color: #1976D2;
+}
+
+.restart-btn:hover {
+    transform: scale(1.6);
 }

@@ -1,107 +1,161 @@
-var palabras = ["cebra", "abeja", "raton", "erizo", "zorro", "pulpo"];
-var palabraObjetivo = "";
+const palabras = ["cebra", "abeja", "raton", "erizo", "zorro", "pulpo", "APPLE", "BANANA", "GRAPE", "LEMON", "MANGO"];
+let palabraObjetivo = "";
+let intentos = 0;
+const maxIntentos = 6;
 
-function escogerPalabra() {
-    var indice = Math.floor(Math.random() * palabras.length);
-    palabraObjetivo = palabras[indice];
-    console.log("Palabra objetivo:", palabraObjetivo);
-}
+document.body.onload = iniciarJuego;
+document.querySelector('.restart-btn').disabled = true;
 
 function iniciarJuego() {
-    escogerPalabra();
     actualizarGrid();
 }
 
-// Añadir letras
-// -------------------------------------------------------------------------------------------------
-var intentos = 0; // Contador de intentos
-var letrasIntroducidas = []; // Array para almacenar letras de la fila actual
-
-function introducirLetra(letra) {
-    var filaActual = document.querySelector(`#fila${intentos + 1}`); // Selecciona la fila actual
-    var letras = filaActual.querySelectorAll('.letra'); // Selecciona todas las letras en la fila
-
-    for (var i = 0; i < letras.length; i++) {
-        if (letras[i].textContent === '') { // Si la casilla está vacía
-            letras[i].textContent = letra; // Introduce la letra
-            letrasIntroducidas.push(letra); // Guarda la letra en el array
-            i = letras.length; // Salimos del bucle
+function agregarLetra(letra) {
+    const filaActual = document.querySelector(`#fila${intentos + 1}`);
+    const letras = filaActual.querySelectorAll('.letra');
+    for (let letraElemento of letras) {
+        if (letraElemento.innerText === '') {
+            letraElemento.innerText = letra;
+            break;
         }
     }
-
-    // Habilita o deshabilita el botón "Enviar"
-    if (letrasIntroducidas.length === 5) {
-        document.querySelector('.enviar').disabled = false; // Habilita el botón Enviar
+    if (filaActual.querySelectorAll('.letra:not(:empty)').length === 5) {
+        document.querySelector('.enviar').disabled = false;
     }
-}
-
-document.querySelectorAll('.tecla').forEach(tecla => {
-    tecla.addEventListener('click', () => {
-        if (!tecla.classList.contains('borrar') && !tecla.classList.contains('enviar') && !tecla.classList.contains('reiniciar')) {
-            introducirLetra(tecla.textContent); // Llama a la función con la letra de la tecla
-        }
-    });
-});
-// -------------------------------------------------------------------------------------------------
-
-// Funcionamiento botones
-// -------------------------------------------------------------------------------------------------
-
-function actualizarGrid() {
-    var filas = document.querySelectorAll('.fila'); // Selecciona todos los campos con class fila (1-6)
-    filas.forEach(fila => { // Con el foreach
-        fila.querySelectorAll('.letra').forEach(letra => {
-            letra.textContent = ''; // Limpia el contenido de la letra
-            letra.style.backgroundColor = ''; // Resetea el color de fondo
-        });
-    });
-    intentos = 0;
-    letrasIntroducidas = []; // Resetea el array de letras introducidas
-    document.querySelector('.enviar').disabled = true; // Deshabilita el botón Enviar
 }
 
 function borrarLetra() {
-    var filaActual = document.querySelector(`#fila${intentos + 1}`);
-    var letras = filaActual.querySelectorAll('.letra');
-
-    for (var i = letras.length - 1; i >= 0; i--) { // Recorremos desde el final
-        if (letras[i].textContent !== '') { // Si encontramos una letra
-            letras[i].textContent = ''; // La borramos
-            letrasIntroducidas.pop(); // Elimina la última letra del array
-            i = -1; // Salimos del bucle
+    const filaActual = document.querySelector(`#fila${intentos + 1}`);
+    const letras = filaActual.querySelectorAll('.letra');
+    for (let i = letras.length - 1; i >= 0; i--) {
+        if (letras[i].innerText !== '') {
+            letras[i].innerText = '';
+            break;
         }
     }
 }
 
-// Manejar el evento del botón "Enviar"
 function verificarFila() {
-    if (letrasIntroducidas.length !== 5) {
-        alert("Faltan letras. Introduce 5 letras antes de enviar."); // Mensaje si faltan letras
+    const filaActual = document.querySelector(`#fila${intentos + 1}`);
+    const letras = filaActual.querySelectorAll('.letra');
+    let respuesta = Array.from(letras).map(letra => letra.innerText).join('');
+
+    if (respuesta.length !== 5) {
+        alert("Faltan letras.");
         return;
     }
 
-    var respuesta = letrasIntroducidas.join(''); // Junta los valores de las letras
+    const letraContada = contarLetras(palabraObjetivo);
+    
+    // Primer bucle: letras correctas
+    for (let i = 0; i < letras.length; i++) {
+        if (respuesta[i] === palabraObjetivo[i]) {
+            letras[i].style.backgroundColor = 'green';
+            actualizarTeclado(respuesta[i], 'green');
+            letraContada[respuesta[i]]--; // Disminuir el conteo de letras
+        }
+    }
 
+    // Segundo bucle: letras en la palabra pero en posición incorrecta
+    for (let i = 0; i < letras.length; i++) {
+        if (respuesta[i] !== palabraObjetivo[i]) {
+            if (palabraObjetivo.includes(respuesta[i]) && letraContada[respuesta[i]] > 0) {
+                letras[i].style.backgroundColor = 'yellow';
+                actualizarTeclado(respuesta[i], 'yellow');
+                letraContada[respuesta[i]]--; // Disminuir el conteo de letras
+            } else {
+                letras[i].style.backgroundColor = 'gray'; // Letras no están en la palabra
+                actualizarTeclado(respuesta[i], 'gray');
+            }
+        }
+    }
+
+    // Comprobación si se ha adivinado la palabra
     if (respuesta === palabraObjetivo) {
         alert("¡Felicidades! Has adivinado la palabra.");
+        document.querySelector('.restart-btn').disabled = false;
     } else {
-        intentos++; // Incrementa el contador de intentos
-        letrasIntroducidas = []; // Resetea el array para la siguiente fila
-        if (intentos === 6) {
-            alert("Te has quedado sin intentos. La palabra era: " + palabraObjetivo);
+        intentos++;
+        if (intentos === maxIntentos) {
+            alert(`Te has quedado sin intentos. La palabra era: ${palabraObjetivo}`);
+            document.querySelector('.restart-btn').disabled = false;
         } else {
-            document.querySelector('.enviar').disabled = true; // Deshabilita el botón Enviar
+            document.querySelector('.enviar').disabled = true;
         }
     }
 }
 
-// -------------------------------------------------------------------------------------------------
+
+function contarLetras(palabra) {
+    const conteo = {};
+    for (const letra of palabra) {
+        conteo[letra] = (conteo[letra] || 0) + 1;
+    }
+    return conteo;
+}
+
+function actualizarTeclado(letra, estado) {
+    const tecla = Array.from(document.querySelectorAll('.tecla')).find(tecla => tecla.textContent === letra);
+    if (tecla) {
+        tecla.style.backgroundColor = estado;
+    }
+}
+
+function actualizarGrid() {
+    palabraObjetivo = palabras[Math.floor(Math.random() * palabras.length)].toUpperCase();
+    console.log("Palabra objetivo:", palabraObjetivo);
+
+    const filas = document.querySelectorAll('.fila');
+    filas.forEach(fila => {
+        fila.querySelectorAll('.letra').forEach(letra => {
+            letra.innerText = '';
+            letra.style.backgroundColor = '';
+        });
+    });
+    // Restablecer todas las teclas a blanco
+    document.querySelectorAll('.tecla').forEach(tecla => {
+        if (tecla.classList.contains("borrar")) {
+            tecla.style.backgroundColor = 'red';
+        } else if (tecla.classList.contains("enviar")) {
+            tecla.style.backgroundColor = 'cyan';
+        } else {
+            tecla.style.backgroundColor = 'white'; // Cambiar el color de fondo a blanco
+            tecla.disabled = false; // Asegurarse de que todas las teclas estén habilitadas
+        }
+    });
+    intentos = 0;
+    document.querySelector('.enviar').disabled = true;
+}
+
+// Eventos de teclado
+document.querySelectorAll('.tecla').forEach(tecla => {
+    tecla.addEventListener('click', () => {
+        if (!tecla.classList.contains('borrar') &&
+            !tecla.classList.contains('enviar') &&
+            !tecla.classList.contains('reiniciar')) {
+            agregarLetra(tecla.textContent.toUpperCase());
+        }
+    });
+});
+
+document.addEventListener('keydown', (event) => {
+    const letra = event.key.toUpperCase();
+
+    // Verificamos que sea una letra del alfabeto
+    if (/^[A-Z]$/.test(letra)) {
+        agregarLetra(letra);
+    } 
+    // Verificamos si se presionó la tecla "Enter" para enviar la fila
+    else if (event.key === 'Enter') {
+        verificarFila();
+    } 
+    // Verificamos si se presionó la tecla "Backspace" para borrar la última letra
+    else if (event.key === 'Backspace') {
+        borrarLetra();
+    }
+});
 
 
-// Añadiendo Listener en los campos correspondientes
-// -------------------------------------------------------------------------------------------------
 document.querySelector('.borrar').addEventListener('click', borrarLetra);
-document.querySelector('.restart-btn').addEventListener('click', actualizarGrid);
 document.querySelector('.enviar').addEventListener('click', verificarFila);
-document.body.onload = iniciarJuego;
-// -------------------------------------------------------------------------------------------------
+document.querySelector('.restart-btn').addEventListener('click', actualizarGrid);
