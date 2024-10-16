@@ -4,8 +4,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0 8% 8% 8%;
     min-height: 100vh; /* Ocupa toda la altura de la ventana */
-    margin: 0; /* Eliminar margen por defecto */
     background: linear-gradient(135deg, #f14949, #02692d);
 }
 
@@ -96,8 +96,7 @@ h1 {
 }
 
 .tecla.borrar,
-.tecla.enviar,
-.tecla.restart-btn {
+.tecla.enviar {
     width: 80px; /* Ajustar el ancho según lo necesites */
     margin: 0 4px; /* Reducir margen horizontal */
 }
@@ -118,6 +117,45 @@ h1 {
     background-color: #1976D2;
 }
 
+.restart-btn {
+    width: 100px; 
+    height: 30px;
+    display: none; /* Mantenemos como 'none' y lo activaremos desde el JS */
+    font-size: 1.2em; /* Tamaño de fuente */
+    color: black;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 40%;
+}
+
+.restart-btn:hover {
+    background-color: #45a049;
+    transform: scale(1.1); /* Pequeño efecto de escalado al pasar el ratón */
+}
+
+
 .restart-btn:hover {
     transform: scale(1.6);
+}
+
+.mensaje {
+    display: none;
+    font-size: 1.5em;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+#centro {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.frase {
+    display: block;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-left: 25px;
 }

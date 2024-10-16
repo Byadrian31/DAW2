@@ -1,4 +1,5 @@
-const palabras = ["cebra", "abeja", "raton", "erizo", "zorro", "pulpo", "APPLE", "BANANA", "GRAPE", "LEMON", "MANGO"];
+// Variables globales
+const palabras = ["CEBRA", "ABEJA", "RATON", "ERIZO", "ZORRO", "PULPO", "APPLE", "GRAPE", "LEMON", "MANGO"];
 let palabraObjetivo = "";
 let intentos = 0;
 const maxIntentos = 6;
@@ -8,6 +9,7 @@ document.querySelector('.restart-btn').disabled = true;
 
 function iniciarJuego() {
     actualizarGrid();
+    document.querySelector('.mensaje').style.display = 'none'; // Escondemos el mensaje al iniciar el juego
 }
 
 function agregarLetra(letra) {
@@ -16,7 +18,7 @@ function agregarLetra(letra) {
     for (let letraElemento of letras) {
         if (letraElemento.innerText === '') {
             letraElemento.innerText = letra;
-            break;
+            return;
         }
     }
     if (filaActual.querySelectorAll('.letra:not(:empty)').length === 5) {
@@ -30,7 +32,7 @@ function borrarLetra() {
     for (let i = letras.length - 1; i >= 0; i--) {
         if (letras[i].innerText !== '') {
             letras[i].innerText = '';
-            break;
+            return;
         }
     }
 }
@@ -41,24 +43,25 @@ function verificarFila() {
     let respuesta = Array.from(letras).map(letra => letra.innerText).join('');
 
     if (respuesta.length !== 5) {
-        alert("Faltan letras.");
         return;
     }
 
     const letraContada = contarLetras(palabraObjetivo);
-    
+    const letrasMarcadas = []; // Para marcar letras que ya están en verde
+
     // Primer bucle: letras correctas
     for (let i = 0; i < letras.length; i++) {
         if (respuesta[i] === palabraObjetivo[i]) {
             letras[i].style.backgroundColor = 'green';
             actualizarTeclado(respuesta[i], 'green');
+            letrasMarcadas[i] = true; // Marcar la letra como correcta
             letraContada[respuesta[i]]--; // Disminuir el conteo de letras
         }
     }
 
     // Segundo bucle: letras en la palabra pero en posición incorrecta
     for (let i = 0; i < letras.length; i++) {
-        if (respuesta[i] !== palabraObjetivo[i]) {
+        if (!letrasMarcadas[i] && respuesta[i] !== palabraObjetivo[i]) { // Solo si no está marcada
             if (palabraObjetivo.includes(respuesta[i]) && letraContada[respuesta[i]] > 0) {
                 letras[i].style.backgroundColor = 'yellow';
                 actualizarTeclado(respuesta[i], 'yellow');
@@ -72,12 +75,12 @@ function verificarFila() {
 
     // Comprobación si se ha adivinado la palabra
     if (respuesta === palabraObjetivo) {
-        alert("¡Felicidades! Has adivinado la palabra.");
+        mostrarMensaje("¡Felicidades! Has adivinado la palabra.", "green");
         document.querySelector('.restart-btn').disabled = false;
     } else {
         intentos++;
         if (intentos === maxIntentos) {
-            alert(`Te has quedado sin intentos. La palabra era: ${palabraObjetivo}`);
+            mostrarMensaje(`Te has quedado sin intentos. La palabra era: ${palabraObjetivo}`, "red");
             document.querySelector('.restart-btn').disabled = false;
         } else {
             document.querySelector('.enviar').disabled = true;
@@ -85,6 +88,15 @@ function verificarFila() {
     }
 }
 
+function mostrarMensaje(texto, color) {
+    const mensaje = document.querySelector('.mensaje');
+    const reiniciar = document.querySelector('.restart-btn');
+    mensaje.innerText = texto;
+    mensaje.style.color = color;
+    mensaje.style.display = 'block';
+    reiniciar.style.display = 'block'; // Mostramos el mensaje
+    document.querySelector('.teclado').style.display = 'none'; // Ocultamos el teclado
+}
 
 function contarLetras(palabra) {
     const conteo = {};
@@ -97,7 +109,9 @@ function contarLetras(palabra) {
 function actualizarTeclado(letra, estado) {
     const tecla = Array.from(document.querySelectorAll('.tecla')).find(tecla => tecla.textContent === letra);
     if (tecla) {
-        tecla.style.backgroundColor = estado;
+        if (tecla.style.backgroundColor != "green") {
+            tecla.style.backgroundColor = estado;
+        }
     }
 }
 
@@ -112,6 +126,7 @@ function actualizarGrid() {
             letra.style.backgroundColor = '';
         });
     });
+
     // Restablecer todas las teclas a blanco
     document.querySelectorAll('.tecla').forEach(tecla => {
         if (tecla.classList.contains("borrar")) {
@@ -124,7 +139,11 @@ function actualizarGrid() {
         }
     });
     intentos = 0;
+    document.querySelector('.restart-btn').disabled = true;
     document.querySelector('.enviar').disabled = true;
+    document.querySelector('.teclado').style.display = 'block'; // Mostramos el teclado al iniciar el juego
+    document.querySelector('.mensaje').style.display = 'none';
+    document.querySelector('.restart-btn').style.display = 'none';
 }
 
 // Eventos de teclado
@@ -144,11 +163,11 @@ document.addEventListener('keydown', (event) => {
     // Verificamos que sea una letra del alfabeto
     if (/^[A-Z]$/.test(letra)) {
         agregarLetra(letra);
-    } 
+    }
     // Verificamos si se presionó la tecla "Enter" para enviar la fila
     else if (event.key === 'Enter') {
         verificarFila();
-    } 
+    }
     // Verificamos si se presionó la tecla "Backspace" para borrar la última letra
     else if (event.key === 'Backspace') {
         borrarLetra();
