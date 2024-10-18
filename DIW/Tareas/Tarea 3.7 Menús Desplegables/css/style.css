@@ -1,5 +1,5 @@
 /*
-Sin transición animada
+Transición animada con valores como opacity, transform y transition
 */
 
 /* Reset de márgenes y rellenos para todos los elementos */
@@ -29,6 +29,7 @@ ul li {
     position: relative; /* Posición relativa para el submenú */
     display: inline-block; 
     padding: 20px; 
+    
 }
 
 /* Estilo del submenú: oculto por defecto */
@@ -36,23 +37,24 @@ ul li ul {
     position: absolute; /* Posición absoluta para el submenú */
     top: 100%; /* Se muestra justo debajo del elemento padre */
     left: 0;
-    display: none; /* Oculto por defecto */
-    z-index: 2; /* Asegura que esté por encima de otros elementos */
-    width: 100px; /* Ancho fijo del submenú */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 1s ease; /* Necesario para que la transición funcione correctamente */
 }
 
 /* Estilo de los elementos del submenú */
 ul li ul li {
-    background-color: #313131; /* Fondo oscuro */
-    text-align: center; /* Texto centrado */
-    padding: 10px; /* Relleno interno */
-    font-family: Verdana; /* Fuente utilizada */
-    font-size: 0.7em; /* Tamaño de fuente pequeño */
+    background-color: #313131; 
+    text-align: center; 
+    padding: 10px; 
+    font-family: Verdana;
+    font-size: 0.7em; 
 }
 
 /* Muestra el submenú al pasar el cursor sobre el elemento padre */
 ul li:hover ul {
-    display: block; /* Muestra el submenú */
+    max-height: 200px;
+    margin-left: 10%;
 }
 
 /* Cambia el fondo del elemento del submenú al pasar el cursor */
@@ -84,8 +86,8 @@ ul li ul li:last-child {
 li ul li:first-child:before {
     content: ' '; /* Contenido vacío para la flecha */
     position: absolute; /* Posición absoluta para colocar la flecha */
-    width: 1px; /* Ancho de la flecha */
-    height: 1px; /* Alto de la flecha */
+    width: 1px; 
+    height: 1px; 
     border: 5px solid transparent; /* Borde transparente */
     border-bottom-color: #313131; /* Color de la flecha */
     left: 50%; /* Centra la flecha horizontalmente */
