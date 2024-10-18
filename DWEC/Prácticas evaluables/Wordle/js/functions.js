@@ -1,5 +1,5 @@
 // Variables globales
-const palabras = ["CEBRA", "ABEJA", "RATON", "ERIZO", "ZORRO", "PULPO", "APPLE", "GRAPE", "LEMON", "MANGO"];
+const palabras = ["CEBRA", "ABEJA", "RATON", "ERIZO", "ZORRO", "PULPO", "MANGO"];
 let palabraObjetivo = "";
 let intentos = 0;
 const maxIntentos = 6;
