@@ -25,7 +25,7 @@
         <label for="nombre">Nombre:</label>
         <input type="text" name="name" maxlength="50"><br> <br>
 
-        <label for="apellido">Apellido:</label>
+        <label for="apellido">Apellidos:</label>
         <input type="text" name="ape" maxlength="200"><br> <br>
 
         <label for="email">Correo electrónico:</label>

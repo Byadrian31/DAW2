@@ -17,8 +17,6 @@ Este repositorio contiene ejercicios de creación de formularios en PHP, abordan
 3. **[Tercer formulario con modificaciones](./3.php)**  
    En este ejercicio se modifica el formulario anterior, cambiando el `textarea` por un `input:text`, lo que permite explorar la versatilidad de los formularios y cómo se pueden adaptar según las necesidades del usuario.
 
-## Estructura de archivos
+4. **[Formulario de registro 4](./4.php)**  
+   En este ejercicio se modifica el formulario del anterior ejercicio añadiendo "bloques" para separar la información del formulario en: `Datos personales`, `Datos de contacto` y `Datos de la incidencia`, para usar todo esto he usado las etiquetas `fieldset` y `legend`. Por último se tratan los datos del formulario con php, para ello uso `isset()`, para comprobar si se ha enviado el formulario, además de la existencia de cada variable para mostrarla posteriormente
 
-- **1.php**: Contiene el primer formulario básico.
-- **2.php**: Implementa el segundo formulario con inputs variados.
-- **3.php**: Muestra el tercer formulario con cambios en los campos de entrada.

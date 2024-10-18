@@ -14,18 +14,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adrián - Formulario de registro</title>
+    <title>Adrián - Formulario de registro 3</title>
 </head>
 
 <body>
 
-    <h1>Adrián López - Formulario de registro</h1>
+    <h1>Adrián López - Formulario de registro 3</h1>
 
     <form action="" method="get">
         <label for="nombre">Nombre:</label>
         <input type="text" name="name" maxlength="50"><br> <br>
 
-        <label for="apellido">Apellido:</label>
+        <label for="apellido">Apellidos:</label>
         <input type="text" name="ape" maxlength="200"><br> <br>
 
         <label for="email">Correo electrónico:</label>
@@ -50,7 +50,7 @@
         </select>
         <br> <br>
 
-        <label for="horario">Horario:</label>
+        <label for="horario">Horario de contacto</label>
         <select multiple size="2" name="horario[]">
             <option value="mañana">De 8 a 14 horas</option>
             <option value="tarde">De 14 a 18 horas</option>
