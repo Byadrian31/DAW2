@@ -15,15 +15,19 @@ function iniciarJuego() {
 function agregarLetra(letra) {
     const filaActual = document.querySelector(`#fila${intentos + 1}`);
     const letras = filaActual.querySelectorAll('.letra');
+    let letraAgregada = false;
+
     for (let letraElemento of letras) {
         if (letraElemento.innerText === '') {
             letraElemento.innerText = letra;
-            return;
+            letraAgregada = true;
+            break; // Salir del bucle una vez que se agrega la letra
         }
     }
-    if (filaActual.querySelectorAll('.letra:not(:empty)').length === 5) {
-        document.querySelector('.enviar').disabled = false;
-    }
+
+    // Verificar si la fila está llena (5 letras)
+    const letrasLlenas = filaActual.querySelectorAll('.letra:not(:empty)').length;
+    document.querySelector('.enviar').disabled = letrasLlenas < 5; // Activa el botón si hay 5 letras
 }
 
 function borrarLetra() {
@@ -32,9 +36,13 @@ function borrarLetra() {
     for (let i = letras.length - 1; i >= 0; i--) {
         if (letras[i].innerText !== '') {
             letras[i].innerText = '';
-            return;
+            break; // Salir del bucle después de borrar la letra
         }
     }
+
+    // Desactivar el botón "Enviar" si la fila no está llena
+    const letrasLlenas = filaActual.querySelectorAll('.letra:not(:empty)').length;
+    document.querySelector('.enviar').disabled = letrasLlenas < 5; // Asegurarse de que el botón esté habilitado o no
 }
 
 function verificarFila() {
@@ -83,9 +91,12 @@ function verificarFila() {
             mostrarMensaje(`Te has quedado sin intentos. La palabra era: ${palabraObjetivo}`, "red");
             document.querySelector('.restart-btn').disabled = false;
         } else {
-            document.querySelector('.enviar').disabled = true;
+            document.querySelector('.enviar').disabled = true; // Desactivar el botón de envío para la próxima fila
         }
     }
+
+    // Quitar foco del teclado virtual
+    document.querySelector('.teclado').blur();
 }
 
 function mostrarMensaje(texto, color) {
@@ -173,7 +184,6 @@ document.addEventListener('keydown', (event) => {
         borrarLetra();
     }
 });
-
 
 document.querySelector('.borrar').addEventListener('click', borrarLetra);
 document.querySelector('.enviar').addEventListener('click', verificarFila);
