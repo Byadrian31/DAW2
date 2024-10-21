@@ -80,6 +80,7 @@ nav .videos {
 .videos ul {
     position: absolute; /* Posición absoluta para el submenú */
     top: 100%; /* Se muestra justo debajo del elemento padre */
+    left: -120%;
     max-height: 0;
     overflow: hidden;
     transition: max-height 1s ease; /* Necesario para que la transición funcione correctamente */
@@ -88,15 +89,15 @@ nav .videos {
 
 .videos:hover ul {
     max-height: 200px;
-    margin-left: 10%;
+    
 }
 
 .videos ul li {
     background-color: #e34c26;
-    text-align: center; 
     padding: 10px; 
     font-family: Verdana;
     font-size: 0.7em; 
+    
 }
 
 .videos ul li:nth-child(odd) {
@@ -107,17 +108,19 @@ nav .videos {
     background-color: #ff7e42;
 }
 
-.videos ul li:first-child:before {
-    content: ' '; /* Contenido vacío para la flecha */
-    position: absolute; /* Posición absoluta para colocar la flecha */
-    width: 1px; 
-    height: 1px; 
-    border: 5px solid transparent; /* Borde transparente */
-    border-bottom-color: #e34c26; /* Color de la flecha */
-    left: 50%; /* Centra la flecha horizontalmente */
-    top: -10px; /* Coloca la flecha arriba del elemento */
-    margin-left: -5px; /* Ajuste para centrar la flecha */
+.videos ul li:first-child::before {
+    content: ''; /* Mantener el contenido vacío para la flecha */
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #e34c26; /* Color de la flecha */
+    left: 50%; 
+    top: -10px;
+    transform: translateX(-50%); /* Para centrar la flecha */
 }
+
 
 nav .contacto {
     background-image: url('../img/mail.png');
