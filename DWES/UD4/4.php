@@ -40,17 +40,16 @@
         echo "</p>";
 
         echo "<p><b>Cómo nos has conocido:</b> ";
-        echo isset($_GET['amigo']) ? "Ha seleccionado un amigo. " : "";
-        echo isset($_GET['web']) ? "Ha seleccionado web. " : "";
-        echo isset($_GET['prensa']) ? "Ha seleccionado prensa. " : "";
-        echo isset($_GET['otros']) ? "Ha seleccionado otros. " : "";
+        echo isset($_GET['amigo']) ? "Ha seleccionado amigo. " : "No ha seleccionado amigo. ";
+        echo isset($_GET['web']) ? "Ha seleccionado web. " : "No ha seleccionado web. ";
+        echo isset($_GET['prensa']) ? "Ha seleccionado prensa. " : "No ha seleccionado prensa. ";
+        echo isset($_GET['otros']) ? "Ha seleccionado otros. " : "No ha seleccionado otros. ";
         echo "</p>";
 
         echo "<p><b>Tipo de incidencia:</b> " . strtoupper($_GET['incidencia']) . "</p>";
         echo "<p><b>Descripción de la incidencia:</b> " . strtoupper($_GET['comentario']) . "</p>";
 
-        echo "<p><b>Deseo recibir información:</b> " . (isset($_GET['condiciones']) ? "Ha seleccionado recibir ofertas" : "No ha seleccionado
-recibir ofertas") . "</p>";
+
     }
     ?>
 
@@ -126,7 +125,6 @@ recibir ofertas") . "</p>";
             <textarea name="comentario" cols="40" rows="4" placeholder="Descripción de la incidencia"></textarea><br> <br>
         </fieldset>
 
-        <input type="checkbox" name="condiciones"> Deseo recibir información sobre novedades y ofertas<br>
         <input type="submit" value="Enviar" name="enviar">
         <input type="reset" value="Reset" name="reset">
     </form>

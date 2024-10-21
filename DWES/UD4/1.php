@@ -7,6 +7,18 @@
 /*
     Creación del Formulario 1
  */
+
+ if (isset($_GET['enviar'])) {
+    echo "<h2>Datos Enviados:</h2>";
+    echo "<p><b>Nombre:</b> " . strtoupper($_GET['name']) . "</p>";
+    echo "<p><b>Apellidos:</b> " . strtoupper($_GET['ape']) . "</p>";
+    echo "<p><b>Sexo:</b> " . (isset($_GET['sexo']) ? strtoupper($_GET['sexo']) : 'No seleccionado') . "</p>";
+    echo "<p><b>Correo electrónico:</b> " . strtoupper($_GET['email']) . "</p>";
+    echo "<p><b>Provincia:</b> " . strtoupper($_GET['provincia']) . "</p>";
+    echo "<p><b>Deseo recibir información:</b> " . (isset($_GET['condiciones']) ? "Ha seleccionado recibir ofertas" : "No ha seleccionado
+    recibir ofertas") . "</p>";
+    echo "<p><b>Condiciones:</b> " . (isset($_GET['condiciones2']) ? "Ha aceptado las condiciones" : "No ha aceptado las condiciones") . "</p>";
+ }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,8 +41,8 @@
         <input type="text" name="ape" maxlength="200"><br> <br>
 
         <label for="sexo">Sexo:</label>
-        <input type="radio" name="sexo" value="m"> hombre
-        <input type="radio" name="sexo" value="f"> mujer<br> <br>
+        <input type="radio" name="sexo" value="Hombre"> hombre
+        <input type="radio" name="sexo" value="Mujer"> mujer<br> <br>
 
         <label for="email">Correo electrónico:</label>
         <input type="text" name="email" maxlength="250"><br> <br>
