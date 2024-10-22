@@ -53,14 +53,14 @@ nav {
 }
 
 /* Estilos para los elementos <li> */
-nav li {
+nav>ul>li {
     padding-top: 80px;
     margin: 0 100px 20px 100px;
     list-style: none;
     display: inline-block;
     text-align: center;
     cursor: default;
- 
+
 }
 
 /* Fondo específico para cada elemento <li> */
@@ -78,47 +78,64 @@ nav .videos {
 }
 
 .videos ul {
-    position: absolute; /* Posición absoluta para el submenú */
-    top: 100%; /* Se muestra justo debajo del elemento padre */
-    left: -120%;
+    position: absolute;
+    /* Posición absoluta para el submenú */
+    top: 80%;
+    /* Se muestra justo debajo del elemento padre */
+    left: 0;
+    margin-top: 50%;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 1s ease; /* Necesario para que la transición funcione correctamente */
+    transition: max-height 1s ease;
+    /* Necesario para que la transición funcione correctamente */
     z-index: 2;
 }
 
 .videos:hover ul {
     max-height: 200px;
-    
 }
 
 .videos ul li {
     background-color: #e34c26;
-    padding: 10px; 
+    padding: 10px;
     font-family: Verdana;
-    font-size: 0.7em; 
-    
+    font-size: 0.7em;
 }
 
 .videos ul li:nth-child(odd) {
     background-color: #f06529;
 }
 
-.videos ul li:hover{
+.videos ul li:hover {
     background-color: #ff7e42;
 }
 
-.videos ul li:first-child::before {
-    content: ''; /* Mantener el contenido vacío para la flecha */
+.videos:before {
+    content: '';
+    /* Mantener el contenido vacío para la flecha */
     position: absolute;
-    width: 0;
+    width: 0px;
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-bottom: 5px solid #e34c26; /* Color de la flecha */
-    left: 50%; 
-    top: -10px;
-    transform: translateX(-50%); /* Para centrar la flecha */
+    border-bottom: 5px solid #e34c26;
+    /* Color de la flecha */
+    left: 48%;
+    visibility: hidden;
+    opacity: 0;
+    top: 114%;
+    /* Ajusta este valor según sea necesario */
+    transform: translateX(-50%);
+    /* Para centrar la flecha */
+    z-index: 10;
+    /* Asegúrate de que sea mayor que el submenú */
+    transition: opacity 1s ease, visibility 1s ease;
+    /* Necesario para que la transición funcione correctamente */
+}
+
+.videos:hover:before {
+    visibility: visible;
+    opacity: 1;
 }
 
 
@@ -182,11 +199,11 @@ article h2 {
     text-shadow: 2px 2px 5px black;
 }
 
-section:first-of-type{
+section:first-of-type {
     transform: rotate(-2deg);
 }
 
-section:last-of-type{
+section:last-of-type {
     transform: rotate(2deg);
 }
 
