@@ -3,6 +3,11 @@
  * @author Adrián López Pascual
  */
 
+/*
+2. Ejerccicio 8: Genera un mensaje de modo que si el día seleccionado o introducido es menor o 
+igual que 15 muestre “primera quincena” mostrando “segunda quincena” en otro caso.
+*/
+
  // Condición que espera al botón Enviar
  if (isset($_POST['enviar'])) {
     $num = $_POST['dia'];

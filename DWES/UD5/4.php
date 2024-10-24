@@ -3,18 +3,27 @@
 /**
  * @author Adrián López Pascual
  */
+
+/*
+4. Ejercicio 4. Escribe un programa que calcule el salario semanal de un trabajador teniendo en 
+cuenta que las horas ordinarias (40 primeras horas de trabajo) se pagan a 12 euros la hora. A 
+partir de la hora 41, se pagan a 16 euros la hora.
+*/
+
 // Condición que espera al botón Enviar
 if (isset($_POST['enviar'])) {
     $nombre = $_POST['nombre'];
     $horas = $_POST['horas'];
     if (is_numeric($horas)) {
+        // Cálculo de horas extra
         if ($horas > 40) {
             $resto = $horas - 40;
             $total = ($resto * 16) + (40 * 12);
-            echo $nombre . " tiene un salario semanal de " . $total;
+            printf("%s tiene un salario semanal de %.2f trabajando %.2f horas  \n", $nombre , $total, $horas);
+            // Cálculo de horas
         } else {
             $total = $horas * 12;
-            echo $nombre . " tiene un salario semanal de " . $total;
+            printf("%s tiene un salario semanal de %.2f trabajando %.2f horas \n", $nombre , $total, $horas);
         }
         
     }

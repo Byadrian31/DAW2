@@ -4,6 +4,13 @@
  * @author Adrián López Pascual
  */
 
+
+/*
+3. Ejercicios 11 y 12 unirlos en una calculadora de euros que convierta de euros a pesetas y de 
+pesetas a euros según lo que elija el usuario (de forma excluyente) y por la cantidad que 
+introduzca. Comprueba que los datos introducidos son los esperados.
+*/
+
  // Función para realizar la conversión correspondiente
  function convertir($op, $cant){
     $cambio = 166.386;
