@@ -1,0 +1,114 @@
+body {
+    margin-left: 30%;
+}
+/* Estilo del formulario */
+#registro {
+    margin: 10px auto; /* Márgenes superior e inferior de 10px, automáticos a los lados */
+    border-top: 2px solid #888; /* Borde superior de 2px */
+    border-bottom: 2px solid #888; /* Borde inferior de 2px */
+    width: 710px; /* Ancho 710px */
+    text-align: center; /* Texto alineado al centro */
+    margin: 20px; /* Márgenes externos de 20px */
+    background: rgba(0, 0, 0, 0.2) url('../imgs/bg-form.png'); /* Fondo negro con opacidad del 20% y la imagen de fondo */
+}
+
+ul {
+    list-style: none; /* Elimina las viñetas */
+}
+
+li {
+    margin-bottom: 15px; /* Margen inferior de 15px */
+}
+
+label {
+    display: block; /* Haz que se muestren como bloque */
+    margin: 0 auto; /* Márgenes automáticos */
+    text-align: center; /* Alineación al centro */
+}
+
+
+h1 {
+    font-size: 2em; /* Tamaño del texto 2em */
+    margin-bottom: 20px; /* Margen interno inferior de 20px */
+}
+
+input{
+    outline: none; /* Eliminar color por defecto*/
+    text-align: center;
+}
+
+input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="date"] {
+    width: 30%; /* Ancho completo */
+    padding: 10px;
+    border: none;
+    border-bottom: 1px dashed #000; /* Línea punteada en la parte inferior */
+    font-size: 1em;
+    background-color: transparent;
+}
+
+input[type="number"] {
+    width: 6%;
+}
+
+/* Estilo del botón */
+input[type="button"] {
+    background: radial-gradient(circle, rgb(144, 144, 144), rgb(72, 72, 72)); /* Fondo degradado radial */
+    color: white; /* Texto del botón de color blanco */
+    border: none; /* Eliminar bordes */
+    border-radius: 5px; /* Redondear esquinas a 5px */
+    font-size: 2em; /* Tamaño de texto 2em */
+    font-family: Tahoma, Geneva, sans-serif; /* Fuente del botón */
+    text-transform: uppercase;
+    opacity: 0.8; /* Opacidad del 80% */
+    padding: 10px; /* Espaciado interno */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    transition: opacity 0.25s linear; /* Transición al pasar el ratón */
+    width: 40%; /* Botón ocupará el ancho completo */
+}
+
+input[type="button"]:hover {
+    opacity: 1; /* 100% opaco al pasar el ratón */
+}
+
+
+/* Estilo de los campos de entrada obligatorios */
+input:required {
+    background-image: url('../imgs/required.png');
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+/* Estilo cuando el campo es válido */
+input:valid:focus {
+    background-image: url('../imgs/valid.png');
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+/* Estilo cuando el campo es inválido */
+input:invalid:focus {
+    background-image: url('../imgs/invalid.png');
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+/* Estilo del texto seleccionado */
+input::selection {
+    background-color: #484848; /* Color de fondo */
+    color: #fff; /* Color de fuente */
+    text-shadow: none; /* Sombra del texto: ninguna */
+}
+
+/* Estilo del título del formulario */
+h1 {
+    background-image: url('../imgs/bg-formtitle-left.png'), url('../imgs/bg-formtitle-right.png');
+    background-repeat: no-repeat, no-repeat;
+    background-position: left, right;
+    background-size: 100px auto; /* Redimensionar imágenes */
+    font-family: 'AcknowledgementMedium'; /* Usar la fuente AcknowledgementMedium */
+}
+
+/* Estilo de los elementos label y el botón */
+label, input[type="button"] {
+    font-family: 'LeagueGothic'; /* Usar la fuente LeagueGothic */
+}
