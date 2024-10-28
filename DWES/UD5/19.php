@@ -5,7 +5,7 @@
 
 /*
 19. Crea un programa donde se le seleccione el curso (radiobutton), los módulos (a seleccionar de 
-un desplegable) y las horas (marcar o desmarcar) y genere un horario usando una tabla
+un desplegable) y las horas (marcar o desmarcar) y genere un horario usando una tabla.
 */
 
 ?>
@@ -14,7 +14,7 @@ un desplegable) y las horas (marcar o desmarcar) y genere un horario usando una 
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, content=device-width, initial-scale=1.0">
     <title>Adrián López Pascual</title>
     <style>
         table {
@@ -65,16 +65,20 @@ if (isset($_POST['enviar'])) {
     $curso = $_POST['curso'];
     $modulos = $_POST['modulos'];
     $horas = $_POST['horas'];
-
+    // Si tienen valores las variables anteriores se realizará el programa
+    // En caso contrario saltará un mensaje de error
     if ($curso && $modulos && $horas) {
         echo "<h2>Horario para $curso</h2>";
         echo "<table>";
         echo "<tr><th>Hora</th><th>Módulo</th></tr>";
+
+        // Limitar el número de módulos y horas a mostrar
+        // El tamaño se escogerá siempre el más pequeño para poder rellenar la tabla.
+        $maxItems = min(count($modulos), count($horas));
         
-        foreach ($horas as $hora) {
-            foreach ($modulos as $modulo) {
-                echo "<tr><td>$hora</td><td>$modulo</td></tr>";
-            }
+        // Muestra los valores indicados dentro de la tabla
+        for ($i = 0; $i < $maxItems; $i++) {
+            echo "<tr><td>{$horas[$i]}</td><td>{$modulos[$i]}</td></tr>";
         }
 
         echo "</table>";
