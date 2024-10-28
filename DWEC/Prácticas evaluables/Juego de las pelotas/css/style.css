@@ -41,10 +41,12 @@ h1#temporizador {
 
 .acierto {
     background-color: blue;
+    border-radius: 50%;
 }
 
 .fallo {
     background-color: red;
+    border-radius: 50%;
 }
 
 #menu {
@@ -63,6 +65,8 @@ h1#temporizador {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     width: 90%;
     height: 70%;
+    position:relative;
+    cursor: url('../img/cursorr.png');
 }
 
 #menu p {
@@ -93,8 +97,12 @@ button {
 }
 
 .eliminarTodas {
-    background-color: blue;
-    color: white;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.eliminarTodas:hover, .eliminarColor:hover, .jugar:hover {
+    background-color: cyan;
 }
 
 .eliminarColor {
@@ -105,4 +113,11 @@ button {
 .jugar {
     background-color: #ccc;
     border: 1px solid black;
+}
+
+.pelota {
+    position: absolute;
+    border-radius: 50%; /* Hacer que la pelota sea redonda */
+    background-color: yellow;
+    border: 2px solid black; /* Opcional: borde */
 }
