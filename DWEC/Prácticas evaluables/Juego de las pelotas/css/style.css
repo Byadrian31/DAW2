@@ -6,7 +6,9 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-image: url("../img/fondo1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,15 +61,18 @@ h1#temporizador {
 }
 
 #juego {
-    background-color: #e9e9e9;
-    padding: 20px;
+    background-image: url("../img/fondo2.jpg");
+    background-size: contain; /* Asegura que la imagen se vea completa, sin estirarla */
+    background-position: center; /* Centra la imagen */
+    padding: 20px; /* Puedes ajustar o eliminar este padding si deseas que la imagen ocupe completamente el área */
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     width: 90%;
     height: 70%;
-    position:relative;
-    cursor: url('../img/cursorr.png');
+    position: relative;
+    cursor: url('../img/cursorr.png'), auto;
 }
+
 
 #menu p {
     margin-bottom: 10px;
@@ -97,8 +102,12 @@ button {
 }
 
 .eliminarTodas {
-    background-color: white;
-    border: 1px solid black;
+    background-image: url("../img/bowser.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    padding: 30px;
 }
 
 .eliminarTodas:hover, .eliminarColor:hover, .jugar:hover {
@@ -106,8 +115,12 @@ button {
 }
 
 .eliminarColor {
-    background-color: white;
-    border: 1px solid black;
+    background-image: url("../img/mario.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    padding: 30px;
 }
 
 .jugar {
@@ -117,7 +130,34 @@ button {
 
 .pelota {
     position: absolute;
-    border-radius: 50%; /* Hacer que la pelota sea redonda */
-    background-color: yellow;
-    border: 2px solid black; /* Opcional: borde */
+}
+
+.champ{
+    background-image: url("../img/champ.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.fuego{
+    background-image: url("../img/fuego.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.star{
+    background-image: url("../img/star.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.elefante{
+    background-image: url("../img/elefante.webp");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.tanooki{
+    background-image: url("../img/tanooki.png");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
