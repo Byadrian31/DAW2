@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @author Adrián López Pascual
+ */
+
 if (isset($_GET['enviar'])) {
     echo "<h2>Datos Enviados:</h2>";
     echo "<p><i>Nombre:</i> <b> " . ($_GET['name']) . "</b></p>";

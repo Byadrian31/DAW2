@@ -11,19 +11,6 @@ donde se le indique el email y si ha aceptado recibir publicidad o no. El botón
 mantendrá en el mismo formulario inicial pero limpiará todos los campos.
 */
 
-if (isset($_POST['enviar'])) {
-    $email = $_POST['email'];
-    $acceptsAds = isset($_POST['cond']) ? '1' : '0';
-
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        // Redirige a otra página pasando el correo y la aceptación de publicidad
-        header("Location: ./22Form.php?email=" . urlencode($email) . "&cond=" . urlencode($acceptsAds));
-        exit; // Asegúrate de terminar el script después de redirigir
-    } else {
-        echo "<p>Correo inválido</p>";
-    }
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +26,7 @@ if (isset($_POST['enviar'])) {
 
     <h1>Adrián López Pascual</h1>
 
-    <form action="" method="post">
+    <form action="./22Form.php" method="post">
         <fieldset>
             <legend>Correo electrónico</legend>
             <label for="email">Correo electrónico:</label>

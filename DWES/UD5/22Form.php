@@ -1,15 +1,23 @@
 <?php
 
-    $email = htmlspecialchars(urldecode($_GET['email']));
-    // Verifica si el checkbox 'cond' está presente y si su valor es '1'
-    $acceptsAds = isset($_GET['cond']) && $_GET['cond'] === '1' ? 'Sí' : 'No'; 
-    echo "Tu correo es: " . $email;
+/**
+ * @author Adrián López Pascual
+ */
+
+
+if (isset($_POST['enviar'])) {
+    $email = $_POST['email'];
+    $acceptsAds = isset($_POST['cond']) ? 'Has aceptado la publicidad' : 'No has aceptado la publicidad';
+
+    // Validar el correo
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo $email;
     echo "<br>";
-    if ($acceptsAds === "No") {
-        echo "No has aceptado recibir publicidad";
+    echo $acceptsAds;
     } else {
-        echo "Has aceptado recibir publicidad";
+        echo "<p>Correo inválido</p>";
     }
+}
 
 
 ?>
