@@ -5,6 +5,7 @@ const aciertosTotales = document.querySelector('.acierto');
 const fallosTotales = document.querySelector('.fallo');
 let modoSeleccionado = null; // Almacenar el modo seleccionado
 let tipoColorSeleccionado = ""; // Almacenar el tipo de color
+let juegoTerminado = false;
 
 function startContador() {
     const cont = document.getElementById('temporizador');
@@ -84,35 +85,50 @@ function crearPelotas(numPelotas) {
 
         // Evento de click para eliminar o contar fallos
         pelota.addEventListener('click', () => {
+
+            if (juegoTerminado) {
+                return; // Salir si el juego ha terminado
+            }
     
-            // Eliminar la pelota
-            pelota.remove();
             if (modoSeleccionado === 'todas') {
                 aciertos++;
                 aciertosTotales.textContent = aciertos;
                 pelota.remove();
                 if (document.querySelectorAll('.pelota').length === 0) {
-                    mostrarMensaje("¡Victoria! Has eliminado todas las pelotas.");
+                    mostrarMensaje("¡Victoria! Has eliminado todas las pelotas.", "victoria");
                     clearInterval(contador);
+                    juegoTerminado = true;
                 }
             } else if (modoSeleccionado === 'color') {
                 const esCorrecta = pelota.classList.contains(tipoColorSeleccionado);
                 let cant = document.querySelectorAll(`.${tipoColorSeleccionado}`).length;
+                let cantD = document.querySelectorAll(`.pelota:not(.${tipoColorSeleccionado})`).length;
                 if (esCorrecta) {
                     aciertos++;
                     aciertosTotales.textContent = aciertos;
+                    cant--;
                 } else {
                     fallos++;
                     fallosTotales.textContent = fallos;
+                    cantD--;
                 }
                 
                 // Depuración
                 console.log(`Aciertos: ${aciertos}, Fallos: ${fallos}`);
                 console.log(cant);
+                console.log("Derrotas cant");
+                console.log(cantD);
+                // Eliminar la pelota
+                pelota.remove();
             
-                if (document.querySelectorAll(`.${tipoColorSeleccionado}`).length === 0) {
-                    mostrarMensaje(aciertos > fallos ? "¡Victoria! Has eliminado todas las pelotas del color correcto." : "¡Derrota! Has eliminado más pelotas incorrectas.");
+                if (cant == 1) {
+                    mostrarMensaje("¡Victoria! Has eliminado todas las pelotas del color correcto.", "victoria");
                     clearInterval(contador);
+                    juegoTerminado = true;
+                } else if(cantD == 0 ) {
+                    mostrarMensaje("¡Derrota! Has eliminado más pelotas incorrectas.", "derrota");
+                    clearInterval(contador);
+                    juegoTerminado = true;
                 }
             }
         });
@@ -122,10 +138,20 @@ function crearPelotas(numPelotas) {
 }
 
 
-function mostrarMensaje(mensaje) {
+function mostrarMensaje(mensaje, tipo) {
     const mensajeDiv = document.querySelector('.mensaje');
     mensajeDiv.textContent = mensaje;
+
+    // Agregar clases para estilizar el mensaje según el tipo
+    mensajeDiv.className = `mensaje ${tipo}`; // Reinicia las clases y aplica el tipo
+    mensajeDiv.style.display = 'block';
+
+    // Ocultar el mensaje automáticamente después de unos segundos
+    setTimeout(() => {
+        mensajeDiv.style.display = 'none';
+    }, 5000);
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const menu = document.getElementById('menu');
@@ -136,6 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const elColor = document.querySelector('.eliminarColor');
     const jugar = document.querySelector('.jugar');
     const elec = document.querySelector('.eleccion');
+    const mensajeModoJuego = document.querySelector('.modo-juego');
 
     juego.style.display = 'none';
     reset.style.display = 'none';
@@ -145,14 +172,24 @@ document.addEventListener('DOMContentLoaded', () => {
     elTodas.addEventListener('click', () => {
         modoSeleccionado = 'todas';
         jugar.disabled = false;
+        mensajeModoJuego.style.display = 'block';
+        mensajeModoJuego.textContent = "Eliminar todas las pelotas";
     });
 
     elColor.addEventListener('click', () => {
         modoSeleccionado = 'color';
         jugar.disabled = false;
-        const imgs = ["champ", "star", "fuego", "tanooki", "elefante"];
-        tipoColorSeleccionado = imgs[Math.floor(Math.random() * imgs.length)];
+        // tipoColorSeleccionado se establece una sola vez
+        if (!tipoColorSeleccionado) {
+            const imgs = ["champ", "star", "fuego", "tanooki", "elefante"];
+            tipoColorSeleccionado = imgs[Math.floor(Math.random() * imgs.length)];
+        }
         elec.classList.add(tipoColorSeleccionado);
+        mensajeModoJuego.style.display = 'block';
+        mensajeModoJuego.innerHTML = `
+        Eliminar pelotas de 
+        <img src="./img/${tipoColorSeleccionado}.png" class="icono-color">
+    `;
         console.log("Tipo seleccionado para eliminar:", tipoColorSeleccionado);
     });
 
@@ -173,7 +210,18 @@ document.addEventListener('DOMContentLoaded', () => {
         reset.style.display = 'none';
         menu.style.display = 'block';
         elec.style.display = 'none';
-        
+        mensajeModoJuego.style.display = 'none';
+        // Eliminar correctamente el color seleccionado
+        if (tipoColorSeleccionado) {
+            elec.classList.remove(tipoColorSeleccionado); // Eliminar la clase del color seleccionado
+        }
+        // Reiniciar las variables globales
+        tipoColorSeleccionado = "";
+        juegoTerminado = false;
+        // Llamar a reiniciarJuego para resetear el estado del juego
         reiniciarJuego();
     });
 });
+
+
+
