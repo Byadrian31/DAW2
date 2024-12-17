@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Curso HTML5 y CSS3</title>
+    <link rel="stylesheet" href="./css/contacto.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="page">
+        <header>
+            <h1><img src="img/logo.png">Curso de HTML5 y CSS3</h1>
+        </header>
+        <nav>
+            <ul>
+                <li class="contenidos"><a href="">Contenidos</a></li>
+                <li class="videos"><a href="">Vídeos</a>
+                    <ul>
+                        <li><a href="./video.html">Video1</a></li>
+                        <li><a href="./video.html">Video2</a></li>
+                        <li><a href="./video.html">Video3</a></li>
+                    </ul>
+                </li>
+                <li class="contacto"><a href="">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <div id="contenedorFormulario">
+                <h1>Contáctenos</h1>
+                <form action="" method="post">
+                    <ul>
+                        <li>
+                            <input type="text" name="nombre" id="nombre" placeholder="Escriba su nombre" list="nombres" required>
+                            <datalist id="nombres">
+                                <option value="alex">
+                                <option value="juan">
+                                <option value="ana">
+                                <option value="pedro">
+                            </datalist>
+                            <label for=""></label>
+                        </li>
+                        <li>
+                            <input type="email" name="email" id="email" placeholder="Escriba su email" required>
+                            <label for=""></label>
+                        </li>
+                        <li>
+                            <textarea name="msj" id="msj" placeholder="Su mensaje..."></textarea>
+                        </li>
+                        <li>
+                            <button type="submit" name="env">Enviar</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </main>
+        <footer>
+            <a>HTML5 y CSS3.</a> <br>
+            Diseño de interfaces web 2ºDAW
+        </footer>
+    </div>
+</body>
+
+</html>
