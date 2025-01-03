@@ -1,0 +1,250 @@
+/* Importación de fuente externa desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap');
+
+/* Estio para un desplazamiento suave al hacer clic en un enlace */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ======================== */
+/* Estilos generales */
+/* ======================== */
+
+body {
+    font-family: "Racing Sans One"; /* Establece la fuente para todo el cuerpo */
+    margin: 0; /* Elimina el margen por defecto */
+    padding: 0; /* Elimina el relleno por defecto */
+    box-sizing: border-box; /* Asegura que el ancho y alto incluyan el borde y padding */
+    display: flex; /* Usamos flexbox para la disposición */
+    flex-direction: column; /* Los elementos dentro de body estarán en columna */
+    min-height: 100vh; /* Asegura que el body ocupe al menos la altura de la ventana */
+}
+
+/* ======================== */
+/* Estilos para el encabezado */
+/* ======================== */
+
+header {
+    background: linear-gradient(to right, #003366, #0059b3); /* Gradiente de azul para el fondo */
+    color: white; /* Texto en blanco */
+    padding: 1rem; /* Espaciado interno */
+    display: flex; /* Usamos flexbox para la disposición */
+    justify-content: space-around; /* Distribuye los elementos de forma equidistante */
+    align-items: center; /* Centra los elementos verticalmente */
+    position: relative; /* Posición relativa para manejar elementos dentro */
+    width: auto; /* Ajusta el ancho al contenido */
+}
+
+header .logo img {
+    max-width: 120px; /* Establece el ancho máximo de la imagen del logo */
+}
+
+/* ======================== */
+/* Estilos para el menú de navegación */
+/* ======================== */
+
+nav ul {
+    list-style: none; /* Elimina los puntos de la lista */
+    display: flex; /* Utiliza flexbox para la disposición de los items */
+    gap: 1rem; /* Espacio entre los elementos */
+    padding: 0; /* Elimina el padding de la lista */
+    margin: 0; /* Elimina el margen de la lista */
+}
+
+/* Estilos cuando el menú de navegación está colapsado */
+nav ul.collapsed {
+    display: none; /* Oculta el menú cuando está colapsado */
+    flex-direction: column; /* Los elementos se apilan verticalmente */
+    gap: 0; /* Elimina el espacio entre los elementos */
+    position: absolute; /* Coloca el menú debajo de su contenedor */
+    top: 100%; /* Se coloca debajo del header */
+    left: 0; /* Se alinea a la izquierda */
+    background: #003366; /* Fondo azul */
+    width: 100%; /* El menú ocupa todo el ancho */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombras para dar profundidad */
+}
+
+nav ul.collapsed li {
+    padding: 0.5rem; /* Espaciado en los elementos de la lista */
+    text-align: center; /* Centra el texto */
+}
+
+nav ul.collapsed li a {
+    display: block; /* Hace que el enlace ocupe todo el ancho */
+    width: 100%; /* Asegura que el enlace ocupe todo el ancho del item */
+    padding: 0.5rem 0; /* Espaciado interno en el enlace */
+}
+
+/* Estilos para los enlaces en el menú */
+nav ul li a {
+    color: white; /* Color de texto blanco */
+    text-decoration: none; /* Elimina el subrayado */
+    font-weight: bold; /* Pone el texto en negrita */
+    padding: 0.5rem 1rem; /* Espaciado interno */
+    border-radius: 5px; /* Redondea las esquinas */
+    transition: background 0.3s; /* Añade transición para el color de fondo */
+}
+
+/* Estilo para los enlaces cuando se pasa el ratón o son activos */
+nav ul li a:hover,
+nav ul li a.active {
+    background: rgba(255, 255, 255, 0.2); /* Fondo gris claro al pasar el ratón */
+}
+
+/* ======================== */
+/* Estilos para el main */
+/* ======================== */
+main {
+    flex: 1; /* Permite que el contenido del main crezca */
+    padding: 2rem; /* Espaciado interno */
+    background-image: url("../img/club.jpg"); /* Imagen de fondo */
+    background-repeat: no-repeat; /* No repite la imagen de fondo */
+    background-size: cover; /* Cubre todo el área disponible */
+    background-position: center; /* Centra la imagen */
+    background-attachment: fixed; /* Fija la imagen para dispositivos modernos */
+    width: auto; /* Asegura que el ancho sea completo */
+    text-align: center; /* Centra el texto */
+}
+
+
+main h1 {
+    text-shadow: 2px 2px 4px rgb(8, 8, 168); /* Sombra de texto para el título */
+    font-size: 2rem; /* Tamaño de fuente */
+}
+
+#general, #principal, #conocenos, #equipos, #equipaje, #contacto {
+    color: orange; /* Texto destacado */
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7); /* Sombras más suaves */
+    background-color: rgb(8, 8, 168); /* Fondo azul llamativo */
+    border-radius: 15px; /* Bordes redondeados */
+    text-align: center; /* Centrado del texto */
+    padding: 20px; /* Espaciado interno para mayor legibilidad */
+    margin: 20px auto; /* Espaciado externo y centrado en pantalla */
+    max-width: 800px; /* Limitar el ancho para mejor estética en dispositivos grandes */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Sombra alrededor para dar profundidad */
+    font-size: 1.2rem; /* Aumentar tamaño de texto */
+    line-height: 1.5; /* Espaciado entre líneas para legibilidad */
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Animación suave */
+}
+
+
+/* Efecto hover para mayor interactividad */
+#general:hover, #principal:hover, #conocenos:hover, #equipos:hover, #equipaje:hover, #contacto:hover {
+    transform: scale(1.05); /* Efecto de ampliación al pasar el ratón */
+    background-color: rgb(5, 5, 145); /* Fondo ligeramente más oscuro */
+    text-shadow: 5px 5px 12px rgba(0, 0, 0, 0.8); /* Aumentar sombra al pasar el ratón */
+}
+
+/* ======================== */
+/* Estilos para el footer */
+/* ======================== */
+footer {
+    background: #003366; /* Fondo azul */
+    color: white; /* Texto blanco */
+    text-align: center; /* Centra el texto */
+    padding: 0.5rem; /* Espaciado interno reducido */
+    margin-top: auto; /* Asegura que el pie de página quede al final */
+    width: auto; /* Ajusta el ancho */
+    font-size: 0.9rem; /* Tamaño de texto reducido */
+}
+
+/* Estilos para la imagen del patrocinador */
+footer .patrocinador {
+    max-width: 120px; /* Tamaño máximo de la imagen */
+    margin: 0.5rem auto 0; /* Centra la imagen con márgenes */
+    display: block; /* Hace que la imagen se comporte como un bloque */
+    opacity: 0; /* Comienza invisible */
+    transform: translateY(30px); /* Desplaza la imagen hacia abajo */
+    animation: entrada 3s ease-out forwards; /* Aplica animación */
+}
+
+/* Estilos para los iconos */
+footer ul {
+    list-style: none; /* Elimina los puntos de la lista */
+    display: flex; /* Usa flexbox para los iconos */
+    justify-content: center; /* Centra los iconos */
+    gap: 0.5rem; /* Espaciado entre los iconos */
+    padding: 0; /* Elimina el padding */
+    margin: 0 0 0.5rem 0; /* Márgenes ajustados */
+}
+
+footer ul li a {
+    color: white; /* Texto blanco */
+    text-decoration: none; /* Elimina el subrayado */
+    font-size: 1rem; /* Tamaño de los íconos */
+}
+
+footer ul li a:hover {
+    color: orange; /* Cambia el color al pasar el ratón */
+    text-decoration: underline; /* Subraya al pasar el ratón */
+}
+
+footer p {
+    font-size: 0.8rem; /* Tamaño de texto reducido */
+}
+
+footer p a {
+    font-size: 0.8rem;
+    color: orange; /* Color del enlace en el footer */
+}
+
+/* ======================== */
+/* Animación */
+/* ======================== */
+@keyframes entrada {
+    from {
+        opacity: 0; /* Comienza invisible */
+        transform: translateY(50px); /* Empieza desplazada hacia abajo */
+    }
+    to {
+        opacity: 1; /* Finaliza visible */
+        transform: translateY(0); /* Vuelve a la posición normal */
+    }
+}
+
+/* ======================== */
+/* Diseño responsive */
+/* ======================== */
+@media (max-width: 768px) {
+    nav ul {
+        display: none; /* Oculta el menú en pantallas pequeñas */
+    }
+
+    .dropdown-menu {
+        position: static; /* Ajusta el submenú */
+        box-shadow: none; /* Elimina la sombra del submenú */
+    }
+
+    .dropdown:hover .dropdown-menu {
+        display: none; /* Oculta el submenú */
+    }
+
+    .dropdown:focus-within .dropdown-menu {
+        display: block; /* Muestra el submenú cuando el menú está enfocado */
+    }
+
+    .menu-toggle {
+        display: block; /* Muestra el botón de menú */
+    }
+
+    nav ul.collapsed {
+        display: flex; /* Muestra el menú colapsado */
+        z-index: 200; /* Asegura que el menú esté encima de otros elementos */
+    }
+
+    footer ul li a {
+        font-size: 0.9rem; /* Tamaño de los íconos en pantallas pequeñas */
+    }
+}
+
+/* Diseño para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    footer {
+        font-size: 0.75rem; /* Tamaño más pequeño para el texto del footer */
+        padding: 0.4rem; /* Espaciado reducido en el footer */
+    }
+
+    footer ul li a {
+        font-size: 0.8rem; /* Tamaño de los íconos reducido */
+    }
+}

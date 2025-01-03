@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap');
+
+/* ======================== */
+/* Estilos generales */
+/* ======================== */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el body ocupe al menos la altura de la ventana */
+    font-family: "Racing Sans One" ;
+}
+
+/* ======================== */
+/* Estilos para el encabezado */
+/* ======================== */
+header {
+    background: linear-gradient(to right, #003366, #0059b3);
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    width: auto;
+}
+
+header .logo img {
+    max-width: 120px;
+}
+
+/* ======================== */
+/* Estilos para el menú */
+/* ======================== */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul.collapsed {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #003366;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+nav ul.collapsed li {
+    padding: 0.5rem;
+    text-align: center;
+}
+
+nav ul.collapsed li a {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background 1s;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Estilos para el menú desplegable */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #0059b3;
+    list-style: none;
+    padding: 0.5rem 0;
+    margin: 0;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.dropdown-menu li {
+    padding: 0.5rem 1rem;
+    text-align: left;
+}
+
+.dropdown-menu li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    transition: background 1s;
+}
+
+/* Estilos para los pares del submenú */
+.dropdown-menu li:nth-child(even) a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Estilos para los impares del submenú */
+.dropdown-menu li:nth-child(odd) a:hover {
+    background: rgb(249, 138, 3);
+}
+
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    background: #0059b3;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    border-radius: 3px;
+}
+
+/* ======================== */
+/* Estilos para el main */
+/* ======================== */
+main {
+    flex: 1; /* Permite que el main ocupe el espacio restante */
+    padding: 2rem;
+    background-image: url("../img/club.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: yellow;
+    text-align: center;
+    width: auto;
+}
+
+main h1 {
+    text-shadow: 2px 2px 4px rgb(8, 8, 168);
+    font-size: 2rem;
+}
+
+main section img {
+    max-width: 100%;
+    height: 70%;
+    width: 50%;
+    border: 3px solid #0059b3;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    min-width: 150px;
+    transition: transform 0.5s ease, box-shadow 0.5s ease, filter 0.5s ease;
+}
+
+main section img:hover {
+    transform: scale(1.1) rotate(3deg); /* Aumenta el tamaño y rota ligeramente */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Incrementa la sombra */
+    filter: brightness(1.2) saturate(1.5); /* Hace la imagen más brillante y colorida */
+}
+
+/* ======================== */
+/* Estilos para el footer */
+/* ======================== */
+footer {
+    background: #003366;
+    color: white;
+    text-align: center;
+    padding: 1rem; /* Cambiado a padding: 1rem; para evitar huecos */
+    margin-top: auto; /* Asegura que el footer se mantenga al final */
+    width: auto;
+}
+
+footer .patrocinador {
+    max-width: 150px;
+    margin: 1rem auto 0;
+    display: block;
+    opacity: 0;
+    transform: translateY(50px); /* Posición inicial de la animación */
+    animation: entrada 3s ease-out forwards; /* Animación de entrada */
+}
+
+/* ======================== */
+/* Estilos para la animación */
+/* ======================== */
+@keyframes entrada {
+    from {
+        opacity: 0;
+        transform: translateY(50px); /* Inicio: fuera de la vista */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Fin: posición normal */
+    }
+}
+
+footer ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0;
+    margin: 0 0 1rem 0;
+}
+
+footer ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+footer ul li a:hover {
+    color: orange;
+    text-decoration: underline;
+}
+
+footer p a {
+    font-size: 0.8rem;
+    color: orange;
+}
+
+/* ======================== */
+/* Estilos responsive */
+/* ======================== */
+@media (max-width: 768px) {
+    nav ul {
+        display: none;
+    }
+
+    .dropdown-menu {
+        position: static;
+        box-shadow: none;
+    }
+
+    .dropdown:hover .dropdown-menu {
+        display: none;
+    }
+
+    .dropdown:focus-within .dropdown-menu {
+        display: block;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    nav ul.collapsed {
+        display: flex;
+        z-index: 200;
+    }
+}
+

@@ -1,0 +1,326 @@
+/* Importa la fuente 'Racing Sans One' desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap');
+
+/* ======================== */
+/* Estilos generales */
+/* ======================== */
+body {
+    font-family: "Racing Sans One"; /* Define la fuente del cuerpo */
+    margin: 0; /* Elimina márgenes predeterminados */
+    padding: 0; /* Elimina el padding predeterminado */
+    box-sizing: border-box; /* Asegura que el padding y border no aumenten el tamaño total del elemento */
+    display: flex; /* Utiliza flexbox para el layout */
+    flex-direction: column; /* Coloca los elementos en una columna */
+    min-height: 100vh; /* Asegura que el body ocupe al menos toda la altura de la ventana */
+}
+
+/* ======================== */
+/* Estilos para el encabezado */
+/* ======================== */
+header {
+    background: linear-gradient(to right, #003366, #0059b3); /* Gradiente de fondo */
+    color: white; /* Color del texto */
+    padding: 1rem; /* Espaciado interno */
+    display: flex; /* Utiliza flexbox */
+    justify-content: space-around; /* Espacia los elementos dentro del header */
+    align-items: center; /* Centra verticalmente los elementos */
+    position: relative; /* Permite usar posiciones relativas dentro del header */
+    width: auto; /* Define el ancho automático */
+}
+
+/* Estilos para el logo */
+header .logo img {
+    max-width: 120px; /* Limita el tamaño máximo del logo */
+}
+
+/* ======================== */
+/* Estilos para el menú de navegación */
+/* ======================== */ 
+nav ul {
+    list-style: none; /* Elimina las viñetas de la lista */
+    display: flex; /* Utiliza flexbox para la disposición de los elementos */
+    gap: 1rem; /* Espacio entre los elementos */
+    padding: 0; /* Elimina el padding de la lista */
+    margin: 0; /* Elimina el margen de la lista */
+}
+
+/* Estilos para el menú colapsado (cuando se oculta en pantallas pequeñas) */
+nav ul.collapsed {
+    display: none; /* Oculta el menú */
+    flex-direction: column; /* Cambia la dirección a columna */
+    gap: 0; /* Elimina el espacio entre los elementos */
+    position: absolute; /* Posiciona el menú en relación al contenedor */
+    top: 100%; /* Lo posiciona debajo del header */
+    left: 0; /* Lo alinea a la izquierda */
+    background: #003366; /* Fondo oscuro */
+    width: 100%; /* Ancho completo */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para el menú */
+}
+
+/* Estilos para los elementos de la lista en el menú colapsado */
+nav ul.collapsed li {
+    padding: 0.5rem; /* Espaciado interno */
+    text-align: center; /* Centra el texto */
+}
+
+/* Estilos para los enlaces en el menú colapsado */
+nav ul.collapsed li a {
+    display: block; /* Hace que el enlace ocupe todo el ancho */
+    width: 100%; /* Ancho completo */
+    padding: 0.5rem 0; /* Espaciado vertical */
+}
+
+/* Estilos para los enlaces en el menú normal */
+nav ul li a {
+    color: white; /* Color de los enlaces */
+    text-decoration: none; /* Elimina el subrayado */
+    font-weight: bold; /* Hace el texto en negrita */
+    padding: 0.5rem 1rem; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background 1s; /* Transición suave para el fondo */
+}
+
+/* Efecto hover en los enlaces del menú */
+nav ul li a:hover,
+nav ul li a.active {
+    background: rgba(255, 255, 255, 0.2); /* Fondo ligeramente blanco al pasar el ratón */
+}
+
+/* Estilos para el menú desplegable */
+.dropdown {
+    position: relative; /* Permite que el menú desplegable se posicione en relación a este contenedor */
+}
+
+/* Estilos para el menú desplegable oculto */
+.dropdown-menu {
+    display: none; /* Oculta el menú por defecto */
+    position: absolute; /* Lo posiciona en relación a su contenedor */
+    top: 100%; /* Lo coloca debajo del enlace del desplegable */
+    left: 0; /* Lo alinea a la izquierda */
+    background-color: #0059b3; /* Fondo azul */
+    list-style: none; /* Elimina las viñetas */
+    padding: 0.5rem 0; /* Espaciado interno */
+    margin: 0; /* Elimina el margen */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para el menú */
+    z-index: 100; /* Asegura que se muestre por encima de otros elementos */
+}
+
+/* Estilos para los elementos del menú desplegable */
+.dropdown-menu li {
+    padding: 0.5rem 1rem; /* Espaciado interno */
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
+/* Estilos para los enlaces dentro del menú desplegable */
+.dropdown-menu li a {
+    color: white; /* Color de los enlaces */
+    text-decoration: none; /* Elimina el subrayado */
+    display: block; /* Hace que el enlace ocupe todo el ancho */
+    transition: background 1s; /* Transición para el fondo */
+}
+
+/* Estilos para los pares del submenú */
+.dropdown-menu li:nth-child(even) a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Estilos para los impares del submenú */
+.dropdown-menu li:nth-child(odd) a:hover {
+    background: rgb(249, 138, 3);
+}
+
+
+/* Muestra el menú desplegable cuando se pasa el ratón sobre el contenedor */
+.dropdown:hover .dropdown-menu {
+    display: block; /* Muestra el menú */
+}
+
+/* Estilos para el botón de menú en pantallas pequeñas */
+.menu-toggle {
+    display: none; /* Oculta el botón por defecto */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    background: #0059b3; /* Fondo azul */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    padding: 0.5rem 1rem; /* Espaciado interno */
+    font-size: 1.2rem; /* Tamaño de la fuente */
+    border-radius: 3px; /* Bordes redondeados */
+}
+
+/* ======================== */
+/* Estilos para el main */
+/* ======================== */ 
+main {
+    flex: 1; /* Hace que el main ocupe el espacio restante */
+    padding: 2rem; /* Espaciado interno */
+    background-image: url("../img/club.jpg"); /* Imagen de fondo */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-size: cover; /* Hace que la imagen cubra toda el área */
+    background-position: center; /* Centra la imagen */
+    color: yellow; /* Color del texto */
+    text-align: center; /* Centra el texto */
+    width: auto; /* Ancho automático */
+}
+
+/* Estilos para los encabezados dentro del main */
+main h2 {
+    text-shadow: 2px 2px 4px rgb(8, 8, 168); /* Sombra de texto */
+    font-size: 2rem; /* Tamaño del texto */
+}
+
+/* Estilos para la galería de imágenes */
+.imagenes {
+    display: grid; /* Utiliza el grid para la disposición */
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas fijas */
+    grid-template-rows: auto auto; /* 2 filas */
+    gap: 1.5rem; /* Espacio entre las imágenes */
+    justify-content: center; /* Centra las imágenes */
+}
+
+/* Especifica que las primeras 2 imágenes estén en la primera fila */
+.imagenes figure:nth-child(1),
+.imagenes figure:nth-child(2) {
+    grid-row: 1; /* Coloca estas imágenes en la fila 1 */
+}
+
+/* Especifica que las siguientes 2 imágenes estén en la segunda fila */
+.imagenes figure:nth-child(3),
+.imagenes figure:nth-child(4) {
+    grid-row: 2; /* Coloca estas imágenes en la fila 2 */
+}
+
+/* Estilos para las imágenes en la galería */
+.imagenes img {
+    max-width: 100%; /* Asegura que la imagen no se desborde */
+    height: 70%; /* Altura del 70% del contenedor */
+    width: 50%; /* Ancho del 50% del contenedor */
+    border: 3px solid #0059b3; /* Borde azul */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra */
+    min-width: 150px; /* Establece un tamaño mínimo */
+}
+
+/* Estilos para los pies de las imágenes */
+.imagenes figcaption {
+    margin-top: 0.5rem; /* Espacio superior */
+    font-size: 1rem; /* Tamaño de fuente */
+    text-shadow: 2px 2px 4px rgb(8, 8, 168); /* Sombra de texto */
+    color: yellow; /* Color del texto */
+    text-shadow: 1px 1px 2px black; /* Sombra adicional */
+}
+
+/* Efecto hover en las imágenes */
+.imagenes img:hover {
+    transform: scale(1.1) rotate(2deg); /* Aumenta el tamaño y rota ligeramente */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3); /* Incrementa la sombra */
+    filter: brightness(1.2); /* Aumenta el brillo */
+}
+
+/* ======================== */
+/* Estilos para el footer */
+/* ======================== */
+footer {
+    background: #003366; /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    text-align: center; /* Centra el texto */
+    padding: 1rem; /* Espaciado interno */
+    margin-top: auto; /* Asegura que el footer se quede al final */
+    width: auto; /* Ancho automático */
+}
+
+/* Animación de entrada para el patrocinador */
+footer .patrocinador {
+    max-width: 150px; /* Ancho máximo */
+    margin: 1rem auto 0; /* Margen auto para centrar */
+    display: block; /* Hace que el elemento sea un bloque */
+    opacity: 0; /* Empieza invisible */
+    transform: translateY(50px); /* Comienza fuera de vista */
+    animation: entrada 3s ease-out forwards; /* Animación que dura 3 segundos */
+}
+
+/* ======================== */
+/* Estilos para la animación */
+/* ======================== */
+@keyframes entrada {
+    from {
+        opacity: 0; /* Inicia invisible */
+        transform: translateY(50px); /* Empieza fuera de la vista */
+    }
+    to {
+        opacity: 1; /* Termina visible */
+        transform: translateY(0); /* Termina en la posición normal */
+    }
+}
+
+/* Estilos para los enlaces en el pie de página */
+footer ul {
+    list-style: none; /* Elimina las viñetas */
+    display: flex; /* Utiliza flexbox para la disposición */
+    justify-content: center; /* Centra los elementos */
+    gap: 1rem; /* Espacio entre los elementos */
+    padding: 0; /* Elimina el padding */
+    margin: 0 0 1rem 0; /* Márgenes alrededor */
+}
+
+/* Estilos para los enlaces dentro de los elementos de la lista */
+footer ul li a {
+    color: white; /* Color de los enlaces */
+    text-decoration: none; /* Elimina el subrayado */
+    font-size: 1.2rem; /* Tamaño de la fuente */
+}
+
+/* Efecto hover en los enlaces del pie de página */
+footer ul li a:hover {
+    color: orange; /* Cambia el color al pasar el ratón */
+    text-decoration: underline; /* Subraya el texto */
+}
+
+/* Estilos para los enlaces en el párrafo del pie de página */
+footer p a {
+    font-size: 0.8rem; /* Tamaño de fuente más pequeño */
+    color: orange; /* Color naranja */
+}
+
+/* ======================== */
+/* Estilos responsive */
+/* ======================== */
+@media (max-width: 768px) {
+    /* Cambia el diseño para dispositivos móviles */
+    nav ul {
+        display: none; /* Oculta el menú */
+    }
+
+    /* Estilos para el menú desplegable en pantallas pequeñas */
+    .dropdown-menu {
+        position: static; /* Cambia la posición a estática */
+        box-shadow: none; /* Elimina la sombra */
+    }
+
+    /* Muestra el menú cuando se hace focus sobre el dropdown */
+    .dropdown:focus-within .dropdown-menu {
+        display: block; /* Muestra el menú */
+    }
+
+    .menu-toggle {
+        display: block; /* Muestra el botón para el menú */
+    }
+
+    /* Muestra el menú desplegable en pantallas pequeñas */
+    nav ul.collapsed {
+        display: flex; /* Muestra el menú en columna */
+        z-index: 200; /* Asegura que esté sobre otros elementos */
+    }
+
+    /* Cambia el diseño de la galería de imágenes */
+    .imagenes {
+        grid-template-columns: 1fr; /* Una columna */
+        grid-template-rows: repeat(4, auto); /* Cuatro filas */
+    }
+
+    /* Estilos para las imágenes al pasar el ratón */
+    .imagenes img:hover {
+        transform: scale(1.1); /* Aumenta el tamaño */
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4); /* Sombra más intensa */
+    }
+}
