@@ -154,8 +154,9 @@ main {
 
 main h1 {
     text-shadow: 2px 2px 4px rgb(8, 8, 168);
-    font-size: 2rem;
+    font-size: 4rem;
 }
+
 
 main section img {
     max-width: 100%;

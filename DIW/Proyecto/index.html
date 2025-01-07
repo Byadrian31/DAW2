@@ -4,51 +4,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Paiporta Basquet Club</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" type="image/jpg" href="img/logo.png" />
+    <title>Paiporta Bàsquet Club</title>
+    <link rel="stylesheet" href="css/principal.css">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
 </head>
 
 <body>
     <header>
-        <h1><img src="img/logo.png" width="100px" height="80px"> Paiporta Basquet Club <img src="img/logo.png"
-            width="100px" height="80px"> </h1>
-        <nav class="navbar">
-            <ul>
-                <li><a href="index.html" class="active">Inicio</a></li>
-                <li><a href="equipo.html">Equipo</a></li>
-                <li><a href="calendario.html">Calendario</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
-
-    </header>
-
-    <section class="hero">
-        <h2>Bienvenidos al club</h2>
-        <p>El hogar del baloncesto en Paiporta.</p>
-        <a href="contacto.html"><button>Únete al equipo</button></a>
-    </section>
-
-    <footer>
-        <div class="social-links">
-            <a href="https://www.instagram.com/paiportabasquet/?hl=es" target="_blank">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.facebook.com/paiportabasquetclub/?locale=es_ES" target="_blank">
-                <i class="fab fa-facebook"></i>
-            </a>
-            <a href="https://www.twitch.tv/paiportabasketclub" target="_blank">
-                <i class="fab fa-twitch"></i>
-            </a>
-            <a href="https://x.com/paiportabasquet" target="_blank">
-                <i class="fab fa-twitter"></i>
+        <div class="logo"> 
+            <a href="./index.html">
+                <img src="img/logo.png" alt="Logo Paiporta Bàsquet Club">
             </a>
         </div>
-        <p>&copy; 2024 Paiporta Basquet Club. Todos los derechos reservados.</p>
+        <button class="menu-toggle"></button>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Inicio</a></li>
+                <li><a href="web/conocenos.html">Conócenos</a></li>
+                <li class="dropdown">
+                    <a href="#">Equipos</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="web/infantil.html">Infantil</a></li>
+                        <li><a href="web/cadete.html">Cadete</a></li>
+                        <li><a href="web/junior.html">Junior</a></li>
+                        <li><a href="web/senior.html">Senior</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Equipaje</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="web/local.html">Local</a></li>
+                        <li><a href="web/visitante.html">Visitante</a></li>
+                        <li><a href="web/entrenamiento.html">Entrenamiento</a></li>
+                        <li><a href="web/chandal.html">Chándal</a></li>
+                    </ul>
+                </li>
+                <li><a href="web/contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h1>Bienvenidos al Paiporta Bàsquet Club</h1>
+        </section>
+
+        <section class="video">
+            <video controls>
+                <source src="video/video.mp4" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+            </video>
+        </section>
+    </main>
+
+    <footer>
+        <h1>Patrocinador:</h1>
+        <img src="img/patrocinio.gif" class="patrocinador" alt="Patrocinador">
+        <ul>
+            <li><a href="https://www.instagram.com/paiportabasquet/?hl=es">Instagram</a></li>
+            <li><a href="https://www.facebook.com/paiportabasquetclub/?locale=es_ES">Facebook</a></li>
+            <li><a href="https://www.twitch.tv/paiportabasketclub">Twitch</a></li>
+            <li><a href="https://x.com/paiportabasquet">Twitter</a></li>
+        </ul>
+        <p>Guía de estilo: <a href="web/guia_estilo.html">DIW</a></p>
     </footer>
+    <script src="js/script.js"></script>
 </body>
 
 </html>
