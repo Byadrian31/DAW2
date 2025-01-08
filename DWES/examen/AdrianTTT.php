@@ -37,7 +37,7 @@ function verificarGanador($array)
 {
     $resultado = false;
     // Horizontal
-    if ($array[0][0] == $array[0][1] && $array[0][0] = $array[0][2] && $array[0][0] != " ") {
+    if ($array[0][0] == $array[0][1] && $array[0][0] == $array[0][2] && $array[0][0] != " ") {
         $resultado = true;
     } elseif ($array[1][0] == $array[1][1] && $array[1][0] == $array[1][2] && $array[1][0] != " ") {
         $resultado = true;
@@ -73,7 +73,7 @@ function tableroLleno($array)
         }
     }
 
-    if ($cant = 9 && verificarGanador($array) == false) {
+    if ($cant == 9 && verificarGanador($array) == false) {
         echo "Empate, nadie gana";
     }
 }
@@ -124,7 +124,7 @@ function iniciarPartida($j1,$f1,$j2,$f2)
 
             $cadena[$op][$op2] = $f2;
 
-        } while ($op = "s" || $op2 = "s");
+        } while ($op == "s" || $op2 == "s");
 }
 
 echo "Bienvenido al 3 en raya\n";
@@ -177,7 +177,7 @@ while ($partidas < 5) {
         $opc = readline("¿Desean jugar otro torneo? (s para iniciar otro, cualquier otra tecla para no continuar): ");
         echo "\n;";
         if ($opc == "s") {
-            $partidas == 0;
+            $partidas = 0;
             $w1 = 0;
             $w2 = 0;
             $l1 = 0;
@@ -194,7 +194,7 @@ while ($partidas < 5) {
         $opc = readline("¿Desean jugar otro torneo? (s para iniciar otro, cualquier otra tecla para no continuar): ");
         echo "\n;";
         if ($opc == "s") {
-            $partidas == 0;
+            $partidas = 0;
             $w1 = 0;
             $w2 = 0;
             $l1 = 0;
