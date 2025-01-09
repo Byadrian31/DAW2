@@ -1,147 +1,112 @@
 <?php
 
-/**
- * @author Adrián López Pascual
- */
-
-
-
 function inicializarTablero()
 {
     $array = [];
-    for ($n = 0; $n < 5; $n++) {
-        for ($m = 0; $m < 5; $m++) {
+    for ($n = 0; $n < 3; $n++) {
+        for ($m = 0; $m < 3; $m++) {
             $array[$n][$m] = " ";
         }
     }
-
-    echo imprimirTablero($array);
     return $array;
 }
 
 function imprimirTablero($array)
 {
-
     for ($n = 0; $n < 3; $n++) {
+        echo "\n";
         for ($m = 0; $m < 3; $m++) {
-            echo " " . $array[$n][$m] . " | ";
+            echo " " . $array[$n][$m];
+            if ($m < 2) echo " |";
         }
         echo "\n";
-        echo "--- | --- | ---";
-        echo "\n";
+        if ($n < 2) echo "---|---|---";
     }
+    echo "\n";
 }
-
 
 function verificarGanador($array)
 {
-    $resultado = false;
     // Horizontal
-    if ($array[0][0] == $array[0][1] && $array[0][0] == $array[0][2] && $array[0][0] != " ") {
-        $resultado = true;
-    } elseif ($array[1][0] == $array[1][1] && $array[1][0] == $array[1][2] && $array[1][0] != " ") {
-        $resultado = true;
-    } elseif ($array[2][0] == $array[2][1] && $array[2][0] == $array[2][2] && $array[2][0] != " ") {
-        $resultado = true;
+    if ($array[0][0] == $array[0][1] && $array[0][0] == $array[0][2] && $array[0][0] != " "
+        || $array[1][0] == $array[1][1] && $array[1][0] == $array[1][2] && $array[1][0] != " "
+        || $array[2][0] == $array[2][1] && $array[2][0] == $array[2][2] && $array[2][0] != " ") {
+        return true;
     }
     // Vertical
-    elseif ($array[0][0] == $array[1][0] && $array[0][0] == $array[2][0] && $array[0][0] != " ") {
-        $resultado = true;
-    } elseif ($array[0][1] == $array[1][1] && $array[0][1] == $array[2][1] && $array[0][1] != " ") {
-        $resultado = true;
-    } elseif ($array[2][0] == $array[2][1] && $array[2][0] == $array[2][2] && $array[2][0] != " " ) {
-        $resultado = true;
+    elseif ($array[0][0] == $array[1][0] && $array[0][0] == $array[2][0] && $array[0][0] != " "
+        || $array[0][1] == $array[1][1] && $array[0][1] == $array[2][1] && $array[0][1] != " "
+        || $array[0][2] == $array[1][2] && $array[0][2] == $array[2][2] && $array[0][2] != " ") {
+        return true;
     }
     // Diagonal
-    elseif ($array[0][0] == $array[1][1] && $array[0][0] == $array[2][2] && $array[0][0] != " ") {
-        $resultado = true;
-    } elseif ($array[0][2] == $array[1][1] && $array[0][2] == $array[2][0] && $array[0][2] != " ") {
-        $resultado = true;
+    elseif ($array[0][0] == $array[1][1] && $array[0][0] == $array[2][2] && $array[0][0] != " "
+        || $array[0][2] == $array[1][1] && $array[0][2] == $array[2][0] && $array[0][2] != " ") {
+        return true;
     }
-
-    return $resultado;
+    return false;
 }
 
 function tableroLleno($array)
 {
-    $cant = 0;
-    for ($i = 0; $i < 3; $i++) {
-        for ($a = 0; $a < 3; $a++) {
-            if ($array[$i][$a] != " ") {
-                $cant ++;
-            }
+    foreach ($array as $fila) {
+        if (in_array(" ", $fila)) {
+            return false;
         }
     }
-
-    if ($cant == 9 && verificarGanador($array) == false) {
-        echo "Empate, nadie gana";
-    }
+    return true;
 }
 
-
-function iniciarPartida($j1,$f1,$j2,$f2)
+function iniciarPartida($j1, $f1, $j2, $f2)
 {
-        do {
-            $op = readline($j1 . "(" . $f1 . "), indica la fila (0-2) o escribe 's' para abandonar la partida: ");
-            echo "\n";
-            $op2 = readline($j1 . "(" . $f1 . "), indica la columna (0-2) o escribe 's' para abandonar la partida: ");
-            echo "\n";
-            $cadena = inicializarTablero();
-            $cadena[$op][$op2] = $f1;
+    $tablero = inicializarTablero();
+    $turno = 1; // Comienza el jugador 1
 
-            while ($cadena[$op][$op2] != " ") {
-                echo "Esa posición no es valida \n";
-                $op = readline($j1 . "(" . $f1 . "), indica la fila (0-2) o escribe 's' para abandonar la partida: ");
-                echo "\n";
-                $op2 = readline($j1 . "(" . $f1 . "), indica la columna (0-2) o escribe 's' para abandonar la partida: ");
-                echo "\n";
-                $cadena[$op][$op2] = $f1;
-            }
+    while (true) {
+        imprimirTablero($tablero);
+        if ($turno == 1) {
+            $op = readline($j1 . "(" . $f1 . "), indica la fila (0-2): ");
+            $op2 = readline($j1 . "(" . $f1 . "), indica la columna (0-2): ");
+            $ficha = $f1;
+        } else {
+            $op = readline($j2 . "(" . $f2 . "), indica la fila (0-2): ");
+            $op2 = readline($j2 . "(" . $f2 . "), indica la columna (0-2): ");
+            $ficha = $f2;
+        }
 
+        if ($op == 's' || $op2 == 's') {
+            echo "Partida abandonada.\n";
+            return null;
+        }
 
+        if ($tablero[$op][$op2] != " ") {
+            echo "Esa posición ya está ocupada. Intenta de nuevo.\n";
+            continue;
+        }
 
+        $tablero[$op][$op2] = $ficha;
 
-            if (verificarGanador($cadena) == true) {
-                echo "¡" . $j1 . " ha ganado esta partida! \n";
-                return $j1;
+        if (verificarGanador($tablero)) {
+            imprimirTablero($tablero);
+            echo "¡" . ($turno == 1 ? $j1 : $j2) . " ha ganado esta partida! \n";
+            return ($turno == 1 ? $j1 : $j2);
+        }
 
+        if (tableroLleno($tablero)) {
+            imprimirTablero($tablero);
+            echo "La partida ha terminado en empate.\n";
+            return "Empate";
+        }
 
-            }
-
-            $op = readline($j2 . "(" . $f2 . "), indica la fila (0-2) o escribe 's' para abandonar la partida: ") ;
-            echo "\n";
-            $op2 = readline($j2 . "(" . $f2 . "), indica la columna (0-2) o escribe 's' para abandonar la partida: ") ;
-            echo "\n";
-            $cadena = inicializarTablero();
-
-            while ($cadena[$op][$op2] != " ") {
-                echo "Esa posición no es valida \n";
-                $op = readline($j2 . "(" . $f2 . "), indica la fila (0-2) o escribe 's' para abandonar la partida: ") ;
-                echo "\n";
-                $op2 = readline($j2 . "(" . $f2 . "), indica la columna (0-2) o escribe 's' para abandonar la partida: ") ;
-                echo "\n";
-            }
-
-            $cadena[$op][$op2] = $f2;
-
-        } while ($op == "s" || $op2 == "s");
+        $turno = ($turno == 1) ? 2 : 1; // Cambiar turno
+    }
 }
 
 echo "Bienvenido al 3 en raya\n";
-$j1 = readline("Dime tu nombre jugador 1 ") ;
-echo "\n";
-$f1 = readline("Elige la ficha que quieras ") ;
-echo "\n";
-
-$j2 = readline("Dime tu nombre jugador 2 ") ;
-echo "\n";
-$f2 = readline("Elige la ficha que quieras ") ;
-echo "\n";
-
-echo "Jugador 1 es : " . $j1 . " y su ficha es " . $f1 . "\n";
-echo "Jugador 2 es : " . $j2 . " y su ficha es " . $f2 . "\n";
-
-
+$j1 = readline("Dime tu nombre jugador 1: ");
+$f1 = readline("Elige la ficha que quieras para jugador 1: ");
+$j2 = readline("Dime tu nombre jugador 2: ");
+$f2 = readline("Elige la ficha que quieras para jugador 2: ");
 
 $partidas = 0;
 $w1 = 0;
@@ -150,59 +115,23 @@ $l1 = 0;
 $l2 = 0;
 $c1 = 0;
 $c2 = 0;
+
 while ($partidas < 5) {
-    $ganador = iniciarPartida($j1,$f1,$j2,$f2);
-    $num = $partidas++;
-    $nuevotorneo = "";
-    echo "--- Partida " . $num . " --- ";
+    $ganador = iniciarPartida($j1, $f1, $j2, $f2);
+    $partidas++;
+    echo "--- Partida $partidas ---\n";
+    
     if ($ganador == $j1) {
         $w1++;
         $l2++;
-        if ($w1 == 3) {
-            $c1++;
-        }
-    } else {
+    } elseif ($ganador == $j2) {
         $w2++;
         $l1++;
-        if ($w2 == 3) {
-            $c2++;
-        }
     }
 
-    if($c1 == 3 ) {
-        echo $j1 . " ha ganado el torneo \n ";
-        echo "---Estadísticas del Torneo--- \n";
-        echo $j1 . "(" . $f1 . ") - Victorias: " . $w1 . ", Derrotas: " . $l1 . ", Copas: " . $c1 . " \n";
-        echo $j2 . "(" . $f2 . ") - Victorias: " . $w2 . ", Derrotas: " . $l2 . ", Copas: " . $c2 . " \n";
-        $opc = readline("¿Desean jugar otro torneo? (s para iniciar otro, cualquier otra tecla para no continuar): ");
-        echo "\n;";
-        if ($opc == "s") {
-            $partidas = 0;
-            $w1 = 0;
-            $w2 = 0;
-            $l1 = 0;
-            $l2 = 0;
-            $nuevoTorneo = "--- Iniciando un nuevo torneo de 3 partidas ---";
-        } else {
-            $partidas = 10;
-        }
-    } elseif ($c2 == 3) {
-        echo $j2 . " ha ganado el torneo \n";
-        echo "---Estadísticas del Torneo--- \n";
-        echo $j1 . "(" . $f1 . ") - Victorias: " . $w1 . ", Derrotas: " . $l1 . ", Copas: " . $c1 . " \n";
-        echo $j2 . "(" . $f2 . ") - Victorias: " . $w2 . ", Derrotas: " . $l2 . ", Copas: " . $c2 . " \n";
-        $opc = readline("¿Desean jugar otro torneo? (s para iniciar otro, cualquier otra tecla para no continuar): ");
-        echo "\n;";
-        if ($opc == "s") {
-            $partidas = 0;
-            $w1 = 0;
-            $w2 = 0;
-            $l1 = 0;
-            $l2 = 0;
-            $nuevoTorneo = "--- Iniciando un nuevo torneo de 3 partidas ---";
-        } else {
-            $partidas = 10;
-        }
+    if ($w1 == 3 || $w2 == 3) {
+        echo "El torneo ha terminado.\n";
+        break;
     }
-    
 }
+?>
