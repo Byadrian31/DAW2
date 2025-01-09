@@ -44,10 +44,10 @@
 
 #enemigo {
     border: 5px solid #464F8D;
-    width: 400px;
-    height: 400px;
+    width: 200px;
+    height: 200px;
     border-radius: 400px;
-    margin-left: calc(50% - 200px);
+    margin-left: calc(50% - 100px);
     margin-top: 15 0px;
     background-color: #464F8D;
 }
@@ -80,7 +80,7 @@
 #jugador {
     float: left;
     margin-left: 100px;
-    height: 770px;
+    height: 600px;
     width: 100px;
     border: 1px solid black;
     overflow: hidden;
@@ -89,7 +89,7 @@
 #maquina {
     float: right;
     margin-right: 100px;
-    height: 750px;
+    height: 600px;
     width: 100px;
     border: 1px solid black;
     overflow: hidden;

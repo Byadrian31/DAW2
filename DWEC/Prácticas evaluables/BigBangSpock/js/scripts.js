@@ -57,13 +57,14 @@ function drop(ev) {
     seleccionado.appendChild(elemento.cloneNode(true));
 
     // Llamar a deliverar antes de mostrar el rival
-    deliverar();
+  //  deliverar();
 
     // Usar un retraso para mostrar la elección del rival y calcular el ganador
-    setTimeout(() => {
+  /*  setTimeout(() => {
         const eleccionMaquina = seleccionMaquina(); // Elección de la máquina
         calcularGanador(idElement, eleccionMaquina); // Determinar el ganador
-    }, 2000); // Retraso de 2 segundos
+    }, 2000); // Retraso de 2 segundos*/
+    seleccionMaquina();
 }
 
 function divMensaje(jugador, maquina) {
@@ -77,7 +78,10 @@ function divMensajePerdedor(jugador, maquina) {
 }
 
 
-function calcularGanador(jugador, maquina) {
+function calcularGanador() {
+    const jugador = document.getElementById("seleccionado").firstElementChild.id;
+    const maquina = document.getElementById("enemigo").firstElementChild.id;
+    console.log(jugador, maquina);
     let resultado = "";
     if (jugador === maquina) {
         resultado = "Empate. Intenta otra vez.";
@@ -188,7 +192,8 @@ function seleccionMaquina() {
     const aleatorio = Math.floor(Math.random() * opciones.length);
     document.getElementById("enemigo").innerHTML = '';
     document.getElementById("enemigo").innerHTML = `<img src="img/${opciones[aleatorio]}.png">`;
-    return opciones[aleatorio];
+    //return opciones[aleatorio];
+    setTimeout(deliverar, 1800);
 }
 
 function marcadorJugador() {
@@ -224,7 +229,7 @@ function deliverar() {
     console.log("deliverar called");
     document.getElementById("proteccion").className = "visible";
     document.getElementById("deliveracion").className = "visible";
-    setTimeout(mostrarMensaje, 2000);
+    setTimeout(calcularGanador, 2000);
 }
 
 function mostrarMensaje(mensaje) {
