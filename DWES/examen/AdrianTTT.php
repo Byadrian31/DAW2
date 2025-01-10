@@ -20,7 +20,9 @@ function imprimirTablero($array)
             if ($m < 2) echo " |";
         }
         echo "\n";
-        if ($n < 2) echo "---|---|---";
+        if ($n < 2){ 
+            echo "---|---|---";
+        }
     }
     echo "\n";
 }
@@ -61,77 +63,117 @@ function iniciarPartida($j1, $f1, $j2, $f2)
 {
     $tablero = inicializarTablero();
     $turno = 1; // Comienza el jugador 1
+    $movimientos = 0; // Control de turnos máximo (9 movimientos)
 
-    while (true) {
+    do {
         imprimirTablero($tablero);
-        if ($turno == 1) {
-            $op = readline($j1 . "(" . $f1 . "), indica la fila (0-2): ");
-            $op2 = readline($j1 . "(" . $f1 . "), indica la columna (0-2): ");
-            $ficha = $f1;
-        } else {
-            $op = readline($j2 . "(" . $f2 . "), indica la fila (0-2): ");
-            $op2 = readline($j2 . "(" . $f2 . "), indica la columna (0-2): ");
-            $ficha = $f2;
+        $jugadorActual = ($turno == 1) ? $j1 : $j2;
+        $fichaActual = ($turno == 1) ? $f1 : $f2;
+        $oponente = ($turno == 1) ? $j2 : $j1;
+
+        // Pedir fila y columna
+        $fila = readline("$jugadorActual ($fichaActual), indica la fila (0-2) o escribe 's' para abandonar la partida: ");
+        if ($fila === 's') {
+            echo "$jugadorActual ha abandonado la partida. ¡$oponente gana!\n";
+            return $oponente;
+        }
+        $columna = readline("$jugadorActual ($fichaActual), indica la columna (0-2) o escribe 's' para abandonar la partida: ");
+        if ($columna === 's') {
+            echo "$jugadorActual ha abandonado la partida. ¡$oponente gana!\n";
+            return $oponente;
         }
 
-        if ($op == 's' || $op2 == 's') {
-            echo "Partida abandonada.\n";
-            return null;
-        }
-
-        if ($tablero[$op][$op2] != " ") {
-            echo "Esa posición ya está ocupada. Intenta de nuevo.\n";
+        // Validar entrada
+        if (!is_numeric($fila) || !is_numeric($columna) || $fila < 0 || $fila > 2 || $columna < 0 || $columna > 2) {
+            echo "Posición inválida. Intenta nuevamente.\n";
             continue;
         }
 
-        $tablero[$op][$op2] = $ficha;
+        // Validar si la posición está ocupada
+        if ($tablero[$fila][$columna] != " ") {
+            echo "Esa posición ya está ocupada. Intenta nuevamente.\n";
+            continue;
+        }
 
+        // Colocar ficha
+        $tablero[$fila][$columna] = $fichaActual;
+        $movimientos++;
+
+        // Verificar ganador
         if (verificarGanador($tablero)) {
             imprimirTablero($tablero);
-            echo "¡" . ($turno == 1 ? $j1 : $j2) . " ha ganado esta partida! \n";
-            return ($turno == 1 ? $j1 : $j2);
+            echo "¡$jugadorActual ha ganado esta partida!\n";
+            return $jugadorActual;
         }
 
-        if (tableroLleno($tablero)) {
-            imprimirTablero($tablero);
-            echo "La partida ha terminado en empate.\n";
-            return "Empate";
-        }
+        // Cambiar turno
+        $turno = ($turno == 1) ? 2 : 1;
+    } while ($movimientos < 9);
 
-        $turno = ($turno == 1) ? 2 : 1; // Cambiar turno
-    }
+    imprimirTablero($tablero);
+    echo "La partida ha terminado en empate.\n";
+    return "Empate";
 }
 
+// Programa principal
 echo "Bienvenido al 3 en raya\n";
 $j1 = readline("Dime tu nombre jugador 1: ");
-$f1 = readline("Elige la ficha que quieras para jugador 1: ");
+$f1 = readline("Elige la ficha que quieras: ");
 $j2 = readline("Dime tu nombre jugador 2: ");
-$f2 = readline("Elige la ficha que quieras para jugador 2: ");
+$f2 = readline("Elige la ficha que quieras: ");
 
-$partidas = 0;
-$w1 = 0;
-$w2 = 0;
-$l1 = 0;
-$l2 = 0;
-$c1 = 0;
-$c2 = 0;
+$estadisticas = [
+    $j1 => ['victorias' => 0, 'derrotas' => 0, 'empates' => 0, 'copas' => 0],
+    $j2 => ['victorias' => 0, 'derrotas' => 0, 'empates' => 0, 'copas' => 0],
+];
 
-while ($partidas < 5) {
-    $ganador = iniciarPartida($j1, $f1, $j2, $f2);
-    $partidas++;
-    echo "--- Partida $partidas ---\n";
-    
-    if ($ganador == $j1) {
-        $w1++;
-        $l2++;
-    } elseif ($ganador == $j2) {
-        $w2++;
-        $l1++;
+do {
+    echo "--- Iniciando torneo de 3 partidas ---\n";
+
+    for ($partida = 1; $partida <= 3; $partida++) {
+        echo "--- Partida $partida de 3 ---\n";
+        $ganador = iniciarPartida($j1, $f1, $j2, $f2);
+
+        if ($ganador === $j1) {
+            $estadisticas[$j1]['victorias']++;
+            $estadisticas[$j2]['derrotas']++;
+        } elseif ($ganador === $j2) {
+            $estadisticas[$j2]['victorias']++;
+            $estadisticas[$j1]['derrotas']++;
+        } else {
+            $estadisticas[$j1]['empates']++;
+            $estadisticas[$j2]['empates']++;
+        }
     }
 
-    if ($w1 == 3 || $w2 == 3) {
-        echo "El torneo ha terminado.\n";
-        break;
+    // Determinar ganador del torneo
+    $ganadorTorneo = ($estadisticas[$j1]['victorias'] > $estadisticas[$j2]['victorias']) ? $j1 : $j2;
+    if ($estadisticas[$j1]['victorias'] === $estadisticas[$j2]['victorias']) {
+        echo "El torneo ha terminado en empate.\n";
+    } else {
+        echo "¡$ganadorTorneo gana el torneo y obtiene una copa!\n";
+        $estadisticas[$ganadorTorneo]['copas']++;
     }
-}
+
+    // Mostrar estadísticas completas
+    echo "\n--- Estadísticas del torneo ---\n";
+    foreach ([$j1, $j2] as $jugador) {
+        echo "$jugador: " .
+            "Victorias: {$estadisticas[$jugador]['victorias']}, " .
+            "Derrotas: {$estadisticas[$jugador]['derrotas']}, " .
+            "Empates: {$estadisticas[$jugador]['empates']}, " .
+            "Copas: {$estadisticas[$jugador]['copas']}\n";
+    }
+
+    // Reiniciar estadísticas de victorias y derrotas para el siguiente torneo
+    $estadisticas[$j1]['victorias'] = 0;
+    $estadisticas[$j2]['victorias'] = 0;
+    $estadisticas[$j1]['derrotas'] = 0;
+    $estadisticas[$j2]['derrotas'] = 0;
+
+    $continuar = readline("¿Desean jugar otro torneo? (s/n): ");
+} while (strtolower($continuar) === 's');
+
+echo "Gracias por jugar. ¡Hasta la próxima!\n";
+
 ?>
