@@ -1,39 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Selector de Medios</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Los Simpson TV</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="shortcut icon" href="./img/logo.webp" type="image/x-icon">
 </head>
 <body>
-    <div class="container">
-        <div class="section videos">
-            <h2>Selección de Videos</h2>
-            <ul id="video-list">
-                </ul>
-            <video width="400">
-                <source src="campfire.mp4" type="video/mp4">
-                Your browser does not support HTML video.
+    <div class="tv-container">
+        <div class="screen">
+            <video id="mainVideo">
+                <source src="./img/Rasca.mp4" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
             </video>
-            <ul>
-                <li>Silenciar</li>
-                <li>-10 segs</li>
-                <li>Play/Stop</li>
-                <li>+10 segs</li>
-                <li>Reiniciar</li>
-                <li>+ Vol</li>
-                <li>- Vol</li>
-            </ul>
-    </div>
-        <div class="section audio">
-            <h2>Selección de Música de Radio</h2>
-            <ul id="audio-list">
-                </ul>
-            <audio controls>
-                <source src="Blue Moon.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
+            <div class="static-effect"></div>
+            <button class="navigation-btn prev-btn">←</button>
+            <button class="navigation-btn next-btn">→</button>
+        </div>
+        <div class="controls">
+            <button class="control-btn" id="muteBtn">Silenciar</button>
+            <button class="control-btn" id="backBtn">-10s</button>
+            <button class="control-btn" id="playBtn">▶</button>
+            <button class="control-btn" id="forwardBtn">+10s</button>
+            <button class="control-btn" id="resetBtn">Reset</button>
+            <button class="control-btn" id="volUpBtn">Vol+</button>
+            <button class="control-btn" id="volDownBtn">Vol-</button>
+        </div>
+        <div class="channel-info">
+            <p id="channelInfo">Canal 1: Dibujos animados</p>
+            <p id="characterInfo">Personaje: Rasca & Pica</p>
+            <p id="typeInfo">Tipo: Video</p>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script src="./js/script.js"></script>
 </body>
 </html>
