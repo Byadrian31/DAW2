@@ -1,3 +1,71 @@
+body {
+    background-image: url("../img/fondo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#inicio {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1a213b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+#inicio img {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+}
+
+#inicio h2 {
+    color: white;
+    font-family: 'Sigmar One', cursive;
+    margin-top: 20px;
+}
+
+.boton-reinicio {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 30px;
+    font-family: 'Sigmar One', cursive;
+    font-size: 20px;
+    background: #464F8D;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.boton-reinicio span {
+    font-size: 24px;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.boton-reinicio:hover {
+    background: #5B64A7;
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.boton-reinicio:hover span {
+    transform: rotate(180deg);
+}
+
 .contitem {
     float: left;
 }
@@ -42,19 +110,39 @@
     height: 100%;
 }
 
+#seleccion {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  
+}
+
+#seleccion>img{
+    width: 25%;
+    height: auto;
+    padding-left: 7%;
+    padding-bottom: 5%;
+}
+
 #enemigo {
     border: 5px solid #464F8D;
     width: 200px;
     height: 200px;
     border-radius: 400px;
-    margin-left: calc(50% - 100px);
+    /*margin-left: calc(50% - 100px);
     margin-top: 15 0px;
-    background-color: #464F8D;
+    */background-color: #464F8D;
 }
 
 #enemigo img {
     width: 100%;
     height: 100%;
+}
+
+#vs {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 20px;
 }
 
 #selector {
@@ -67,7 +155,7 @@
 
 #seleccionado {
     float: none;
-    margin-left: calc(50% - 50px);
+    /*margin-left: calc(50% - 50px);*/
     margin-top: 50px;
     margin-bottom: 50px;
     border: 3px solid #464F8D;
@@ -75,6 +163,7 @@
     height: 100px;
     border-radius: 100px;
     cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.43);
 }
 
 #jugador {
@@ -84,6 +173,8 @@
     width: 100px;
     border: 1px solid black;
     overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.43);
+    border-radius: 15%;
 }
 
 #maquina {
@@ -93,6 +184,8 @@
     width: 100px;
     border: 1px solid black;
     overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.43);
+    border-radius: 15%;
 }
 
 .punto {

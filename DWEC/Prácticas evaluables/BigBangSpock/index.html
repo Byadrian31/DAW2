@@ -1,12 +1,22 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Examen DAW</title>
+        <title>BigBangSpock</title>
         <script src="js/scripts.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Sigmar+One&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="shortcut icon" href="img/logo.webp" type="image/x-icon">
     </head>
     <body>
+        <div id="inicio" class="visible">
+            <h2>¡Bienvenido al juego!</h2>
+            <img src="img/reglas.jpg" alt="Reglas del juego">
+            <img src="img/unnamed.gif">
+            
+        </div>
+        <button id="reiniciar" class="boton-reinicio invisible">
+            <span>↺</span> Reiniciar Juego
+        </button>
         <div id="jugador">
 
         </div>
@@ -46,15 +56,17 @@
                 <h3>SPOCK</h3>
             </div>
         </div>
-        <div>
+        <div id="seleccion">
             <div id="seleccionado" class="item">
 
             </div>
+                <img src="img/vs2.png">
+            <div id="enemigo">
+                <img src="img/interrogante.png">
+            </div>
         </div>
 
-        <div id="enemigo">
-            <img src="img/interrogante.png">
-        </div>
+
     </body>
     <div id="proteccion" class="invisible">
     </div>
@@ -65,7 +77,7 @@
     <div id="mensaje" class="invisible">
         <img src="img/reglas.jpg">
         <p>Tijeras decapitan lagarto</p>
-        <button id="continuar">Continuar</button>
     </div>
+    
 </html>
 

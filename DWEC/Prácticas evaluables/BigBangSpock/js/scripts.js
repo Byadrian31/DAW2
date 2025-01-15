@@ -15,9 +15,28 @@ var mensajes = {
 //Variables que contendrán los elementos HTML que vayamos a necesitar
 
 window.onload = function () {
-    cargarTablero();
+    // Primero manejamos la pantalla de inicio
+    const inicio = document.getElementById('inicio');
+    if (inicio) {
+        setTimeout(() => {
+            inicio.style.opacity = '0';
+            setTimeout(() => {
+                inicio.style.display = 'none';
+            }, 500); // Dar tiempo para la animación de fade out
+        }, 5000);
+    }
+    
+    
     asignarElementosHTML();
     cargarEventos();
+    
+    // Configurar botón de reinicio
+    const botonReinicio = document.getElementById('reiniciar');
+    botonReinicio.addEventListener('click', () => {
+        reiniciarJuego();
+        botonReinicio.className = 'boton-reinicio invisible';
+        ganar = true;
+    });
 }
 
 function asignarElementosHTML() {
@@ -45,8 +64,9 @@ function allowDrop(ev) {
 function drag(ev) {
     ev.dataTransfer.setData("id", ev.target.id); // Guardar ID del elemento
 }
-
+let ganar = true;
 function drop(ev) {
+    if (!ganar) return;
     ev.preventDefault();
     const idElement = ev.dataTransfer.getData("id"); // Obtén el id del elemento
     const elemento = document.getElementById(idElement);
@@ -56,15 +76,21 @@ function drop(ev) {
     seleccionado.innerHTML = ''; // Limpiar
     seleccionado.appendChild(elemento.cloneNode(true));
 
-    // Llamar a deliverar antes de mostrar el rival
-  //  deliverar();
+    // Mostrar la elección de la máquina antes de deliverar
+    const eleccionMaquina = seleccionMaquina(); // Elección de la máquina
+        const rival = document.getElementById("enemigo");
+        rival.innerHTML = ''; // Limpiar
+        rival.innerHTML = `<img src="img/${eleccionMaquina}.png">`;
 
-    // Usar un retraso para mostrar la elección del rival y calcular el ganador
-  /*  setTimeout(() => {
-        const eleccionMaquina = seleccionMaquina(); // Elección de la máquina
-        calcularGanador(idElement, eleccionMaquina); // Determinar el ganador
-    }, 2000); // Retraso de 2 segundos*/
-    seleccionMaquina();
+    setTimeout(() => {
+        deliverar(); // Mostrar mensaje o efecto de preparación
+
+        // Usar otro retraso para calcular el ganador
+        setTimeout(() => {
+            calcularGanador(idElement, eleccionMaquina); // Determinar el ganador
+        }, 2000); // Retraso de 2 segundos para mostrar el ganador
+
+    }, 1000); // Retraso de 1 segundo para mostrar el mensaje de deliverar
 }
 
 function divMensaje(jugador, maquina) {
@@ -78,10 +104,8 @@ function divMensajePerdedor(jugador, maquina) {
 }
 
 
-function calcularGanador() {
-    const jugador = document.getElementById("seleccionado").firstElementChild.id;
-    const maquina = document.getElementById("enemigo").firstElementChild.id;
-    console.log(jugador, maquina);
+function calcularGanador(jugador, maquina) {
+    if (!ganar) return;
     let resultado = "";
     if (jugador === maquina) {
         resultado = "Empate. Intenta otra vez.";
@@ -90,7 +114,7 @@ function calcularGanador() {
             case "piedra":
                 if (maquina === "papel") {
                     resultado = "Perdiste. " + mensajes[divMensajePerdedor(jugador, maquina)];
-                    console.log(divMensaje(jugador, maquina));
+                    console.log(divMensaje(maquina, jugador));
                 } else if (maquina === "tijera") {
                     resultado = "Ganaste. " + mensajes[divMensaje(jugador, maquina)];
                     console.log(divMensaje(jugador, maquina));
@@ -99,7 +123,7 @@ function calcularGanador() {
                     console.log(divMensaje(jugador, maquina));
                 } else if (maquina === "spock") {
                     resultado = "Perdiste. " + mensajes[divMensajePerdedor(jugador, maquina)];
-                    console.log(divMensaje(jugador, maquina));
+                    console.log(divMensaje(maquina, jugador));
                 }
 
                 break;
@@ -110,10 +134,10 @@ function calcularGanador() {
                     console.log(divMensaje(jugador, maquina));
                 } else if (maquina === "tijera") {
                     resultado = "Perdiste. " + mensajes[divMensajePerdedor(jugador, maquina)];
-                    console.log(divMensaje(jugador, maquina));
+                    console.log(divMensaje(maquina, jugador));
                 } else if (maquina === "lagarto") {
                     resultado = "Perdiste. " + mensajes[divMensajePerdedor(jugador, maquina)];
-                    console.log(divMensaje(jugador, maquina));
+                    console.log(divMensaje(maquina, jugador));
                 } else if (maquina === "spock") {
                     resultado = "Ganaste. " + mensajes[divMensaje(jugador, maquina)];
                     console.log(divMensaje(jugador, maquina));
@@ -123,7 +147,7 @@ function calcularGanador() {
             case "tijera":
                 if (maquina === "piedra") {
                     resultado = "Perdiste. " + mensajes[divMensajePerdedor(jugador, maquina)];
-                    console.log(divMensaje(jugador, maquina));
+                    console.log(divMensaje(maquina, jugador));
                 } else if (maquina === "papel") {
                     resultado = "Ganaste. " + mensajes[divMensaje(jugador, maquina)];
                     console.log(divMensaje(jugador, maquina));
@@ -132,7 +156,7 @@ function calcularGanador() {
                     console.log(divMensaje(jugador, maquina));
                 } else if (maquina === "spock") {
                     resultado = "Perdiste. " + mensajes[divMensajePerdedor(jugador, maquina)];
-                    console.log(divMensaje(jugador, maquina));
+                    console.log(divMensaje(maquina, jugador));
                 }
 
                 break;
@@ -140,13 +164,13 @@ function calcularGanador() {
             case "lagarto":
                 if (maquina === "piedra") {
                     resultado = "Perdiste. " + mensajes[divMensajePerdedor(jugador, maquina)];
-                    console.log(divMensaje(jugador, maquina));
+                    console.log(divMensaje(maquina, jugador));
                 } else if (maquina === "papel") {
                     resultado = "Ganaste. " + mensajes[divMensaje(jugador, maquina)];
                     console.log(divMensaje(jugador, maquina));
                 } else if (maquina === "tijera") {
                     resultado = "Perdiste. " + mensajes[divMensajePerdedor(jugador, maquina)];
-                    console.log(divMensaje(jugador, maquina));
+                    console.log(divMensaje(maquina, jugador));
                 } else if (maquina === "spock") {
                     resultado = "Ganaste. " + mensajes[divMensaje(jugador, maquina)];
                     console.log(divMensaje(jugador, maquina));
@@ -159,14 +183,14 @@ function calcularGanador() {
                     resultado = "Ganaste. " + mensajes[divMensaje(jugador, maquina)];
                     console.log(divMensaje(jugador, maquina));
                 } else if (maquina === "papel") {
-                    resultado = "Perdiste. " + mensajes[divMensaje(jugador, maquina)];
-                    console.log(divMensaje(jugador, maquina));
+                    resultado = "Perdiste. " + mensajes[divMensajePerdedor(jugador, maquina)];
+                    console.log(divMensaje(maquina, jugador));
                 } else if (maquina === "tijera") {
                     resultado = "Ganaste. " + mensajes[divMensaje(jugador, maquina)];
                     console.log(divMensaje(jugador, maquina));
                 } else if (maquina === "lagarto") {
-                    resultado = "Perdiste. " + mensajes[divMensaje(jugador, maquina)];
-                    console.log(divMensaje(jugador, maquina));
+                    resultado = "Perdiste. " + mensajes[divMensajePerdedor(jugador, maquina)];
+                    console.log(divMensaje(maquina, jugador));
                 }
 
                 break;
@@ -185,6 +209,7 @@ function calcularGanador() {
 
 
     mostrarMensaje(resultado);
+    verificarFinDelJuego();
 }
 
 function seleccionMaquina() {
@@ -192,8 +217,7 @@ function seleccionMaquina() {
     const aleatorio = Math.floor(Math.random() * opciones.length);
     document.getElementById("enemigo").innerHTML = '';
     document.getElementById("enemigo").innerHTML = `<img src="img/${opciones[aleatorio]}.png">`;
-    //return opciones[aleatorio];
-    setTimeout(deliverar, 1800);
+    return opciones[aleatorio];
 }
 
 function marcadorJugador() {
@@ -212,24 +236,11 @@ function cargarEventos() {
     //Función donde cargaremos los eventos que necesite cada elemento de la partida
 }
 
-
-function continuar() {
-    //Función que lanzamos cuando pulsamos al botón continuar
-    //Volvemos a ocultar el mensaje;
-    document.getElementById("mensaje").className = "invisible";
-    document.getElementById("proteccion").className = "invisible";
-    document.getElementById("deliveracion").className = "invisible";
-
-    //Si es una jugada reiniciamos todo menos los contadores de puntos.
-    //Si es el final de la partida, también incluimos los contadores de puntos.
-    cargarTablero();
-}
-
 function deliverar() {
     console.log("deliverar called");
     document.getElementById("proteccion").className = "visible";
     document.getElementById("deliveracion").className = "visible";
-    setTimeout(calcularGanador, 2000);
+    setTimeout(mostrarMensaje, 2000);
 }
 
 function mostrarMensaje(mensaje) {
@@ -247,22 +258,40 @@ function mostrarMensaje(mensaje) {
     document.getElementById("enemigo").innerHTML = '<img src="img/interrogante.png">';
 }
 
+function verificarFinDelJuego() {
+    const puntosJugador = document.querySelectorAll("#jugador .punto").length;
+    const puntosMaquina = document.querySelectorAll("#maquina .punto").length;
+    const botonReinicio = document.getElementById('reiniciar');
 
-function cargarTablero() {
-    //Función donde crearemos los elementos que vayamos a necesitar, junto a sus atributos y eventos
-    //La utilizaremos para reiniciar cada jugada
+    if (puntosJugador === 8) {
+        ganar = false;
+        mostrarMensaje("¡Felicidades! Has ganado la partida.");
+        botonReinicio.classList.remove('invisible');
+        botonReinicio.classList.add('visible');
+    } else if (puntosMaquina === 8) {
+        ganar = false;
+        mostrarMensaje("Lo siento, la máquina ha ganado.");
+        botonReinicio.classList.remove('invisible');
+        botonReinicio.classList.add('visible');
+    }
 }
+
+
 
 function reiniciarJuego() {
     // Limpiar selecciones
     document.getElementById("seleccionado").innerHTML = '';
     document.getElementById("enemigo").innerHTML = '<img src="img/interrogante.png">';
 
-    // Si alguien gana 10 puntos, reiniciar también los marcadores
-    if (puntosJugador === 10 || puntosMaquina === 10) {
-        puntosJugador = 0;
-        puntosMaquina = 0;
-        document.getElementById("jugador").innerHTML = '';
-        document.getElementById("maquina").innerHTML = '';
-    }
+// Limpiar marcadores
+document.getElementById("jugador").innerHTML = '';
+document.getElementById("maquina").innerHTML = '';
+
+// Reiniciar estado del juego
+ganar = true;
+
+// Ocultar mensajes
+document.getElementById("mensaje").className = "invisible";
+document.getElementById("proteccion").className = "invisible";
+document.getElementById("deliveracion").className = "invisible";
 }
