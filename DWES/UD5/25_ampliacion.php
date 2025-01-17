@@ -153,7 +153,8 @@ if (isset($_POST['enviar'])) {
         <?php if (isset($errores['foto'])): ?>
             <span style="color:red;"><?= $errores['foto'] ?></span><br>
         <?php endif; ?>
-
+        <input type="reset" value="Limpiar">
+        <input type="button" value="Validar" name="validar">
         <input type="submit" value="Enviar" name="enviar">
     </form>
 </body>
