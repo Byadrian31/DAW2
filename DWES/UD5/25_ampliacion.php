@@ -91,6 +91,12 @@ if (isset($_POST['validar']) || isset($_POST['enviar'])) {
     }
 }
 
+// Limpiar todos los valores
+if (isset($_POST['limpiar'])) {
+    $_POST = []; // Esto limpia todo el formulario al presionar el botón de "limpiar".
+    $foto_temporal = '';
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -102,7 +108,6 @@ if (isset($_POST['validar']) || isset($_POST['enviar'])) {
     <style>
         .errores { color: red; }
         .exito { color: green; }
-        ul { list-style-type: none; }
     </style>
 </head>
 <body>
@@ -171,7 +176,7 @@ if (isset($_POST['validar']) || isset($_POST['enviar'])) {
     <input type="hidden" name="foto_temporal" value="<?= htmlspecialchars($foto_temporal) ?>">
     <br>
 
-    <button type="reset">Limpiar</button>
+    <button type="submit" name="limpiar">Limpiar</button>
     <button type="submit" name="validar">Validar</button>
     <button type="submit" name="enviar">Enviar</button>
 </form>

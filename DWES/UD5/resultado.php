@@ -31,6 +31,7 @@ $foto = $_GET['foto'] ?? '';
     <p><strong>Idiomas:</strong> <?= htmlspecialchars(implode(', ', $idiomas)) ?></p>
     <p><strong>Foto:</strong></p>
     <?php if (!empty($foto)): ?>
+        <p><strong>Ruta de la imagen:</strong> temp/<?= htmlspecialchars($foto) ?></p>
         <img src="temp/<?= htmlspecialchars($foto) ?>" alt="Foto subida" width="200">
     <?php endif; ?>
 </body>
