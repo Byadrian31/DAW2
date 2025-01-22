@@ -2,6 +2,12 @@
 
 /**
  * @author Adrián López Pascual
+ * Cambiar email por text
+ * Tamaño foto por hidden
+ * Validar por escalones dependiendo de la interacción del usuario
+ * SERVER_REQUEST_METHOD_POST > El resto | Validar solo | Validar > Enviar
+ * Nombre de foto, el del usuario
+ * ++ comentarios
  */
 
 // Inicializar un array para almacenar errores de validación
