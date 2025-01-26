@@ -4,13 +4,13 @@
  * @author Adrián López Pascual
  */
 
-/*
+/* 
 Usa el formulario (Ejercicio 1 UD5) del selector de operación y las operaciones de suma, resta,
 división y multiplicación de modo que se guarde en la Cookie los números y las operaciones
 elegidas y muestre el resultado de la operación indicando cuáles han sido los números, las
 operaciones elegidas y el resultado en la ejecución actual (formulario) y los números y las
-elegidas en la operación anterior a la actual (cookie).
-*/
+elegidas en la operación anterior a la actual (cookie)
+ */
 
 // Función para realizar la operación según lo que indique el usuario
 function operar($num1, $num2, $op)
@@ -56,45 +56,50 @@ if (isset($_POST['enviar'])) {
             $resultados[] = operar($num1, $num2, $operation);
         }
 
-        // Guardamos los números, las operaciones seleccionadas y los resultados en una cookie
-        $texto = implode(",", [$num1, $num2, implode(",", $op), implode(",", $resultados)]);
-        setcookie('datos', $texto, time() + 3600);  // Guardamos en la cookie
+        // Guardamos la operación actual en una cadena delimitada
+        $operacionActual = implode("|", [
+            $num1,
+            $num2,
+            implode(",", $op),
+            implode(",", $resultados)
+        ]);
 
-        // Ahora mostramos los resultados de las operaciones actuales
+        // Recuperamos la operación previa de la cookie (si existe)
+        $operacionAnterior = isset($_COOKIE['datos']) ? $_COOKIE['datos'] : null;
+
+        // Guardamos la operación actual en la cookie
+        setcookie('datos', $operacionActual, time() + 3600);
+
+        // Mostramos los resultados de la operación actual
         echo "VALORES ACTUALES: <br>";
         foreach ($resultados as $res) {
             echo $res . "<br>";
         }
 
-        // Mostramos los resultados anteriores si la cookie está presente
-        if (isset($_COOKIE['datos'])) {
-            $cookie = $_COOKIE['datos'];  // Obtenemos el valor de la cookie
-            $cookie = explode(",", $cookie);  // Dividimos la cookie en partes
+        // Mostramos los resultados anteriores si existen
+        if ($operacionAnterior) {
+            // Descomponemos la operación previa
+            $datosAnteriores = explode("|", $operacionAnterior);
+            $num1Ant = $datosAnteriores[0];
+            $num2Ant = $datosAnteriores[1];
+            $operacionesAnt = $datosAnteriores[2];
+            $resultadosAnt = explode(",", $datosAnteriores[3]);
 
-            $n1 = $cookie[0];
-            $n2 = $cookie[1];
-            $operar = $cookie[2];  // Las operaciones seleccionadas en una cadena separada por comas
-            $res = explode(",", $cookie[3]);  // Los resultados separados por ","
-
-            // Mostramos los valores anteriores correctamente
             echo "<br>VALORES ANTERIORES: <br>";
-            echo "Números: " . $n1 . " y " . $n2 . "<br>";
-            echo "Operaciones: " . $operar . "<br>";
-
-            // Recorrer todos los resultados anteriores (si hay más de uno)
+            echo "Números: " . $num1Ant . " y " . $num2Ant . "<br>";
+            echo "Operaciones: " . $operacionesAnt . "<br>";
             echo "Resultados: <br>";
-            foreach ($res as $resultado) {
-                echo $resultado . "<br>";
+            foreach ($resultadosAnt as $resAnt) {
+                echo $resAnt . "<br>";
             }
         } else {
-            echo "No hay valores anteriores.";
+            echo "<br>No hay valores anteriores.";
         }
     } else {
-        echo "Tienes que indicar números";
+        echo "Tienes que indicar números.";
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
