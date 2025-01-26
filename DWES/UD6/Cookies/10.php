@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @author
+ * @author Adrián López Pascual
  */
 
 /* 

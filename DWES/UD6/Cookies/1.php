@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @ author Adrián López Pascual
+ * @author Adrián López Pascual
  */
 /* 
 Crea un formulario sencillo donde el usuario indique su nombre y seleccione si quiere  un 
