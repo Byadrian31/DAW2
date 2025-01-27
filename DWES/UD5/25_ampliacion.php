@@ -2,12 +2,13 @@
 
 /**
  * @author Adrián López Pascual
- * Cambiar email por text
- * Tamaño foto por hidden
- * Validar por escalones dependiendo de la interacción del usuario
- * SERVER_REQUEST_METHOD_POST > El resto | Validar solo | Validar > Enviar
- * Nombre de foto, el del usuario
- * ++ comentarios
+ * Mejoras implementadas:
+ *  - Campo email cambiado por text
+ *  - Campo tamaño de foto cambiado por hidden
+ *  - Validación escalonada según la interacción del usuario
+ *  - Control de flujo para validar solo o validar y enviar
+ *  - Nombre del archivo de foto es el nombre del usuario
+ *  - Comentarios adicionales agregados
  */
 
 // Inicializar un array para almacenar errores de validación
@@ -18,10 +19,14 @@ $foto_temporal = '';
 $directorio_temporal = 'temp/';
 
 // Verificar si el formulario ha sido enviado o si se ha pulsado el botón de validar
-if (isset($_POST['validar']) || isset($_POST['enviar'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validar el nombre
-    if (empty($_POST['nombre']) || ctype_alpha(str_replace(' ', '', $_POST['nombre'])) === false) {
-        $errores['nombre'] = 'El nombre completo es obligatorio y debe contener solo letras y espacios';
+    if (empty($_POST['nombre'])) {
+        $errores['nombre'] = 'El nombre completo es obligatorio';
+    } elseif (ctype_alpha(str_replace(' ', '', $_POST['nombre'])) === false) {
+        $errores['nombre'] = 'El nombre completo debe contener solo letras y espacios';
+    } {
+
     }
 
     // Validar la contraseña (mínimo 6 caracteres)
@@ -44,7 +49,7 @@ if (isset($_POST['validar']) || isset($_POST['enviar'])) {
         $errores['idiomas'] = 'Debe seleccionar al menos un idioma';
     }
 
-    // Validar formato del email
+    // Validar formato del email (ahora texto libre)
     if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         $errores['email'] = 'El email no es válido';
     }
@@ -69,7 +74,7 @@ if (isset($_POST['validar']) || isset($_POST['enviar'])) {
             if (!is_dir($directorio_temporal)) {
                 mkdir($directorio_temporal, 0777, true); // Crear directorio si no existe
             }
-            $foto_temporal = uniqid() . '.' . $extension; // Generar un nombre único para la foto
+            $foto_temporal = $_POST['nombre'] . '_' . uniqid() . '.' . $extension; // Usar el nombre del usuario
             move_uploaded_file($archivo['tmp_name'], $directorio_temporal . $foto_temporal);
         }
     } 
@@ -85,21 +90,21 @@ if (isset($_POST['validar']) || isset($_POST['enviar'])) {
     // Si se presionó enviar y no hay errores, redirigir a resultado.php con los datos
     if (isset($_POST['enviar']) && empty($errores)) {
         $url = 'resultado.php?' .
-            'nombre=' . urlencode($_POST['nombre']) . // Codificar nombre
-            '&contraseña=' . urlencode($_POST['contraseña']) . // Codificar contraseña
-            '&nivel_estudios=' . urlencode($_POST['nivel_estudios']) . // Codificar nivel de estudios
-            '&nacionalidad=' . urlencode($_POST['nacionalidad']) . // Codificar nacionalidad
-            '&email=' . urlencode($_POST['email']) . // Codificar email
-            '&idiomas=' . urlencode(implode(',', $_POST['idiomas'])) . // Codificar idiomas seleccionados
-            '&foto=' . urlencode($foto_temporal); // Codificar el nombre del archivo de foto
-        header("Location: $url"); // Redirigir a resultado.php
+            'nombre=' . urlencode($_POST['nombre']) .
+            '&contraseña=' . urlencode($_POST['contraseña']) .
+            '&nivel_estudios=' . urlencode($_POST['nivel_estudios']) .
+            '&nacionalidad=' . urlencode($_POST['nacionalidad']) .
+            '&email=' . urlencode($_POST['email']) .
+            '&idiomas=' . urlencode(implode(',', $_POST['idiomas'])) .
+            '&foto=' . urlencode($foto_temporal);
+        header("Location: $url");
         exit;
     }
 }
 
 // Limpiar todos los valores
 if (isset($_POST['limpiar'])) {
-    $_POST = []; // Esto limpia todo el formulario al presionar el botón de "limpiar".
+    $_POST = [];
     $foto_temporal = '';
 }
 
@@ -110,7 +115,7 @@ if (isset($_POST['limpiar'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario Ampliado</title>
+    <title>Adrián López Pascual</title>
     <style>
         .errores { color: red; }
         .exito { color: green; }
@@ -118,7 +123,7 @@ if (isset($_POST['limpiar'])) {
 </head>
 <body>
 
-<h1>Formulario Ampliado</h1>
+<h1>Formulario</h1>
 
 <!-- Mostrar errores si los hay -->
 <?php if (!empty($errores)): ?>
@@ -139,52 +144,59 @@ if (isset($_POST['limpiar'])) {
 <?php endif; ?>
 
 <!-- Formulario -->
-<form action="" method="post" enctype="multipart/form-data">
-    <!-- Campos visibles -->
+<form action="" method="post" enctype="multipart/form-data"> <!-- enctype permite la carga de archivos -->
+    <!-- Campo para el nombre completo -->
     <label for="nombre">Nombre completo:</label>
-    <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($_POST['nombre'] ?? '') ?>">
+    <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($_POST['nombre'] ?? '') ?>"> <!-- Escapa caracteres especiales y mantiene el valor tras envío -->
     <br>
 
+    <!-- Campo para la contraseña -->
     <label for="contraseña">Contraseña:</label>
-    <input type="password" id="contraseña" name="contraseña" value="<?= htmlspecialchars($_POST['contraseña'] ?? '') ?>">
+    <input type="password" id="contraseña" name="contraseña" value="<?= htmlspecialchars($_POST['contraseña'] ?? '') ?>"> <!-- Mantiene el valor tras envío de forma segura -->
     <br>
 
+    <!-- Selección de nivel de estudios -->
     <label for="nivel_estudios">Nivel de estudios:</label>
     <select id="nivel_estudios" name="nivel_estudios">
         <option value="">Seleccione</option>
-        <option value="Sin estudios" <?= ($_POST['nivel_estudios'] ?? '') === 'Sin estudios' ? 'selected' : '' ?>>Sin estudios</option>
-        <option value="ESO" <?= ($_POST['nivel_estudios'] ?? '') === 'ESO' ? 'selected' : '' ?>>ESO</option>
-        <option value="Bachillerato" <?= ($_POST['nivel_estudios'] ?? '') === 'Bachillerato' ? 'selected' : '' ?>>Bachillerato</option>
-        <option value="FP" <?= ($_POST['nivel_estudios'] ?? '') === 'FP' ? 'selected' : '' ?>>FP</option>
-        <option value="Universitarios" <?= ($_POST['nivel_estudios'] ?? '') === 'Universitarios' ? 'selected' : '' ?>>Universitarios</option>
+        <option value="Sin estudios" <?= ($_POST['nivel_estudios'] ?? '') === 'Sin estudios' ? 'selected' : '' ?>>Sin estudios</option> <!-- Marca la opción seleccionada si coincide -->
+        <option value="ESO" <?= ($_POST['nivel_estudios'] ?? '') === 'ESO' ? 'selected' : '' ?>>ESO</option> <!-- Marca la opción seleccionada si coincide -->
+        <option value="Bachillerato" <?= ($_POST['nivel_estudios'] ?? '') === 'Bachillerato' ? 'selected' : '' ?>>Bachillerato</option> <!-- Marca la opción seleccionada si coincide -->
+        <option value="FP" <?= ($_POST['nivel_estudios'] ?? '') === 'FP' ? 'selected' : '' ?>>FP</option> <!-- Marca la opción seleccionada si coincide -->
+        <option value="Universitarios" <?= ($_POST['nivel_estudios'] ?? '') === 'Universitarios' ? 'selected' : '' ?>>Universitarios</option> <!-- Marca la opción seleccionada si coincide -->
     </select>
     <br>
 
+    <!-- Selección de nacionalidad -->
     <label for="nacionalidad">Nacionalidad:</label>
-    <input type="radio" id="nacionalidad_española" name="nacionalidad" value="Española" <?= ($_POST['nacionalidad'] ?? '') === 'Española' ? 'checked' : '' ?>> Española
-    <input type="radio" id="nacionalidad_otra" name="nacionalidad" value="Otra" <?= ($_POST['nacionalidad'] ?? '') === 'Otra' ? 'checked' : '' ?>> Otra
+    <input type="radio" id="nacionalidad_española" name="nacionalidad" value="Española" <?= ($_POST['nacionalidad'] ?? '') === 'Española' ? 'checked' : '' ?>> Española <!-- Marca la opción seleccionada si coincide -->
+    <input type="radio" id="nacionalidad_otra" name="nacionalidad" value="Otra" <?= ($_POST['nacionalidad'] ?? '') === 'Otra' ? 'checked' : '' ?>> Otra <!-- Marca la opción seleccionada si coincide -->
     <br>
 
+    <!-- Selección de idiomas -->
     <label for="idiomas">Idiomas:</label>
-    <input type="checkbox" name="idiomas[]" value="Español" <?= in_array('Español', $_POST['idiomas'] ?? []) ? 'checked' : '' ?>> Español
-    <input type="checkbox" name="idiomas[]" value="Inglés" <?= in_array('Inglés', $_POST['idiomas'] ?? []) ? 'checked' : '' ?>> Inglés
-    <input type="checkbox" name="idiomas[]" value="Francés" <?= in_array('Francés', $_POST['idiomas'] ?? []) ? 'checked' : '' ?>> Francés
-    <input type="checkbox" name="idiomas[]" value="Alemán" <?= in_array('Alemán', $_POST['idiomas'] ?? []) ? 'checked' : '' ?>> Alemán
-    <input type="checkbox" name="idiomas[]" value="Italiano" <?= in_array('Italiano', $_POST['idiomas'] ?? []) ? 'checked' : '' ?>> Italiano
+    <input type="checkbox" name="idiomas[]" value="Español" <?= in_array('Español', $_POST['idiomas'] ?? []) ? 'checked' : '' ?>> Español <!-- Marca la opción seleccionada si coincide -->
+    <input type="checkbox" name="idiomas[]" value="Inglés" <?= in_array('Inglés', $_POST['idiomas'] ?? []) ? 'checked' : '' ?>> Inglés <!-- Marca la opción seleccionada si coincide -->
+    <input type="checkbox" name="idiomas[]" value="Francés" <?= in_array('Francés', $_POST['idiomas'] ?? []) ? 'checked' : '' ?>> Francés <!-- Marca la opción seleccionada si coincide -->
+    <input type="checkbox" name="idiomas[]" value="Alemán" <?= in_array('Alemán', $_POST['idiomas'] ?? []) ? 'checked' : '' ?>> Alemán <!-- Marca la opción seleccionada si coincide -->
+    <input type="checkbox" name="idiomas[]" value="Italiano" <?= in_array('Italiano', $_POST['idiomas'] ?? []) ? 'checked' : '' ?>> Italiano <!-- Marca la opción seleccionada si coincide -->
     <br>
 
+    <!-- Campo para el email -->
     <label for="email">Email:</label>
-    <input type="email" id="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+    <input type="text" id="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"> <!-- Escapa caracteres especiales para evitar ataques XSS -->
     <br>
 
+    <!-- Campo para subir foto -->
     <label for="foto">Adjuntar foto:</label>
-    <input type="file" id="foto" name="foto">
-    <input type="hidden" name="foto_temporal" value="<?= htmlspecialchars($foto_temporal) ?>">
+    <input type="file" id="foto" name="foto"> <!-- Permite cargar un archivo -->
+    <input type="hidden" name="foto_temporal" value="<?= htmlspecialchars($foto_temporal) ?>"> <!-- Campo oculto para mantener el nombre de la foto temporal -->
     <br>
 
-    <button type="submit" name="limpiar">Limpiar</button>
-    <button type="submit" name="validar">Validar</button>
-    <button type="submit" name="enviar">Enviar</button>
+    <!-- Botones para interactuar con el formulario -->
+    <button type="submit" name="limpiar">Limpiar</button> <!-- Limpia los campos del formulario -->
+    <button type="submit" name="validar">Validar</button> <!-- Valida los datos ingresados -->
+    <button type="submit" name="enviar">Enviar</button> <!-- Envía los datos si son válidos -->
 </form>
 
 </body>
