@@ -12,6 +12,23 @@ $nacionalidad = $_GET['nacionalidad'] ?? '';
 $email = $_GET['email'] ?? '';
 $idiomas = explode(',', $_GET['idiomas'] ?? '');
 $foto = $_GET['foto'] ?? '';
+$foto_size = intval($_GET['foto_size']);
+/* 
+<?php
+if (isset($_GET['foto']) && isset($_GET['foto_size'])) {
+    $foto = htmlspecialchars($_GET['foto']);
+    $foto_size = intval($_GET['foto_size']); // Convertir a un número entero para seguridad
+    $foto_size_kb = $foto_size / 1024; // Convertir a KB
+
+    echo "<p>La foto se ha subido correctamente.</p>";
+    echo "<p>Tamaño de la foto: " . number_format($foto_size_kb, 2) . " KB</p>";
+    echo "<img src='temp/$foto' alt='Foto subida' width='200'>";
+} else {
+    echo "<p>No se recibió ninguna foto o el tamaño no fue especificado.</p>";
+}
+
+*/
+
 
 ?>
 
@@ -32,6 +49,7 @@ $foto = $_GET['foto'] ?? '';
     <p><strong>Foto:</strong></p>
     <?php if (!empty($foto)): ?>
         <p><strong>Ruta de la imagen:</strong> temp/<?= htmlspecialchars($foto) ?></p>
+        <p><strong>Tamaño:</strong> <?= htmlspecialchars($foto_size) ?></p>
         <img src="temp/<?= htmlspecialchars($foto) ?>" alt="Foto subida" width="200">
     <?php endif; ?>
 </body>
