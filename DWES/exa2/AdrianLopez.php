@@ -98,13 +98,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['foto_temporal']) && !empty($_POST['foto_temporal'])) {
             $foto_temporal = $_POST['foto_temporal'];
         } else {
-            $errores['foto'] = 'La foto debe ser PNG';
+            $errores['foto'] = 'Sube alguna foto';
         }
     }
     // Si se presionó enviar y no hay errores, redirigir a AdrianLopez_ok.php con los datos
     if (isset($_POST['enviar']) && empty($errores)) {
         if ($_POST['respuesta'] == 'No aceptar LOPDGDD') {
             echo "<p style='color:red'> Debes aceptar LOPDGDD</p>";
+            exit;
         } else {
             $url = 'AdrianLopez_ok.php?' .
             'nombre=' . urlencode($_POST['nombre']) .
@@ -114,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             '&trabajo=' . urlencode($_POST['trabajo']) .
             '&poblacion=' . urlencode($_POST['poblacion']) .
             '&material=' . urlencode(implode(',', $_POST['material'])) .
-            '&necesidades=' . urlencode(implode(',', $_POST['necesidades'])) .
+            '&necesidad=' . urlencode(implode(',', $_POST['necesidad'])) .
             '&respuesta=' . urlencode($_POST['respuesta']) .
             '&foto=' . urlencode($foto_temporal);
             header("Location: $url");
