@@ -1,0 +1,126 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: grid;
+    grid-template-areas: 
+        "navbar navbar navbar navbar navbar navbar"
+        "header header header header header header"
+        "banner-a banner-a banner-a banner-a banner-a banner-a"
+        "article-a main main main main main"
+        "banner-b banner-b banner-b banner-b banner-b banner-b"
+        "footer footer footer footer footer footer";
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: auto;
+    gap: 5px;
+    padding: 10px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.navbar { 
+    grid-area: navbar; 
+    background: #e0e0e0; 
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+}
+
+.navbar a {
+    background: #c0c0c0;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    display: block;
+    text-align: center;
+}
+
+.navbar a:hover {
+    background: #a0a0a0;
+}
+
+.header { 
+    grid-area: header; 
+    background: #4a4a4a; 
+    color: white;
+    padding: 40px; 
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.banner-a { 
+    grid-area: banner-a; 
+    background: #333; 
+    color: white; 
+    padding: 30px; 
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.article-a { 
+    grid-area: article-a; 
+    background: #d3d3d3; 
+    padding: 20px; 
+    font-weight: bold;
+}
+
+.main { 
+    grid-area: main; 
+    background: white; 
+    padding: 20px; 
+    border-left: 4px solid black;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.banner-b { 
+    grid-area: banner-b; 
+    background: #7a7a7a; 
+    padding: 20px;
+    color: white;
+    font-size: 20px;
+}
+
+.footer { 
+    grid-area: footer; 
+    background: #3a3a3a; 
+    padding: 15px; 
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    color: white;
+    font-weight: bold;
+    gap: 5px;
+}
+
+.footer div {
+    background: #505050;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        grid-template-areas: 
+            "navbar"
+            "header"
+            "banner-a"
+            "article-a"
+            "main"
+            "banner-b"
+            "footer";
+        grid-template-columns: 1fr;
+    }
+
+    .navbar {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer {
+        grid-template-columns: 1fr;
+    }
+}
