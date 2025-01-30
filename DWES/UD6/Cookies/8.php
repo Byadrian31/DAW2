@@ -61,7 +61,7 @@ if (isset($_POST['enviar']) && isset($_POST['numeros']) && is_array($_POST['nume
         $resultadosActuales['mediana'] = $mediana;
     }
 
-    // Guardar los números y los cálculos actuales en una cookie (sin usar JSON)
+    // Guardar los números y los cálculos actuales en una cookie
     $numerosGuardados = implode(",", $numeros);
     $calculosActuales = [];
     if (isset($resultadosActuales['media'])) {
