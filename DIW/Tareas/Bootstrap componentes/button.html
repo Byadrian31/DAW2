@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botones con Bootstrap</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="p-4">
+    <h2>Botones Predefinidos</h2>
+    <button class="btn btn-primary">Primary</button>
+    <button class="btn btn-secondary">Secondary</button>
+    <button class="btn btn-success">Success</button>
+    <button class="btn btn-danger">Danger</button>
+    <button class="btn btn-warning">Warning</button>
+    <button class="btn btn-info">Info</button>
+    <button class="btn btn-light">Light</button>
+    <button class="btn btn-dark">Dark</button>
+
+    <h2 class="mt-4">Botones con Link, Input, Submit y Reset</h2>
+    <a href="#" class="btn btn-primary">Enlace como Botón</a>
+    <input type="button" class="btn btn-secondary" value="Input Button">
+    <input type="submit" class="btn btn-success" value="Submit">
+    <input type="reset" class="btn btn-danger" value="Reset">
+
+    <h2 class="mt-4">Botones con Bordes y Fondo Blanco</h2>
+    <button class="btn btn-outline-primary">Borde Azul</button>
+    <button class="btn btn-outline-secondary">Borde Gris</button>
+    <button class="btn btn-outline-success">Borde Verde</button>
+    <button class="btn btn-outline-danger">Borde Rojo</button>
+
+    <h2 class="mt-4">Tamaños de Botón</h2>
+    <button class="btn btn-primary btn-lg">Grande</button>
+    <button class="btn btn-primary">Normal</button>
+    <button class="btn btn-primary btn-sm">Pequeño</button>
+
+    <h2 class="mt-4">Grupo de Botones</h2>
+    <div class="btn-group" role="group">
+        <button class="btn btn-primary">Izquierda</button>
+        <button class="btn btn-primary">Centro</button>
+        <button class="btn btn-primary">Derecha</button>
+    </div>
+
+    <h2 class="mt-4">Menú Desplegable (Dropdown)</h2>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Menú Desplegable
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Acción 1</a></li>
+            <li><a class="dropdown-item" href="#">Acción 2</a></li>
+            <li><a class="dropdown-item" href="#">Acción 3</a></li>
+        </ul>
+    </div>
+
+    <h2 class="mt-4">Menú Desplegable Vertical</h2>
+    <div class="btn-group-vertical">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Menú Vertical
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Opción 1</a></li>
+            <li><a class="dropdown-item" href="#">Opción 2</a></li>
+            <li><a class="dropdown-item" href="#">Opción 3</a></li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
