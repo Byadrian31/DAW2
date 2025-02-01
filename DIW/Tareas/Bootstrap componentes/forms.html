@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formulario de Pedidos</title>
+    <!-- CSS de Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Opcional: para mejorar la visualización del output del range */
+        output {
+            display: inline-block;
+            width: 3rem;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-4">
+        <!-- Enlace para volver al menú -->
+        <a href="navbar.html" class="btn btn-secondary mb-3">Volver al menú</a>
+    </div>
+    <div class="container mt-4">
+        <h1>Formulario de Pedidos</h1>
+        <form action="#" method="post" enctype="multipart/form-data" novalidate>
+            <!-- Grupo de Nombre y Apellidos con botón de envío (input-group) -->
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Nombre" name="nombre" required>
+                <input type="text" class="form-control" placeholder="Apellido1" name="apellido1" required>
+                <input type="text" class="form-control" placeholder="Apellido2" name="apellido2" required>
+
+            </div>
+
+            <!-- Correo electrónico -->
+            <div class="mb-3">
+                <label for="correo" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" id="correo" name="correo" required>
+                <div class="invalid-feedback">
+                    Por favor, introduce un correo válido.
+                </div>
+            </div>
+
+            <!-- Selección de producto(s) -->
+            <div class="mb-3">
+                <label for="producto" class="form-label">Seleccionar producto(s)</label>
+                <select multiple class="form-select" id="producto" name="producto[]">
+                    <option value="zapatillas">Zapatillas</option>
+                    <option value="camiseta">Camiseta</option>
+                    <option value="pantalon">Pantalón</option>
+
+                </select>
+                <div class="form-text">Usa Ctrl (o Cmd en Mac) para seleccionar más de uno.</div>
+            </div>
+
+            <!-- Color de la caja de envoltorio -->
+            <div class="mb-3">
+                <label for="colorCaja" class="form-label">Color de la caja de envoltorio de las zapatillas</label>
+                <input type="color" class="form-control form-control-color" id="colorCaja" name="colorCaja"
+                    value="#563d7c" title="Elige un color">
+            </div>
+
+            <!-- Rango para elegir el número de unidades -->
+            <div class="mb-3">
+                <label for="unidades" class="form-label">Número de unidades</label>
+                <input type="range" class="form-range" id="unidades" name="unidades" min="1" max="100" value="1"
+                    oninput="document.getElementById('rangoValor').value = this.value">
+                <output id="rangoValor">1</output>
+            </div>
+
+            <!-- Fichero con datos de contacto -->
+            <div class="mb-3">
+                <label for="archivo" class="form-label">Datos de contacto (archivo)</label>
+                <input class="form-control" type="file" id="archivo" name="archivo">
+            </div>
+            <button class="btn btn-primary" type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <!-- JS de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Validación del formulario usando JavaScript y las utilidades de Bootstrap -->
+    <script>
+        (() => {
+            // Se activa el modo estricto para evitar ciertos errores comunes y mejorar la seguridad del código.
+            'use strict'
+            // Se seleccionan todos los elementos <form> que existan en la página.
+            const forms = document.querySelectorAll('form')
+
+            // Se convierte la lista de formularios (NodeList) en un array para poder usar el método forEach.
+            Array.from(forms).forEach(form => {
+                // Se añade un "listener" para el evento 'submit' de cada formulario.
+                form.addEventListener('submit', event => {
+                    // Se utiliza el método checkValidity() del formulario, que comprueba si todos los campos cumplen las restricciones de validación HTML5.
+                    if (!form.checkValidity()) {
+                        // Si el formulario NO es válido:
+                        // event.preventDefault() evita que se envíe el formulario.
+                        event.preventDefault()
+                        // event.stopPropagation() detiene la propagación del evento hacia otros elementos.
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
+</body>
+
+</html>
