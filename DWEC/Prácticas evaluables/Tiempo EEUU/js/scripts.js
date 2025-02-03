@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.style.backgroundColor = 'rgba(0,0,0,0.5)';
             var lat = zona.getAttribute('data-lat');
             var long = zona.getAttribute('data-lon');
-            ntitulo = "  <b> <i>" + zona.getAttribute('title') + "</i></b>";
+            ntitulo = " <img src='./img/america.webp' width='30%' height='30%'>  <b> <i>" + zona.getAttribute('title') + "</i></b> <img src='./img/america.webp' width='30%' height='30%'>";
             titulo.innerHTML = ntitulo;
 
             const response = await fetch(`https://api.weatherusa.net/v1/forecast?q=${lat},${long}&daily=0&units=e&maxtime=1d`); // URL de la API
