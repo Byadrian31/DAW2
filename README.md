@@ -6,7 +6,7 @@ Este repositorio contiene los proyectos y tareas desarrollados durante el segund
 
 ## Estructura del Repositorio
 
-- **DAW/**: Desarrollo de Aplicaciones Web. Incluye proyectos relacionados con la creación y mantenimiento de aplicaciones web completas.
+- **DAW/**: Despliegue de Aplicaciones Web. Incluye proyectos relacionados con la creación, mantenimiento y despliegue de aplicaciones web completas.
 - **DIW/**: Desarrollo de Interfaces Web. Contiene ejercicios enfocados en el diseño y desarrollo de interfaces de usuario atractivas y funcionales.
 - **DWEC/**: Desarrollo Web en Entorno Cliente. Incluye prácticas relacionadas con la programación del lado del cliente, utilizando tecnologías como JavaScript.
 - **DWES/**: Desarrollo Web en Entorno Servidor. Contiene proyectos enfocados en la programación del lado del servidor, empleando lenguajes como PHP y bases de datos.
