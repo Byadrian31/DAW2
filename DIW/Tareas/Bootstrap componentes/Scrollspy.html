@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrollspy - Valencia Basket</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            position: relative; /* Necesario para Scrollspy */
+        }
+        .scrollspy-example {
+            height: 600px; /* Mayor altura para un mejor scroll */
+            overflow-y: scroll;
+            padding: 1rem;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbarScrollspy" data-bs-offset="50">
+
+<!-- Barra de Navegación -->
+<nav id="navbarScrollspy" class="navbar navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Valencia Basket</a>
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="#targets">Historia</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#formularios">Formulario de Contacto</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#alerts">Logros y Títulos</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Contenido Scrollspy -->
+<div class="container mt-5">
+    <div class="scrollspy-example p-3">
+        <h4 id="targets">Historia de Valencia Basket</h4>
+        <p>El <strong>Valencia Basket Club</strong>, fundado en 1986, ha crecido hasta convertirse en uno de los clubes más importantes del baloncesto español y europeo. Conocido por su estilo de juego dinámico y su sólida cantera, el equipo ha sido una referencia en la <strong>Liga Endesa (ACB)</strong> y la <strong>EuroCup</strong>.</p>
+        <p>Uno de los momentos más icónicos del club llegó en <strong>2017</strong>, cuando Valencia Basket conquistó su <strong>primer título de la Liga ACB</strong>, derrotando al Real Madrid en la final. Esta victoria marcó un antes y un después en la historia del club.</p>
+        <p>El equipo juega en el <strong>Pabellón Fuente de San Luis</strong>, conocido popularmente como <strong>La Fonteta</strong>, donde la afición taronja se hace sentir en cada partido.</p>
+        <p>Algunos jugadores históricos que han dejado huella en el club son <strong>Fernando San Emeterio, Rafa Martínez, Bojan Dubljevic y Víctor Claver</strong>.</p>
+
+        <h4 id="formularios" class="mt-5">Formulario de Contacto</h4>
+        <form>
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre Completo</label>
+                <input type="text" class="form-control" id="nombre">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email">
+            </div>
+            <div class="mb-3">
+                <label for="telefono" class="form-label">Teléfono</label>
+                <input type="tel" class="form-control" id="telefono">
+            </div>
+            <div class="mb-3">
+                <label for="mensaje" class="form-label">Mensaje</label>
+                <textarea class="form-control" id="mensaje" rows="4"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">¿Cómo conociste a Valencia Basket?</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="origen" id="tv">
+                    <label class="form-check-label" for="tv">Televisión</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="origen" id="redes">
+                    <label class="form-check-label" for="redes">Redes Sociales</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="origen" id="amistades">
+                    <label class="form-check-label" for="amistades">Amistades</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="pais" class="form-label">País</label>
+                <select class="form-select" id="pais">
+                    <option selected>Seleccionar...</option>
+                    <option value="es">España</option>
+                    <option value="mx">México</option>
+                    <option value="ar">Argentina</option>
+                    <option value="co">Colombia</option>
+                </select>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="terminos">
+                <label class="form-check-label" for="terminos">Acepto los términos y condiciones</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+
+        <h4 id="alerts" class="mt-5">Logros y Títulos</h4>
+        <div class="alert alert-info" role="alert">
+            🏆 <strong>Campeón de la Liga ACB</strong> (2016-17)
+        </div>
+        <div class="alert alert-warning" role="alert">
+            🏆 <strong>Cuatro títulos de la EuroCup</strong> (2003, 2010, 2014, 2019) – récord del torneo.
+        </div>
+        <div class="alert alert-danger" role="alert">
+            🏆 <strong>Campeón de la Supercopa de España</strong> (2017)
+        </div>
+        <div class="alert alert-success" role="alert">
+            🏆 <strong>Campeón de la Copa del Rey</strong> (1998)
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
