@@ -1,0 +1,125 @@
+@font-face {
+    font-family: "pokemon";
+    src: url("../fonts/Ketchum.otf");
+}
+
+* {
+    font-family: "pokemon";
+
+}
+
+#main {
+    display: grid;
+    grid-template-rows: auto;
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    height: auto;
+}
+
+.pokemon-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Equipo seleccionado en línea con el mismo modelo de carta */
+.selected-team {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    padding: 20px;
+    justify-items: center;
+    margin-bottom: 20px;
+}
+
+.selected-pokemon {
+    width: 180px;
+    text-align: center;
+    background-color: black;
+    box-shadow: 0 0 15px gray;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform .3s;
+}
+
+.selected-pokemon img {
+    width: 100%;
+    background-color: lightblue;
+    box-shadow: inset 0 0 10px gray;
+    border-radius: 5px;
+}
+
+.pokemon-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    padding: 20px;
+    justify-items: center;
+    max-height: none;
+    overflow: hidden;
+}
+
+.carta {
+    position: relative;
+    width: 180px;
+    background-color: black;
+    box-shadow: 0 0 15px gray;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform .3s;
+}
+
+/* Cambio de color con transparencia cuando se selecciona */
+.carta.seleccionada {
+    background-color: rgba(255, 0, 0, 0.5) !important;
+}
+
+.carta:hover {
+    transform: scale(1.1);
+    transition: transform .3s;
+    box-shadow: 0 0 15px black;
+}
+
+.carta img {
+    width: 100%;
+    background-color: lightblue;
+    box-shadow: inset 0 0 10px gray;
+    border-radius: 5px;
+}
+
+.carta div {
+    background-color: whitesmoke;
+    box-shadow: inset 0 0 10px gray;
+    text-transform: capitalize;
+    margin-top: 10px;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px 0 10px 0;
+}
+
+/* Botón de ¡A LUCHAR! alineado */
+.start-battle {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.start-battle button {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: yellow;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.start-battle button:hover {
+    background-color: orange;
+}

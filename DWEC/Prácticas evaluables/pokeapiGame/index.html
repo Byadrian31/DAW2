@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pokemon Battle</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="pokemon-selection">
+            <h2>Equipo seleccionado</h2>
+            <div class="selected-team">
+                <div v-for="(pokemon, index) in selectedPokemonsPlayer" :key="index" class="carta" @click="removePokemon(index)">
+                    <img :src="pokemon.sprite" :alt="pokemon.name">
+                    <div>{{ pokemon.name }}</div>
+                </div>
+            </div>
+        </div>
+                <!-- Botones para selección aleatoria y jugar -->
+                <div class="start-battle">
+                    <button @click="fillRandomTeam">Seleccionar equipo aleatorio</button>
+                    <button v-if="selectedPokemonsPlayer.length === 6">¡A LUCHAR!</button>
+                </div>
+
+        <div class="pokemon-selection">
+            <h2>Selecciona 6 Pokémon</h2>
+
+            <!-- Filtros de búsqueda -->
+            <div class="filters">
+                <input type="text" v-model="searchQuery" placeholder="Buscar Pokémon por nombre">
+                <select v-model="selectedType">
+                    <option value="">Todos los tipos</option>
+                    <option value="fire">Fuego</option>
+                    <option value="water">Agua</option>
+                    <option value="grass">Planta</option>
+                    <option value="electric">Eléctrico</option>
+                    <option value="ice">Hielo</option>
+                    <option value="fighting">Lucha</option>
+                    <option value="poison">Veneno</option>
+                    <option value="ground">Tierra</option>
+                    <option value="flying">Volador</option>
+                    <option value="psychic">Psíquico</option>
+                    <option value="bug">Bicho</option>
+                    <option value="rock">Roca</option>
+                    <option value="ghost">Fantasma</option>
+                    <option value="dragon">Dragón</option>
+                    <option value="dark">Siniestro</option>
+                    <option value="steel">Acero</option>
+                    <option value="fairy">Hada</option>
+                </select>
+            </div>
+
+            <!-- Lista de Pokémon -->
+            <div class="pokemon-grid">
+                <div v-for="pokemon in filteredPokemons" :key="pokemon.id" class="carta" 
+                     :class="{ 'seleccionada': selectedPokemonsPlayer.includes(pokemon) }" 
+                     @click="selectPokemon(pokemon)">
+                    <img :src="pokemon.sprite" :alt="pokemon.name">
+                    <div>{{ pokemon.name }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>
