@@ -5,61 +5,124 @@
 
 * {
     font-family: "pokemon";
-
 }
 
-#main {
-    display: grid;
-    grid-template-rows: auto;
-    width: 1200px;
-    margin: 0 auto;
-    position: relative;
-    height: auto;
-}
-
-.pokemon-selection {
+/************ MENÚ DE SELECCIÓN DE PERSONAJE *************/
+.character-selection {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-/* Equipo seleccionado en línea con el mismo modelo de carta */
-.selected-team {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 10px;
+    justify-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
     padding: 20px;
-    justify-items: center;
-    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px gray;
+    text-align: center;
+    color: white;
 }
 
-.selected-pokemon {
-    width: 180px;
-    text-align: center;
-    background-color: black;
-    box-shadow: 0 0 15px gray;
+.character-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.character-container img {
+    width: 150px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.character-container button {
+    font-size: 20px;
+    background-color: yellow;
+    border: none;
     padding: 10px;
+    cursor: pointer;
+    margin: 0 10px;
+    border-radius: 5px;
+}
+
+.character-container button:hover {
+    background-color: orange;
+}
+
+.start-game {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: yellow;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
-    transform: scale(1);
-    transition: transform .3s;
+    transition: 0.3s;
 }
 
-.selected-pokemon img {
+.start-game:hover {
+    background-color: orange;
+}
+
+/************ MODAL DE SELECCIÓN DE POKÉMON *************/
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    background-color: lightblue;
-    box-shadow: inset 0 0 10px gray;
-    border-radius: 5px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.modal-large {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px gray;
+    max-width: 90%;
+    max-height: 90%;
+    overflow-y: auto;
+    text-align: center;
+    position: relative;
+}
+
+/************ ESTILOS DEL BUSCADOR Y DROPDOWN *************/
+.pokemon-input {
+    font-size: 18px;
+    padding: 10px;
+    border: 2px solid yellow;
+    border-radius: 5px;
+    text-align: center;
+    width: 250px;
+    margin: 10px;
+}
+
+.pokemon-dropdown {
+    font-size: 18px;
+    padding: 10px;
+    border: 2px solid yellow;
+    border-radius: 5px;
+    background-color: white;
+    text-align: center;
+    width: 250px;
+    margin: 10px;
+}
+
+/************ DISEÑO DE CARTAS Y GRILLA *************/
 .pokemon-grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     padding: 20px;
     justify-items: center;
-    max-height: none;
-    overflow: hidden;
+    max-height: 70vh;
+    overflow-y: auto;
 }
 
 .carta {
@@ -74,7 +137,6 @@
     transition: transform .3s;
 }
 
-/* Cambio de color con transparencia cuando se selecciona */
 .carta.seleccionada {
     background-color: rgba(255, 0, 0, 0.5) !important;
 }
@@ -102,7 +164,15 @@
     padding: 10px 0 10px 0;
 }
 
-/* Botón de ¡A LUCHAR! alineado */
+/************ EQUIPO SELECCIONADO *************/
+.selected-team {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/************ BOTONES DE BATALLA *************/
 .start-battle {
     display: flex;
     justify-content: center;

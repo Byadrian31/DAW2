@@ -1,12 +1,16 @@
 const app = Vue.createApp({
     data() {
         return {
-            pokemons: [], // Lista de Pokémon obtenidos de la API
-            selectedPokemonsPlayer: [], // Equipo del jugador
-            selectedPokemonsMachine: [], // Equipo de la máquina
-            isLoading: true, // Estado de carga
-            searchQuery: '', // Texto de búsqueda
-            selectedType: '' // Tipo seleccionado
+            characters: ["ash.png", "blue.png", "red.png" , "leaf.png", "brock.png", "misty.png", "may.png", "serena.png", "adaman.png", "cynthia.png", "n.png", "dawn.png"],
+            playerCharacter: 0,
+            rivalCharacter: 1,
+            charactersSelected: false,
+            showPokemonModal: false,
+            pokemons: [],
+            selectedPokemonsPlayer: [],
+            isLoading: true,
+            searchQuery: '',
+            selectedType: ''
         };
     },
     computed: {
@@ -24,7 +28,6 @@ const app = Vue.createApp({
                 let response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
                 let data = await response.json();
                 
-                // Obtener detalles de cada Pokémon
                 const pokemonDetails = await Promise.all(
                     data.results.map(async (pokemon) => {
                         let detailsResponse = await fetch(pokemon.url);
@@ -33,11 +36,11 @@ const app = Vue.createApp({
                             id: details.id,
                             name: details.name,
                             sprite: details.sprites.front_default,
-                            types: details.types.map(t => t.type.name) // Obtener tipos del Pokémon
+                            types: details.types.map(t => t.type.name)
                         };
                     })
                 );
-                
+
                 this.pokemons = pokemonDetails;
                 this.isLoading = false;
             } catch (error) {
@@ -56,9 +59,23 @@ const app = Vue.createApp({
             this.selectedPokemonsPlayer = [];
             let shuffled = [...this.pokemons].sort(() => 0.5 - Math.random());
             this.selectedPokemonsPlayer = shuffled.slice(0, 6);
+        },
+        nextCharacter(type) {
+            if (type === 'player') {
+                this.playerCharacter = (this.playerCharacter + 1) % this.characters.length;
+            } else {
+                this.rivalCharacter = (this.rivalCharacter + 1) % this.characters.length;
+            }
+        },
+        prevCharacter(type) {
+            if (type === 'player') {
+                this.playerCharacter = (this.playerCharacter - 1 + this.characters.length) % this.characters.length;
+            } else {
+                this.rivalCharacter = (this.rivalCharacter - 1 + this.characters.length) % this.characters.length;
+            }
         }
     },
     mounted() {
-        this.fetchPokemons(); // Llamar a la función al montar la aplicación
+        this.fetchPokemons();
     }
 }).mount('#app');

@@ -9,56 +9,79 @@
 
 <body>
     <div id="app">
-        <div class="pokemon-selection">
-            <h2>Equipo seleccionado</h2>
-            <div class="selected-team">
-                <div v-for="(pokemon, index) in selectedPokemonsPlayer" :key="index" class="carta" @click="removePokemon(index)">
-                    <img :src="pokemon.sprite" :alt="pokemon.name">
-                    <div>{{ pokemon.name }}</div>
+        <!-- Menú de selección de personajes en línea -->
+        <div v-if="!charactersSelected" class="character-selection">
+            <h2>Elige tu entrenador y tu rival</h2>
+            <div class="character-container">
+                <div class="character-box">
+                    <h3>Tu entrenador</h3>
+                    <button @click="prevCharacter('player')">&#60;</button>
+                    <img :src="'img/' + characters[playerCharacter]" :alt="characters[playerCharacter]">
+                    <button @click="nextCharacter('player')">&#62;</button>
+                </div>
+                <div class="character-box">
+                    <h3>Tu rival</h3>
+                    <button @click="prevCharacter('rival')">&#60;</button>
+                    <img :src="'img/' + characters[rivalCharacter]" :alt="characters[rivalCharacter]">
+                    <button @click="nextCharacter('rival')">&#62;</button>
                 </div>
             </div>
+            <button class="start-game" @click="charactersSelected = true; showPokemonModal = true" 
+                :disabled="playerCharacter === rivalCharacter">Confirmar</button>
         </div>
-                <!-- Botones para selección aleatoria y jugar -->
-                <div class="start-battle">
+
+        <!-- Modal de selección de Pokémon -->
+        <div v-if="showPokemonModal" class="modal-container">
+            <div class="modal modal-large">
+                <h2 v-if="selectedPokemonsPlayer.length < 6">Selecciona 6 Pokémon</h2>
+                <h2 v-if="selectedPokemonsPlayer.length === 6">Equipo seleccionado</h2>
+                <div class="selected-team">
+                    
+                    <div v-for="(pokemon, index) in selectedPokemonsPlayer" :key="index" class="carta" @click="removePokemon(index)">
+                        <img :src="pokemon.sprite" :alt="pokemon.name">
+                        <div>{{ pokemon.name }}</div>
+                    </div>
+                </div>
+                
+                <div class="filters" v-if="selectedPokemonsPlayer.length < 6">
+                    <input type="text" v-model="searchQuery" class="pokemon-input" placeholder="Buscar Pokémon...">
+                    <select v-model="selectedType" class="pokemon-dropdown">
+                        <option value="">Todos los tipos</option>
+                        <option value="fire">🔥 Fuego</option>
+                        <option value="water">💧 Agua</option>
+                        <option value="grass">🌿 Planta</option>
+                        <option value="electric">⚡ Eléctrico</option>
+                        <option value="ice">❄️ Hielo</option>
+                        <option value="fighting">🥊 Lucha</option>
+                        <option value="poison">☠️ Veneno</option>
+                        <option value="ground">🏜️ Tierra</option>
+                        <option value="flying">🕊️ Volador</option>
+                        <option value="psychic">🔮 Psíquico</option>
+                        <option value="bug">🐞 Bicho</option>
+                        <option value="rock">🪨 Roca</option>
+                        <option value="ghost">👻 Fantasma</option>
+                        <option value="dragon">🐉 Dragón</option>
+                        <option value="dark">🌑 Siniestro</option>
+                        <option value="steel">🔩 Acero</option>
+                        <option value="fairy">✨ Hada</option>
+                    </select>
+                </div>
+                <div class="start-battle" v-if="selectedPokemonsPlayer.length < 6">
                     <button @click="fillRandomTeam">Seleccionar equipo aleatorio</button>
-                    <button v-if="selectedPokemonsPlayer.length === 6">¡A LUCHAR!</button>
+                </div>
+                
+                <div class="pokemon-grid" v-if="selectedPokemonsPlayer.length < 6">
+                    <div v-for="pokemon in filteredPokemons" :key="pokemon.id" class="carta" 
+                        :class="{ 'seleccionada': selectedPokemonsPlayer.includes(pokemon) }" 
+                        @click="selectPokemon(pokemon)">
+                        <img :src="pokemon.sprite" :alt="pokemon.name">
+                        <div>{{ pokemon.name }}</div>
+                    </div>
                 </div>
 
-        <div class="pokemon-selection">
-            <h2>Selecciona 6 Pokémon</h2>
 
-            <!-- Filtros de búsqueda -->
-            <div class="filters">
-                <input type="text" v-model="searchQuery" placeholder="Buscar Pokémon por nombre">
-                <select v-model="selectedType">
-                    <option value="">Todos los tipos</option>
-                    <option value="fire">Fuego</option>
-                    <option value="water">Agua</option>
-                    <option value="grass">Planta</option>
-                    <option value="electric">Eléctrico</option>
-                    <option value="ice">Hielo</option>
-                    <option value="fighting">Lucha</option>
-                    <option value="poison">Veneno</option>
-                    <option value="ground">Tierra</option>
-                    <option value="flying">Volador</option>
-                    <option value="psychic">Psíquico</option>
-                    <option value="bug">Bicho</option>
-                    <option value="rock">Roca</option>
-                    <option value="ghost">Fantasma</option>
-                    <option value="dragon">Dragón</option>
-                    <option value="dark">Siniestro</option>
-                    <option value="steel">Acero</option>
-                    <option value="fairy">Hada</option>
-                </select>
-            </div>
-
-            <!-- Lista de Pokémon -->
-            <div class="pokemon-grid">
-                <div v-for="pokemon in filteredPokemons" :key="pokemon.id" class="carta" 
-                     :class="{ 'seleccionada': selectedPokemonsPlayer.includes(pokemon) }" 
-                     @click="selectPokemon(pokemon)">
-                    <img :src="pokemon.sprite" :alt="pokemon.name">
-                    <div>{{ pokemon.name }}</div>
+                <div class="start-battle">
+                    <button v-if="selectedPokemonsPlayer.length === 6" class="Button">¡A LUCHAR!</button>
                 </div>
             </div>
         </div>
