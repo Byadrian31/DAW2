@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BY BIKE</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="img/logo.png" alt="Logo" height="40"> BY BIKE
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#bicicletas">Bicicletas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#accesorios">Accesorios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#componentes">Componentes</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="productosDropdown" role="button"
+                            data-bs-toggle="dropdown">
+                            Productos
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Sillines</a></li>
+                            <li><a class="dropdown-item" href="#">Cascos</a></li>
+                            <li><a class="dropdown-item" href="#">Tijas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="sobreNosotrosDropdown" role="button"
+                            data-bs-toggle="dropdown">
+                            Sobre Nosotros
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <button class="dropdown-item" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#quienesSomos">¿Quiénes somos?</button>
+                                <div class="collapse" id="quienesSomos">
+                                    <div class="card card-body">Somos una empresa apasionada por el ciclismo</div>
+                                </div>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#referencias">Referencias</button>
+                                <div class="collapse" id="referencias">
+                                    <div class="card card-body">Carlos Rodríguez, Enric Mas, Mikel Landa y Oier Lazkano son nuestros mejores clientes</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Carousel -->
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner" style="max-width: 800px; margin: auto;">
+            <div class="carousel-item active">
+                <img src="img/orbea.jpg" class="d-block w-100 rounded" alt="Bicicleta">
+            </div>
+            <div class="carousel-item">
+                <img src="img/accesorios.jpg" class="d-block w-100 rounded" alt="Accesorios">
+            </div>
+            <div class="carousel-item">
+                <img src="img/componentes.jpg" class="d-block w-100 rounded" alt="Componentes">
+            </div>
+        </div>
+        <button class="carousel-control-prev bg-dark" type="button" data-bs-target="#carouselExample"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next bg-dark" type="button" data-bs-target="#carouselExample"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+    </div>
+
+    <!-- Articles Section -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-4" id="bicicletas">
+                <div class="card">
+                    <img src="img/orbea.jpg" class="card-img-top" alt="Bicicletas">
+                    <div class="card-body">
+                        <h5 class="card-title">Bicicletas</h5>
+                        <p class="card-text">Explora nuestra selección de bicicletas de alta calidad para todo tipo de
+                            terrenos.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" id="accesorios">
+                <div class="card">
+                    <img src="img/accesorios.jpg" class="card-img-top" alt="Accesorios">
+                    <div class="card-body">
+                        <h5 class="card-title">Accesorios</h5>
+                        <p class="card-text">Encuentra los mejores accesorios para mejorar tu experiencia en bicicleta.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" id="componentes">
+                <div class="card">
+                    <img src="img/componentes.jpg" class="card-img-top" alt="Componentes">
+                    <div class="card-body">
+                        <h5 class="card-title">Componentes</h5>
+                        <p class="card-text">Mejora y personaliza tu bicicleta con nuestra selección de componentes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulario de contacto -->
+    <div class="container my-5">
+        <h2>Contacto</h2>
+        <form>
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="mensaje" class="form-label">Mensaje</label>
+                <textarea class="form-control" id="mensaje" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        &copy; 2025 BY BIKE - Creado por Adrián López Pascual
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
