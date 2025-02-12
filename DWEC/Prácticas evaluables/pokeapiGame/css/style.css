@@ -119,7 +119,7 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
-    padding: 20px;
+    padding: 15px;
     justify-items: center;
     max-height: 70vh;
     overflow-y: auto;
@@ -142,9 +142,30 @@
 }
 
 .carta:hover {
-    transform: scale(1.1);
-    transition: transform .3s;
+    animation: rotate 5s infinite;
     box-shadow: 0 0 15px black;
+}
+
+@keyframes rotate {
+    0% {
+        transform: scale(1.1);
+    }
+
+    25% {
+        transform: rotateY(-40deg);
+        transform: scale(1.1);
+    }
+
+    75% {
+        transform: rotateY(40deg);
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1.1);
+
+    }
+
 }
 
 .carta img {
@@ -192,4 +213,135 @@
 
 .start-battle button:hover {
     background-color: orange;
+}
+
+/************ ANIMACIÓN DE ENFRENTAMIENTO *************/
+.battle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    overflow: hidden;
+}
+
+.player-trainer {
+    position: absolute;
+    width: 200px;
+    animation: moveL 3s forwards;
+    opacity: 0;
+}
+
+.rival-trainer {
+    position: absolute;
+    width: 200px;
+    animation: moveR 3s forwards;
+    opacity: 0;
+}
+
+@keyframes moveL {
+    0% {
+        transform: translateX(-1000%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(-100%);
+        opacity: 1;
+    }
+}
+
+@keyframes moveR {
+    0% {
+        transform: translateX(1000%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(100%);
+        opacity: 1;
+    }
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(2);
+    }
+
+    100% {
+        transform: scale(1);
+
+    }
+
+}
+
+/*
+.player-trainer {
+    left: -100%;
+}
+
+.rival-trainer {
+    right: -100%;
+}
+
+.move-to-center.player-trainer {
+    left: 20% !important;
+    opacity: 1;
+}
+
+.move-to-center.rival-trainer {
+    right: 20% !important;
+    opacity: 1;
+}
+*/
+
+.vs-text {
+    position: absolute;
+    font-size: 100px;
+    font-weight: bold;
+    color: red;
+    opacity: 1;
+    animation: appear 1.5s forwards;
+
+}
+
+/************ CAMPO DE BATALLA *************/
+.battlefield {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    position: fixed;
+}
+
+.player-team, .rival-team {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
+.player-team {
+    align-items: flex-start;
+    padding-left: 20px;
+}
+
+.rival-team {
+    align-items: flex-end;
+    padding-right: 20px;
+}
+
+.battle-zone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

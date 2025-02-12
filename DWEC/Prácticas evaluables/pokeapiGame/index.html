@@ -26,8 +26,7 @@
                     <button @click="nextCharacter('rival')">&#62;</button>
                 </div>
             </div>
-            <button class="start-game" @click="charactersSelected = true; showPokemonModal = true" 
-                :disabled="playerCharacter === rivalCharacter">Confirmar</button>
+            <button class="start-game" @click="charactersSelected = true; showPokemonModal = true" :disabled="playerCharacter === rivalCharacter">Confirmar</button>
         </div>
 
         <!-- Modal de selección de Pokémon -->
@@ -35,8 +34,10 @@
             <div class="modal modal-large">
                 <h2 v-if="selectedPokemonsPlayer.length < 6">Selecciona 6 Pokémon</h2>
                 <h2 v-if="selectedPokemonsPlayer.length === 6">Equipo seleccionado</h2>
+                <div class="start-battle">
+                    <button @click="fillRandomTeam">Seleccionar equipo aleatorio</button>
+                </div>
                 <div class="selected-team">
-                    
                     <div v-for="(pokemon, index) in selectedPokemonsPlayer" :key="index" class="carta" @click="removePokemon(index)">
                         <img :src="pokemon.sprite" :alt="pokemon.name">
                         <div>{{ pokemon.name }}</div>
@@ -66,9 +67,6 @@
                         <option value="fairy">✨ Hada</option>
                     </select>
                 </div>
-                <div class="start-battle" v-if="selectedPokemonsPlayer.length < 6">
-                    <button @click="fillRandomTeam">Seleccionar equipo aleatorio</button>
-                </div>
                 
                 <div class="pokemon-grid" v-if="selectedPokemonsPlayer.length < 6">
                     <div v-for="pokemon in filteredPokemons" :key="pokemon.id" class="carta" 
@@ -79,10 +77,31 @@
                     </div>
                 </div>
 
-
                 <div class="start-battle">
-                    <button v-if="selectedPokemonsPlayer.length === 6" class="Button">¡A LUCHAR!</button>
+                    <button v-if="selectedPokemonsPlayer.length === 6" @click="startBattle()" class="Button">¡A LUCHAR!</button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Animación de enfrentamiento -->
+        <div v-if="battleStarted && !battlefieldShown" class="battle-container">
+            <img :src="'img/' + characters[playerCharacter]" class="player-trainer">
+            <h1 class="vs-text">VS</h1>
+            <img :src="'img/' + characters[rivalCharacter]" class="rival-trainer">
+        </div>
+
+        <!-- Campo de batalla (aparece después de 5s) -->
+        <div v-if="battlefieldShown" class="battlefield">
+            <div class="player-team">
+                <img v-for="pokemon in selectedPokemonsPlayer" :key="pokemon.id" :src="pokemon.sprite" :alt="pokemon.name">
+            </div>
+            
+            <div class="battle-zone">
+                <h1 class="vs-text">VS</h1>
+            </div>
+            
+            <div class="rival-team">
+                <img v-for="pokemon in selectedPokemonsRival" :key="pokemon.id" :src="pokemon.sprite" :alt="pokemon.name">
             </div>
         </div>
     </div>
