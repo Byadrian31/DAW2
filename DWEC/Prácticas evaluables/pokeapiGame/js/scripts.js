@@ -11,6 +11,8 @@ const app = Vue.createApp({
             pokemons: [],
             selectedPokemonsPlayer: [],
             selectedPokemonsRival: [],
+            currentPokemonPlayer: null,
+            currentPokemonRival: null,
             isLoading: true,
             searchQuery: '',
             selectedType: ''
@@ -37,7 +39,12 @@ const app = Vue.createApp({
                         id: details.id,
                         name: details.name,
                         sprite: details.sprites.front_default,
-                        types: details.types.map(t => t.type.name)
+                        types: details.types.map(t => t.type.name),
+                        hp: details.stats.find(stat => stat.stat.name === "hp").base_stat,
+                        maxHp: details.stats.find(stat => stat.stat.name === "hp").base_stat,
+                        attack: details.stats.find(stat => stat.stat.name === "attack").base_stat,
+                        defense: details.stats.find(stat => stat.stat.name === "defense").base_stat,
+                        speed: details.stats.find(stat => stat.stat.name === "speed").base_stat
                     };
                 })
             );
@@ -77,6 +84,9 @@ const app = Vue.createApp({
         },
         startBattle() {
             this.fillRivalTeam();
+            this.currentPokemonPlayer = this.selectedPokemonsPlayer[0] || null;
+            this.currentPokemonRival = this.selectedPokemonsRival[0] || null;
+            
             this.showPokemonModal = false;
             this.battleStarted = true;
             setTimeout(() => {
@@ -87,11 +97,21 @@ const app = Vue.createApp({
             setTimeout(() => {
                 this.battlefieldShown = true;
             }, 5000);
+        },
+        getHealthClass(pokemon) {
+            if (!pokemon || pokemon.hp === undefined || pokemon.maxHp === undefined) return "red";
+    
+            let percentage = (pokemon.hp / pokemon.maxHp) * 100;
+            if (percentage > 60) return "green";
+            if (percentage > 30) return "orange";
+            return "red";
+        },
+        getHealthPercentage(pokemon) {
+            if (!pokemon || pokemon.hp === undefined || pokemon.maxHp === undefined) return "0%";
+            return ((pokemon.hp / pokemon.maxHp) * 100) + "%";
         }
     },
     mounted() {
         this.fetchPokemons();
     }
 }).mount('#app');
-
-
