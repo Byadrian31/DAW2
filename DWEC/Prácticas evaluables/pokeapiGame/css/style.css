@@ -14,6 +14,41 @@ html, body {
     overflow: hidden;
 }
 
+/************ MENÚ DE SELECCIÓN DE VS *************/
+.game-mode-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px gray;
+    text-align: center;
+    color: white;
+}
+
+.game-mode-selection button {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: yellow;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.game-mode-selection button:hover {
+    background-color: orange;
+}
+
+
 /************ MENÚ DE SELECCIÓN DE PERSONAJE *************/
 .character-selection {
     display: flex;
@@ -214,7 +249,7 @@ html, body {
     align-items: center;
     justify-content: center;
     max-width: 100vw;
-    height: 100vh; /* Ocupa la pantalla completa */
+    height: 100vh;
     width: 100vw;
     background-color: #f4f4f4;
     padding: 20px;
@@ -222,7 +257,7 @@ html, body {
 }
 
 /************ LISTA DE EQUIPOS *************/
-.player-team, .rival-team {
+.player-team {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -233,6 +268,22 @@ html, body {
     width: 120px;
     height: 85vh;
 
+}
+
+.rival-team {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    width: 120px;
+    height: 85vh;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10; /* Asegura que los Pokémon estén encima */
 }
 
 .rival-team {
@@ -254,14 +305,18 @@ html, body {
 /************ CARTA DE POKÉMON COMBATIENTE *************/
 .fight-card {
     position: relative;
-    width: 220px;
-    height: 280px;
-    background-color: black;
+    width: 250px; /* Ancho aumentado */
+    height: 350px; /* Altura aumentada */
+    background-color: var( --card-color, lightgray);
     box-shadow: 0 0 15px gray;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
     transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .fight-card:hover {
@@ -280,10 +335,42 @@ html, body {
     background-color: whitesmoke;
     box-shadow: inset 0 0 10px gray;
     text-transform: capitalize;
-    margin-top: 10px;
     font-weight: bold;
-    padding: 10px 0;
+    padding: 5px;
 }
+
+.fight-card.fire { --card-color: #ff7043; } /* Naranja */
+.fight-card.water { --card-color: #42a5f5; } /* Azul */
+.fight-card.grass { --card-color: #66bb6a; } /* Verde */
+.fight-card.electric { --card-color: #ffeb3b; } /* Amarillo */
+.fight-card.psychic { --card-color: #ec407a; } /* Rosa */
+.fight-card.rock { --card-color: #8d6e63; } /* Marrón */
+.fight-card.ghost { --card-color: #7e57c2; } /* Púrpura */
+.fight-card.dark { --card-color: #424242; } /* Gris oscuro */
+.fight-card.dragon { --card-color: #0288d1; } /* Azul más oscuro */
+.fight-card.bug { --card-color: #8bc34a; } /* Verde claro */
+.fight-card.poison { --card-color: #9c27b0; } /* Morado */
+.fight-card.fairy { --card-color: #ffab91; } /* Rosa claro */
+.fight-card.fighting { --card-color: #ef5350; } /* Rojo */
+.fight-card.steel { --card-color: #78909c; } /* Gris */
+.fight-card.flying { --card-color: #90a4ae; } /* Gris azulado */
+.fight-card.ice { --card-color: #4fc3f7; } /* Azul claro */
+.fight-card.normal { --card-color: #a1887f; } /* Marrón claro */
+.fight-card.ground { --card-color: #d4e157; } /* Verde lima */
+
+.fight-card .stats {
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    padding-bottom: 45px;
+    border-radius: 5px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 100;
+}
+
 
 /************ BARRA DE VIDA *************/
 .health-bar {
@@ -292,7 +379,9 @@ html, body {
     border-radius: 5px;
     margin-top: 5px;
     border: 1px solid black;
+    transition: width 0.5s ease-in-out;
 }
+
 
 .health-bar.green {
     background-color: green;
@@ -304,6 +393,27 @@ html, body {
 
 .health-bar.red {
     background-color: red;
+}
+
+.hp-info {
+    position: absolute;
+    bottom: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px black;
+}
+
+.hp-display {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 5px 10px;
+    border-radius: 5px;
 }
 
 /************ ZONA DE BATALLA *************/
@@ -353,6 +463,56 @@ html, body {
     top: 0;
     overflow: hidden;
 }
+
+/************ BOTONES ATAQUE *************/
+.attack-buttons {
+    position: absolute;
+    bottom: 10px;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.attack-buttons button {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px;
+    background-color: yellow;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.attack-buttons button:hover {
+    background-color: orange;
+}
+
+/************ REINICIAR COMBATE *************/
+
+.restart-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.restart-button {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.restart-button:hover {
+    background-color: darkred;
+}
+
+
 
 /************ ANIMACIONES *************/
 @keyframes appear {

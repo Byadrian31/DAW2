@@ -9,8 +9,14 @@
 
 <body>
     <div id="app">
+        <div v-if="!gameModeSelected" class="game-mode-selection">
+            <h2>Selecciona el modo de juego</h2>
+            <button @click="selectGameMode('IA')">Contra IA</button>
+            <button @click="selectGameMode('J2')">Jugador vs Jugador</button>
+        </div>
+
         <!-- Menú de selección de personajes en línea -->
-        <div v-if="!charactersSelected" class="character-selection">
+        <div v-if="gameModeSelected && !charactersSelected" class="character-selection">
             <h2>Elige tu entrenador y tu rival</h2>
             <div class="character-container">
                 <div class="character-box">
@@ -72,7 +78,8 @@
 
                 <div class="pokemon-grid" v-if="selectedPokemonsPlayer.length < 6">
                     <div v-for="pokemon in filteredPokemons" :key="pokemon.id" class="carta"
-                        :class="{ 'seleccionada': selectedPokemonsPlayer.includes(pokemon) }" @click="selectPokemon(pokemon)">
+                        :class="{ 'seleccionada': selectedPokemonsPlayer.includes(pokemon) }"
+                        @click="selectPokemon(pokemon)">
                         <img :src="pokemon.sprite" :alt="pokemon.name">
                         <div>{{ pokemon.name }}</div>
                     </div>
@@ -92,7 +99,7 @@
             <img :src="'img/' + characters[rivalCharacter]" class="rival-trainer">
         </div>
 
-        <!-- Campo de batalla (aparece después de 5s) -->
+        <!-- Campo de batalla -->
         <div v-if="battlefieldShown" class="battlefield">
             <div class="player-team">
                 <div v-for="pokemon in selectedPokemonsPlayer" :key="pokemon.id" class="pokemon-entry">
@@ -104,22 +111,54 @@
 
             <div class="battle-zone">
                 <div class="pokemon-battle">
-                    <div class="fight-card">
+                    <!-- Carta del Pokémon Jugador -->
+                    <div class="fight-card" :class="currentPokemonPlayer ? currentPokemonPlayer.types[0] : ''">
+                        <div class="hp-display">
+                            {{ currentPokemonPlayer.hp }} / {{ currentPokemonPlayer.maxHp }}
+                        </div>
                         <img v-if="currentPokemonPlayer" :src="currentPokemonPlayer.sprite"
                             :alt="currentPokemonPlayer.name">
-                        <p v-if="currentPokemonPlayer">ATK: {{ currentPokemonPlayer.attack }} | DEF: {{ currentPokemonPlayer.defense }}</p>
+                        <p class="stats" v-if="currentPokemonPlayer">ATK: {{ currentPokemonPlayer.attack }} | DEF: {{
+                            currentPokemonPlayer.defense }}</p>
+
+                        <!-- BOTONES DE MOVIMIENTOS -->
+                        <div class="attack-buttons" v-if="currentPokemonPlayer && currentPokemonPlayer.moves && currentPokemonPlayer.moves.length > 0">
+                            <button v-for="(move, index) in currentPokemonPlayer.moves" :key="index"
+                                @click="attack(move)" :disabled="!isPlayerTurn">
+                                {{ move.name }} <br> ({{ move.power }})
+                            </button>
+
+                        </div>
                     </div>
 
                     <h1 class="vs-fight">VS</h1>
 
-                    <div class="fight-card">
+                    <!-- Carta del Pokémon Rival -->
+                    <div class="fight-card" :class="currentPokemonRival ? currentPokemonRival.types[0] : ''">
+                        <div class="hp-display">
+                            {{ currentPokemonRival.hp }} / {{ currentPokemonRival.maxHp }}
+                        </div>
                         <img v-if="currentPokemonRival" :src="currentPokemonRival.sprite"
                             :alt="currentPokemonRival.name">
-                        <p v-if="currentPokemonRival">ATK: {{ currentPokemonRival.attack }} | DEF: {{ currentPokemonRival.defense }}</p>
+                        <p class="stats" v-if="currentPokemonRival">ATK: {{ currentPokemonRival.attack }} | DEF: {{
+                            currentPokemonRival.defense }}</p>
+
+                        <!-- BOTONES DE MOVIMIENTOS DEL RIVAL (DESHABILITADOS) -->
+                        <div class="attack-buttons">
+                            <button v-for="(move, index) in currentPokemonRival.moves" :key="index" disabled>
+                                {{ move.name }} <br> ({{ move.power }})
+                            </button>
+
+
+                        </div>
                     </div>
                 </div>
                 <div class="battle-log">
                     <p>{{ battleLog }}</p>
+                </div>
+                <!-- BOTÓN PARA REINICIAR EL JUEGO -->
+                <div v-if="gameOver" class="restart-container">
+                    <button @click="restartGame()" class="restart-button">Volver a jugar</button>
                 </div>
             </div>
 
