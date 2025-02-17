@@ -1,126 +1,107 @@
 <?php
-
 /**
- * Clase Incidencia que gestiona el CRUD de incidencias en la BD.
- * 
- * @author Adrián López Pascual
+ * Clase Incidencia para gestionar incidencias en la BD INCIDENCIAS
+ * Autor: Silvia Vilar
  */
-include_once "traitDB.php";
+include_once "../traitDB.php";
 
 class Incidencia {
     use traitDB;
 
     private $codigo;
-    private $descripcion;
     private $estado;
-    private $solucion;
+    private $puesto;
+    private $problema;
+    private $resolucion;
 
-    /**
-     * Constructor de la clase Incidencia.
-     */
-    public function __construct($codigo, $descripcion, $estado = "Pendiente", $solucion = "") {
+    public function __construct($codigo, $estado, $puesto, $problema, $resolucion = "") {
         $this->codigo = $codigo;
-        $this->descripcion = $descripcion;
         $this->estado = $estado;
-        $this->solucion = $solucion;
+        $this->puesto = $puesto;
+        $this->problema = $problema;
+        $this->resolucion = $resolucion;
     }
 
-    /** Getters y Setters */
+    // Getters y Setters
     public function getCodigo() {
         return $this->codigo;
     }
-    
-    public function getDescripcion() {
-        return $this->descripcion;
-    }
-    
-    public function setDescripcion($descripcion) {
-        $this->descripcion = $descripcion;
-    }
-    
     public function getEstado() {
         return $this->estado;
     }
-    
     public function setEstado($estado) {
         $this->estado = $estado;
     }
-    
-    public function getSolucion() {
-        return $this->solucion;
+    public function getPuesto() {
+        return $this->puesto;
     }
-    
-    public function setSolucion($solucion) {
-        $this->solucion = $solucion;
+    public function setPuesto($puesto) {
+        $this->puesto = $puesto;
     }
-
-    /**
-     * Crea una nueva incidencia en la base de datos.
-     */
-    public static function creaIncidencia($codigo, $descripcion) {
-        $sql = "INSERT INTO INCIDENCIA (codigo, descripcion, estado, solucion) VALUES (?, ?, 'Pendiente', '')";
-        self::queryPreparadaDB($sql, [$codigo, $descripcion]);
-        return new self($codigo, $descripcion);
+    public function getProblema() {
+        return $this->problema;
     }
-
-    /**
-     * Marca una incidencia como resuelta con una solución.
-     */
-    public function resuelve($solucion) {
-        $sql = "UPDATE INCIDENCIA SET estado = 'Resuelta', solucion = ? WHERE codigo = ?";
-        self::queryPreparadaDB($sql, [$solucion, $this->codigo]);
-        $this->setEstado("Resuelta");
-        $this->setSolucion($solucion);
+    public function setProblema($problema) {
+        $this->problema = $problema;
+    }
+    public function getResolucion() {
+        return $this->resolucion;
+    }
+    public function setResolucion($resolucion) {
+        $this->resolucion = $resolucion;
     }
 
-    /**
-     * Obtiene el número de incidencias pendientes.
-     */
-    public static function getPendientes() {
-        $sql = "SELECT COUNT(*) as total FROM INCIDENCIA WHERE estado = 'Pendiente'";
-        $resultado = self::queryPreparadaDB($sql, []);
-        return $resultado[0]['total'];
+    public static function resetearBD() {
+        $pdo = self::connectDB();
+        $pdo->exec("DELETE FROM INCIDENCIA;");
     }
 
-    /**
-     * Lee una incidencia específica.
-     */
+    public static function creaIncidencia($puesto, $problema) {
+        $pdo = self::connectDB();
+        $codigo = rand(1000, 9999);
+        $stmt = $pdo->prepare("INSERT INTO INCIDENCIA (CODIGO, ESTADO, PUESTO, PROBLEMA) VALUES (?, 'PENDIENTE', ?, ?)");
+        if ($stmt->execute([$codigo, $puesto, $problema])) {
+            return new Incidencia($codigo, 'PENDIENTE', $puesto, $problema);
+        }
+        return null;
+    }
+
+    public function resuelve($resolucion) {
+        $pdo = self::connectDB();
+        $stmt = $pdo->prepare("UPDATE INCIDENCIA SET ESTADO = 'RESUELTA', RESOLUCION = ? WHERE CODIGO = ?");
+        if ($stmt->execute([$resolucion, $this->codigo])) {
+            $this->setEstado('RESUELTA');
+            $this->setResolucion($resolucion);
+        }
+    }
+
+    public function actualizaIncidencia($estado, $problema, $puesto, $resolucion) {
+        $pdo = self::connectDB();
+        $stmt = $pdo->prepare("UPDATE INCIDENCIA SET ESTADO = COALESCE(NULLIF(?, ''), ESTADO), PROBLEMA = COALESCE(NULLIF(?, ''), PROBLEMA), PUESTO = COALESCE(NULLIF(?, ''), PUESTO), RESOLUCION = COALESCE(NULLIF(?, ''), RESOLUCION) WHERE CODIGO = ?");
+        $stmt->execute([$estado, $problema, $puesto, $resolucion, $this->codigo]);
+    }
+
     public static function leeIncidencia($codigo) {
-        $sql = "SELECT * FROM INCIDENCIA WHERE codigo = ?";
-        $resultado = self::queryPreparadaDB($sql, [$codigo]);
-        return $resultado ? new self($resultado[0]['codigo'], $resultado[0]['descripcion'], $resultado[0]['estado'], $resultado[0]['solucion']) : null;
+        $pdo = self::connectDB();
+        $stmt = $pdo->prepare("SELECT * FROM INCIDENCIA WHERE CODIGO = ?");
+        $stmt->execute([$codigo]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Lista todas las incidencias.
-     */
     public static function leeTodasIncidencias() {
-        $sql = "SELECT * FROM INCIDENCIA";
-        return self::queryPreparadaDB($sql, []);
+        $pdo = self::connectDB();
+        $stmt = $pdo->query("SELECT * FROM INCIDENCIA");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Actualiza la información de una incidencia.
-     */
-    public function actualizaIncidencia($descripcion, $solucion) {
-        $sql = "UPDATE INCIDENCIA SET descripcion = ?, solucion = ? WHERE codigo = ?";
-        self::queryPreparadaDB($sql, [$descripcion, $solucion, $this->codigo]);
-        $this->setDescripcion($descripcion);
-        $this->setSolucion($solucion);
+    public static function getPendientes() {
+        $pdo = self::connectDB();
+        $stmt = $pdo->query("SELECT COUNT(*) FROM INCIDENCIA WHERE ESTADO = 'PENDIENTE'");
+        return $stmt->fetchColumn();
     }
 
-    /**
-     * Elimina una incidencia de la base de datos.
-     */
-    public function borraIncidencia() {
-        $sql = "DELETE FROM INCIDENCIA WHERE codigo = ?";
-        self::queryPreparadaDB($sql, [$this->codigo]);
-    }
-
-    /**
-     * Devuelve la incidencia en formato de texto.
-     */
     public function __toString() {
-        return "Incidencia " . $this->getCodigo() . ": " . $this->getDescripcion() . " (" . $this->getEstado() . ") - Solución: " . $this->getSolucion() . "\n";
+        return "Incidencia #{$this->getCodigo()} en puesto {$this->getPuesto()}: {$this->getProblema()} - Estado: {$this->getEstado()}. " . ($this->getResolucion() ? "Resolución: {$this->getResolucion()}" : "");
     }
 }
+?>
