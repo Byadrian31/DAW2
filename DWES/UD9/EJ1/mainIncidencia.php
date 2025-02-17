@@ -26,7 +26,7 @@ $inc3->actualizaIncidencia("","La pantalla se ve AZUL","","");
 $inc4->actualizaIncidencia("","El ruido es del ventilador","","");
 $inc4->resuelve("Se ha limpiado el ventilador");
 $inc5->actualizaIncidencia("","Se cuelga al abrir 2 programas","","");
-//$inc2->borraIncidencia();  
+$inc2->borraIncidencia();  
 Incidencia::leeTodasIncidencias();  
 
 ?>

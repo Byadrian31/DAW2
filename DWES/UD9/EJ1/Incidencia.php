@@ -100,8 +100,14 @@ class Incidencia {
         return $stmt->fetchColumn();
     }
 
+    public function borraIncidencia() {
+        $pdo = self::connectDB();
+        $stmt = $pdo->prepare("DELETE FROM INCIDENCIA WHERE CODIGO = ?");
+        $stmt->execute([$this->codigo]);
+    }
+
     public function __toString() {
-        return "Incidencia #{$this->getCodigo()} en puesto {$this->getPuesto()}: {$this->getProblema()} - Estado: {$this->getEstado()}. " . ($this->getResolucion() ? "Resolución: {$this->getResolucion()}" : "");
+        return "Incidencia #{$this->getCodigo()} en puesto {$this->getPuesto()}: {$this->getProblema()} - Estado: {$this->getEstado()}. " . ($this->getResolucion() ? "Resolución: {$this->getResolucion()}" : "") . "\n";
     }
 }
 ?>

@@ -7,7 +7,7 @@ trait traitDB
     {
         try {
             $dsn = "mysql:host=127.0.0.1;port=33006;dbname=INCIDENCIAS;charset=utf8";
-            $conn = new PDO($dsn, "root", "dbrootpass", [
+            $conn = new PDO($dsn, MYSQL_ROOT, MYSQL_ROOT_PASSWORD, [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
             ]);
