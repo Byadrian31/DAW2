@@ -1,206 +1,152 @@
 <?php
 /**
- * @autor Silvia Vilar
+ * @author Adrián López Pascual
  * Ejercicio 2. Consultas
  */
-include_once __DIR__ . '\..\..\db.php';
+include_once '../traitDB.php';
 
-// Verifica si se ha enviado el formulario
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Conecta a la base de datos (ajusta los detalles de la conexión según tu configuración)
-    
+header('Content-Type: application/json; charset=UTF-8');
 
-    // Determina el tipo de consulta
-  
+class Consultas {
+    use traitDB;
 
-    switch () {
-            //consultas de Clientes
-        case 'ClientePorDni':
-            //Datos de cliente por DNI
-           
-            break;
+    public static function ejecutarConsulta() {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $pdo = self::connectDB2();
+            $tipoConsulta = $_POST['tipoConsulta'] ?? '';
+            $parametro = $_POST['parametro'] ?? '';
+            $resultado = [];
 
-        case 'ListadoClientes':
-            //Listado de todos los clientes ordenados por dni de cliente
-            
-            break;
+            switch ($tipoConsulta) {
+                // Consultas de Clientes
+                case 'ClientePorDni':
+                    $stmt = $pdo->prepare("SELECT * FROM CLIENTE WHERE DNI = ? ORDER BY DNI");
+                    $stmt->execute([$parametro]);
+                    $resultado = $stmt->fetchAll();
+                    break;
 
-        case 'ClientesDadapoblacion':
-            //Datos de Clientes de una Población seleccionada ordenados por dni de cliente
-            
-            break;
-        case 'ListadoClientesPorPoblacion':
-            //Listado de Clientes de una población seleccionada ordenados por población
-            
-            break;
+                case 'ListadoClientes':
+                    $stmt = $pdo->query("SELECT * FROM CLIENTE ORDER BY DNI");
+                    $resultado = $stmt->fetchAll();
+                    break;
 
-        case 'NumeroClientesPorPoblacion':
-            //Listado de Clientes de una población seleccionada ordenados por población
-            
-            break;
+                case 'ClientesDadapoblacion':
+                    $stmt = $pdo->prepare("SELECT * FROM CLIENTE WHERE POBLACION = ? ORDER BY DNI");
+                    $stmt->execute([$parametro]);
+                    $resultado = $stmt->fetchAll();
+                    break;
 
-        case 'ListadoClientesConCompras':
-            //Datos de Clientes que han realizado compras ordenados por dni de cliente
-            
-            break;
-        case 'ListadoClientesSinCompras':
-            //Datos de Clientes que no han realizado compras ordenados por dni de cliente
-           
-            break;
-        case 'ListadoClientesConComprasDadaPoblacion':
-            //Datos de Clientes que han realizado compras de una población seleccionada ordenados por dni de cliente
-            
-            break;
-        case 'ListadoClientesSinComprasDadaPoblacion':
-            //Datos de Clientes que no han realizado compras de una población seleccionada ordenados por dni de cliente
-            
-            break;
-        case 'ListadoClientesConComprasValencia':
-            //Datos de Clientes que han realizado compras con algún cliente de la población de Valencia ordenados por dni de cliente
-            
-            break;
+                case 'ListadoClientesPorPoblacion':
+                    $stmt = $pdo->query("SELECT * FROM CLIENTE ORDER BY POBLACION");
+                    $resultado = $stmt->fetchAll();
+                    break;
 
-        case 'ListadoClientesConTresOMasCompras':
-            //Listado de clientes que han realizado 3 o más compras ordenados por dni de cliente
-           
-            break;
-        case 'ListadoClientesConTresComprasOMasPorPoblacion':
-            //Listado de clientes que han realizado 3 compras o más de una población seleccionada ordenados por dni de cliente
-           
-            break;
+                case 'NumeroClientesPorPoblacion':
+                    $stmt = $pdo->prepare("SELECT COUNT(*) AS total FROM CLIENTE WHERE POBLACION = ?");
+                    $stmt->execute([$parametro]);
+                    $resultado = $stmt->fetch();
+                    break;
 
-            //Consultas con proveedores
-        case 'ProveedorPorNif':
-            //Datos de proveedor por NIF
-           
-            break;
+                case 'ListadoClientesConCompras':
+                    $stmt = $pdo->query("SELECT DISTINCT C.* FROM CLIENTE C INNER JOIN COMPRA CO ON C.DNI = CO.CLIENTE ORDER BY C.DNI");
+                    $resultado = $stmt->fetchAll();
+                    break;
 
-        case 'ListadoProveedores':
-            //Listado de todos los proveedores ordenados por nif de proveedor
-            
-            break;
+                case 'ListadoClientesSinCompras':
+                    $stmt = $pdo->query("SELECT * FROM CLIENTE WHERE DNI NOT IN (SELECT CLIENTE FROM COMPRA) ORDER BY DNI");
+                    $resultado = $stmt->fetchAll();
+                    break;
 
-        case 'ProveedoresEmpiezanPorTexto':
-            //Datos de proveedores que empiezan por un texto seleccionado ordenados por nif de proveedor
-           
-            break;
+                case 'ListadoProveedores':
+                    $stmt = $pdo->query("SELECT * FROM PROVEEDOR ORDER BY NIF");
+                    $resultado = $stmt->fetchAll();
+                    break;
 
-        case 'ProveedoresProductosPvpMayor1000':
-            //Datos de proveedores con productos con precio mayor a 1000€ ordenados por nif de proveedor
-            
-            break;
+                case 'ProductoPorCodProd':
+                    $stmt = $pdo->prepare("SELECT * FROM PRODUCTO WHERE COD_PROD = ? ORDER BY COD_PROD");
+                    $stmt->execute([$parametro]);
+                    $resultado = $stmt->fetchAll();
+                    break;
 
-            //Consultas con productos
-        case 'ProductoPorCodProd':
-            //Datos de producto por COD_PROD
-            
-            break;
+                case 'ListadoProductos':
+                    $stmt = $pdo->query("SELECT * FROM PRODUCTO ORDER BY COD_PROD");
+                    $resultado = $stmt->fetchAll();
+                    break;
 
-        case 'ListadoProductos':
-            //Listado de todos los productos ordenados por codigo de producto
-           
-            break;
+                case 'ProductosPvpMenorOIgual100':
+                    $stmt = $pdo->query("SELECT * FROM PRODUCTO WHERE PVP <= 100 ORDER BY COD_PROD");
+                    $resultado = $stmt->fetchAll();
+                    break;
 
-        case 'ProductosPvpMenorOIgual100':
-            //Datos de productos con precio menor a 100 ordenados por codigo de producto
-            
-            break;
+                case 'ProductosPVPMayorPromedio':
+                    $stmt = $pdo->query("SELECT * FROM PRODUCTO WHERE PVP > (SELECT AVG(PVP) FROM PRODUCTO) ORDER BY COD_PROD");
+                    $resultado = $stmt->fetchAll();
+                    break;
 
-        case 'ProductosPVPMayorPromedio':
-            //Productos con precio mayor al promedio ordenados por codigo de producto
-            
-            break;
+                case 'ListadoCompras':
+                    $stmt = $pdo->query("
+                        SELECT C.DNI, C.NOMBRE AS CLIENTE, C.APELLIDOS, 
+                               P.COD_PROD, P.NOMBRE AS PRODUCTO, PR.NOMBRE AS PROVEEDOR,
+                               CO.FECHA, CO.UDES
+                        FROM COMPRA CO
+                        JOIN CLIENTE C ON CO.CLIENTE = C.DNI
+                        JOIN PRODUCTO P ON CO.PRODUCTO = P.COD_PROD
+                        JOIN PROVEEDOR PR ON P.PROVEEDOR = PR.NIF
+                        ORDER BY C.DNI, P.COD_PROD
+                    ");
+                    $resultado = $stmt->fetchAll();
+                    break;
 
-        case 'PvpMaximoProductos':
-            //PVP máximo de los productos
-           
-            break;
+                case 'ComprasDeAnyo':
+                    $stmt = $pdo->prepare("SELECT * FROM COMPRA WHERE YEAR(FECHA) = ? ORDER BY FECHA");
+                    $stmt->execute([$parametro]);
+                    $resultado = $stmt->fetchAll();
+                    break;
 
-        case 'PvpMinimoProductos':
-            //PVP mínimo de los productos
-          
-            break;
+                case 'ComprasDeCliente':
+                    $stmt = $pdo->prepare("SELECT * FROM COMPRA WHERE CLIENTE = ? ORDER BY CLIENTE");
+                    $stmt->execute([$parametro]);
+                    $resultado = $stmt->fetchAll();
+                    break;
 
-        case 'PvpPromedioProductos':
-            //PVP promedio de los productos
-           
-            break;
+                case 'ComprasDeProducto':
+                    $stmt = $pdo->prepare("SELECT * FROM COMPRA WHERE PRODUCTO = ? ORDER BY PRODUCTO");
+                    $stmt->execute([$parametro]);
+                    $resultado = $stmt->fetchAll();
+                    break;
 
-        case "ProductosNombreContieneTexto":
-            //Productos cuyo nombre contiene un texto dado ordenados por codigo de producto
-           
-            break;
+                case 'ComprasDeProveedor':
+                    $stmt = $pdo->prepare("
+                        SELECT CO.* FROM COMPRA CO 
+                        JOIN PRODUCTO P ON CO.PRODUCTO = P.COD_PROD 
+                        WHERE P.PROVEEDOR = ? ORDER BY P.PROVEEDOR
+                    ");
+                    $stmt->execute([$parametro]);
+                    $resultado = $stmt->fetchAll();
+                    break;
 
-        //consultas con compras
-        case 'ListadoCompras':
-            //Listado de todas las compras mostrando nombre y apellidos de cliente, código y nombre de producto, nombre de proveedor, fecha y unidades ordenados por dni de cliente y código de producto
-            
-            break;
+                case 'ComprasConIgualOMasDe2Unidades':
+                    $stmt = $pdo->query("SELECT * FROM COMPRA WHERE UDES >= 2 ORDER BY CLIENTE");
+                    $resultado = $stmt->fetchAll();
+                    break;
 
-        case 'ComprasDeAnyo':
-            //Datos de compras a partir de un año dado ordenados por fecha
-            
-            break;
+                default:
+                    $resultado = ['error' => 'Consulta no válida'];
+                    break;
+            }
 
-        case 'ComprasDeCliente':
-            //Datos de compras de un cliente dado ordenados por dni de cliente
-            
-            break;
-
-        case 'ComprasDeProducto':
-            //Datos de compras de un producto dado ordenados por código de producto
-            
-            break;
-
-        case 'ComprasDeProveedor':
-            //Datos de compras de un proveedor dado ordenados por nif de proveedor
-           
-            break;
-
-        case 'ComprasDePoblacion':
-            //Datos de compras de una población dada ordenados por población
-            
-            break;
-
-        case 'ComprasDeClientesValencia':
-            //Datos de compras con algún cliente de la población de Valencia ordenados por dni de cliente   
-           
-            break;
-
-        case 'ComprasConIgualOMasDe2Unidades':
-            //Datos de compras con igual o más de 2 unidades ordenados por dni de cliente
-           
-            break;
-
-        case 'ComprasConMasDe3productos':
-            //Datos de compras con más de 3 productos ordenados por dni de cliente
-          
-            break;
-
-        case 'ComprasMinimo10Unidades':
-            //Datos de compras con un mínimo de 10 unidades ordenados por dni de cliente
-            
-            break;
-
-        default:
-            break;
+            echo json_encode($resultado, JSON_PRETTY_PRINT);
+        }
     }
-
-    // Ejecuta la consulta si está definida
-    if (isset($consulta)) {
-        //ejecutamos la consulta con los parámetros (si los hay) y obtenemos un vector asociativo
-
-    }
-
-    // Cierra la conexión (iguala a null)
-    
-
-    // Devuelve los resultados como JSON si hay resultados
-    
 }
+
+// Ejecutar la consulta automáticamente si se accede al script
+Consultas::ejecutarConsulta();
 ?>
 
-<html>
+
+<!DOCTYPE html>
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -247,69 +193,83 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <option value="ComprasConMasDe3productos">Compras con más de 3 productos</option>
             <option value="ComprasMinimo10Unidades">Compras con un mínimo de 10 unidades</option>
         </select>
-        </select>
-        <label for="dni">dni:</label>
-        <select name="dni" id="dni">
-            <?php
-            // Conecta a la base de datos (ajusta los detalles de la conexión según tu configuración)
-            
-
-            // Obtiene los dnis de la base de datos
-            
-            // Muestra los dnis en un select
-            foreach ($dnis as $dni) {
-                echo "<option value='{$dni['dni']}'>{$dni['dni']}</option>";
-            }
-            ?>
-        </select>
-        <label for="poblacion">población:</label>
-        <select name="poblacion" id="poblacion">
-            <?php
-            // Conecta a la base de datos (ajusta los detalles de la conexión según tu configuración)
-            
-
-            // Obtiene los dnis de la base de datos
-           
-
-            // Muestra los dnis en un select
-            foreach ($poblaciones as $poblacion) {
-                echo "<option value='{$poblacion['poblacion']}'>{$poblacion['poblacion']}</option>";
-            }
-            ?>
-        </select>
-        <label for="proveedor">proveedor:</label>
-        <select name="proveedor" id="proveedor">
-            <?php
-            // Conecta a la base de datos (ajusta los detalles de la conexión según tu configuración)
-            
-
-            // Obtiene los proveedores de la base de datos
-            
-            // Muestra los proveedors en un select
-            foreach ($proveedores as $proveedor) {
-                echo "<option value='{$proveedor['nif']}'>{$proveedor['nif']}</option>";
-            }
-            ?>
-        </select>
-        <label for="producto">producto:</label>
-        <select name="producto" id="producto">
-            <?php
-            // Conecta a la base de datos (ajusta los detalles de la conexión según tu configuración)
-            
-
-            // Obtiene los productos de la base de datos
-            
-            // Muestra los productos en un select
-            foreach ($productos as $producto) {
-                echo "<option value='{$producto['cod_prod']}'>{$producto['cod_prod']}</option>";
-            }
-            ?>
-        </select>
+        
         <label for="parametro">Parámetro de consulta:</label>
         <input type="text" name="parametro" id="parametro">
         <br>
         <input type="submit" value="Consultar">
+    </form>
+
+
+<?php
+// Conectar a la base de datos
+$pdo = Consultas::connectDB2();
+
+// Obtener DNIs de clientes
+$stmt = $pdo->query("SELECT DNI FROM CLIENTE ORDER BY DNI");
+$dnis = $stmt->fetchAll();
+
+// Obtener poblaciones de clientes
+$stmt = $pdo->query("SELECT DISTINCT POBLACION FROM CLIENTE ORDER BY POBLACION");
+$poblaciones = $stmt->fetchAll();
+
+// Obtener NIFs de proveedores
+$stmt = $pdo->query("SELECT NIF FROM PROVEEDOR ORDER BY NIF");
+$proveedores = $stmt->fetchAll();
+
+// Obtener códigos de productos
+$stmt = $pdo->query("SELECT COD_PROD FROM PRODUCTO ORDER BY COD_PROD");
+$productos = $stmt->fetchAll();
+?>
+
+<form action="consultas.php" method="post">
+    <label for="dni">DNI:</label>
+    <select name="dni" id="dni">
+        <?php
+        // Muestra los DNIs en un select
+        foreach ($dnis as $dni) {
+            echo "<option value='{$dni['DNI']}'>{$dni['DNI']}</option>";
+        }
+        ?>
+    </select>
+
+    <label for="poblacion">Población:</label>
+    <select name="poblacion" id="poblacion">
+        <?php
+        // Muestra las poblaciones en un select
+        foreach ($poblaciones as $poblacion) {
+            echo "<option value='{$poblacion['POBLACION']}'>{$poblacion['POBLACION']}</option>";
+        }
+        ?>
+    </select>
+
+    <label for="proveedor">Proveedor:</label>
+    <select name="proveedor" id="proveedor">
+        <?php
+        // Muestra los NIFs de proveedores en un select
+        foreach ($proveedores as $proveedor) {
+            echo "<option value='{$proveedor['NIF']}'>{$proveedor['NIF']}</option>";
+        }
+        ?>
+    </select>
+
+    <label for="producto">Producto:</label>
+    <select name="producto" id="producto">
+        <?php
+        // Muestra los códigos de productos en un select
+        foreach ($productos as $producto) {
+            echo "<option value='{$producto['COD_PROD']}'>{$producto['COD_PROD']}</option>";
+        }
+        ?>
+    </select>
+
+    <label for="parametro">Parámetro de consulta:</label>
+    <input type="text" name="parametro" id="parametro">
+    <br>
+    <input type="submit" value="Consultar">
+</form>
 
 </body>
+
 
 </html>
