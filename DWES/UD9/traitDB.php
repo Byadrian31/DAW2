@@ -18,6 +18,21 @@ trait traitDB
         return $conn;
     }
 
+    public static function connectDB2()
+    {
+        try {
+            $dsn = "mysql:host=127.0.0.1;port=33006;dbname=EMPRESA;charset=utf8";
+            $conn = new PDO($dsn, MYSQL_ROOT, MYSQL_ROOT_PASSWORD, [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            ]);
+         } catch (PDOException $e) {
+            die("Conexión fallida: " . $e->getMessage());
+        }
+        //devuelve la conexion creada
+        return $conn;
+    }
+
     public function execDB($sql)
     {
         $conn = self::connectDB();
