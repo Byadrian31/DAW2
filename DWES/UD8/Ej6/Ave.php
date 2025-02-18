@@ -30,7 +30,8 @@ abstract class Ave extends Animal {
      * @return string Mensaje con el número total de aves.
      */
     public static function getTotalAves() {
-        return "Hay un total de " . self::$totalAves . " aves<br>";
+        return "Hay un total de " . self::$totalAves . " aves<br>
+";
     }
 
     /**
@@ -39,9 +40,11 @@ abstract class Ave extends Animal {
      */
     public function ponerHuevo() {
         if ($this->sexo === "H") {
-            echo get_called_class() . " {$this->nombre}: He puesto un huevo!<br>";
+            echo get_called_class() . " {$this->nombre}: He puesto un huevo!<br>
+";
         } else {
-            echo get_called_class() . " {$this->nombre}: Soy macho, no puedo poner huevos<br>";
+            echo get_called_class() . " {$this->nombre}: Soy macho, no puedo poner huevos<br>
+";
         }
     }
 

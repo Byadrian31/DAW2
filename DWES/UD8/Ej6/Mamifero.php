@@ -30,7 +30,8 @@ abstract class Mamifero extends Animal {
      * @return string Mensaje con el número total de mamíferos.
      */
     public static function getTotalMamiferos() {
-        return "Hay un total de " . self::$totalMamiferos . " mamíferos<br>";
+        return "Hay un total de " . self::$totalMamiferos . " mamíferos<br>
+";
     }
 
     /**
@@ -39,9 +40,11 @@ abstract class Mamifero extends Animal {
      */
     public function amamantar() {
         if ($this->sexo === "H") {
-            echo get_called_class() . " {$this->nombre}: Amamantando a mis crías<br>";
+            echo get_called_class() . " {$this->nombre}: Amamantando a mis crías<br>
+";
         } else {
-            echo get_called_class() . " {$this->nombre}: Soy macho, no puedo amamantar<br>";
+            echo get_called_class() . " {$this->nombre}: Soy macho, no puedo amamantar<br>
+";
         }
     }
 

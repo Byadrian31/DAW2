@@ -36,14 +36,16 @@ abstract class Animal {
      * @return string Mensaje con el número total de animales.
      */
     public static function getTotalAnimales() {
-        return "Hay un total de " . self::$totalAnimales . " animales<br>";
+        return "Hay un total de " . self::$totalAnimales . " animales<br>
+";
     }
 
     /**
      * Método para simular que el animal se duerme.
      */
     public function dormirse() {
-        echo "{$this->getAnimalDescripcion()}: Zzzzzzz<br>";
+        echo "{$this->getAnimalDescripcion()}: Zzzzzzz<br>
+";
     }
 
     /**
@@ -56,8 +58,36 @@ abstract class Animal {
      * Reduce el contador total de animales.
      */
     public function morirse() {
-        echo "{$this->getAnimalDescripcion()}: Adiós!<br>";
+        echo "{$this->getAnimalDescripcion()}: Adiós!<br>
+";
         self::$totalAnimales--;
+    }
+
+
+    /**
+     * Metodos getters y setters
+     * 
+     */
+
+    public function getSexo() {
+        return $this->sexo;
+    }
+
+    /**
+     * Establece un nuevo sexo para el animal.
+     * 
+    */
+    public function setSexo($sexo) {
+        $this->sexo = $sexo;
+    }
+
+    /**
+     * Devuelve el nombre del animal.
+     * 
+     * @return string Nombre del animal.
+     */
+    public function getNombre() {
+        return $this->nombre;
     }
 
     /**
@@ -90,8 +120,8 @@ abstract class Animal {
      * @param string $nombre Nombre del animal.
      * @return static Instancia de la clase hija correspondiente.
      */
-    public static function consFull($sexo, $nombre) {
-        return new static($sexo, $nombre);
+    public static function consFull($sexo, $nombre,$raza=null) {
+        return new static($sexo, $nombre,$raza);
     }
 
     /**
@@ -127,6 +157,7 @@ abstract class Animal {
         $categoria = $this instanceof Ave ? "un Ave" : ($this instanceof Mamifero ? "un Mamífero" : "");
         
         return "Soy un Animal" . ($categoria ? ", $categoria" : "") . ", en concreto un " . get_called_class() . ", con sexo $sexoStr" .
-               ($this->nombre ? ", llamado $this->nombre" : "") . "<br>";
+               ($this->nombre ? ", llamado $this->nombre" : "") . "<br>
+";
     }
 }

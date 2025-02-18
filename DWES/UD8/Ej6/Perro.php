@@ -19,8 +19,19 @@ class Perro extends Mamifero {
      * @param string $nombre Nombre opcional del perro.
      * @param string $raza Raza del perro, por defecto "Desconocida".
      */
-    public function __construct($sexo = "M", $nombre = "", $raza = "Desconocida") {
+    public function __construct($sexo = "M", $nombre = "", $raza = "teckel") {
         parent::__construct($sexo, $nombre);
+        $this->raza = $raza;
+    }
+
+    /**
+     * Métodos Getters y Setters
+     */
+    public function getRaza() {
+        return $this->raza;
+    }
+
+    public function setRaza($raza) {
         $this->raza = $raza;
     }
 
@@ -29,14 +40,16 @@ class Perro extends Mamifero {
      * Simula que el perro se alimenta.
      */
     public function alimentarse() {
-        echo "Perro {$this->nombre}: Estoy comiendo carne<br>";
+        echo "Perro {$this->getNombre()}: Estoy comiendo carne<br>
+";
     }
 
     /**
      * Método para simular el ladrido del perro.
      */
     public function ladra() {
-        echo "Perro {$this->nombre}: Guau guau<br>";
+        echo "Perro {$this->getNombre()}: Guau guau<br>
+";
     }
 
     /**
@@ -46,7 +59,19 @@ class Perro extends Mamifero {
      * @return string Información sobre el perro.
      */
     public function __toString() {
+        // Llamamos al método padre para obtener la descripción base
         $descripcion = parent::__toString();
-        return str_replace("<br>", ", raza {$this->raza}" . ($this->nombre ? " y mi nombre es {$this->nombre}" : " y no tengo nombre") . "<br>", $descripcion);
+        $descripcion = preg_replace('/<br>\s*$/', '', $descripcion);
+
+        if (strpos($descripcion, "llamado " . $this->getNombre()) !== false) {
+            $nombrePattern = "/, llamado " . preg_quote($this->getNombre(), '/') . "/";
+            $descripcion = preg_replace($nombrePattern, '', $descripcion);
+            // Retornamos la descripción con la raza y el nombre correctamente formateados
+            return $descripcion . ", raza {$this->getRaza()} y mi nombre es {$this->getNombre()}<br>\n";
+        }else {
+            return $descripcion . ", raza {$this->getRaza()} y no tengo nombre<br>\n";
+        }
     }
+    
+    
 }

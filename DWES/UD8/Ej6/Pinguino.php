@@ -13,20 +13,15 @@ class Pinguino extends Ave {
      * Simula que el pingüino se alimenta de peces.
      */
     public function alimentarse() {
-        echo "Pingüino {$this->nombre}: Estoy comiendo peces<br>";
-    }
-
-    /**
-     * Método para simular el sonido del pingüino.
-     */
-    public function pia() {
-        echo "Pingüino {$this->nombre}: Soy un pingüino programando en PHP<br>";
+        echo "Pingüino {$this->getNombre()}: Estoy comiendo peces<br>
+";
     }
 
     /**
      * Método para simular que el pingüino programa en PHP.
      */
     public function programar() {
-        echo "Pingüino {$this->nombre}: Estoy programando en PHP 🐧<br>";
+        echo "Pingüino {$this->getNombre()}: Estoy programando en PHP 🐧<br>
+";
     }
 }
