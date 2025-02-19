@@ -1,7 +1,7 @@
 <?php
 /**
  * Clase Incidencia para gestionar incidencias en la BD INCIDENCIAS
- * Autor: Silvia Vilar
+ * @author Adrián López Pascual
  */
 include_once "../traitDB.php";
 
