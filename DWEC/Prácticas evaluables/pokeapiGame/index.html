@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -5,28 +6,36 @@
     <title>Pokemon Battle</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 </head>
 
 <body>
     <div id="app">
+        <!-- Agrega esto justo después del <div id="app"> en index.html -->
+        <div v-if="!audioEnabled" class="audio-start">
+            <button @click="enableAudio" class="start-button">
+                🎵 Iniciar Juego con Música
+            </button>
+        </div>
+        <!-- Menú de selección de modo de juego -->
         <div v-if="!gameModeSelected" class="game-mode-selection">
             <h2>Selecciona el modo de juego</h2>
-            <button @click="selectGameMode('IA')">Contra IA</button>
+            <button @click="selectGameMode('IA')">Jugador vs IA</button>
             <button @click="selectGameMode('J2')">Jugador vs Jugador</button>
         </div>
 
-        <!-- Menú de selección de personajes en línea -->
+        <!-- Menú de selección de personajes -->
         <div v-if="gameModeSelected && !charactersSelected" class="character-selection">
             <h2>Elige tu entrenador y tu rival</h2>
             <div class="character-container">
                 <div class="character-box">
-                    <h3>Tu entrenador</h3>
+                    <h3>Jugador 1</h3>
                     <button @click="prevCharacter('player')">&#60;</button>
                     <img :src="'img/' + characters[playerCharacter]" :alt="characters[playerCharacter]">
                     <button @click="nextCharacter('player')">&#62;</button>
                 </div>
                 <div class="character-box">
-                    <h3>Tu rival</h3>
+                    <h3>Jugador 2</h3>
                     <button @click="prevCharacter('rival')">&#60;</button>
                     <img :src="'img/' + characters[rivalCharacter]" :alt="characters[rivalCharacter]">
                     <button @click="nextCharacter('rival')">&#62;</button>
@@ -39,20 +48,19 @@
         <!-- Modal de selección de Pokémon -->
         <div v-if="showPokemonModal" class="modal-container">
             <div class="modal modal-large">
-                <h2 v-if="selectedPokemonsPlayer.length < 6">Selecciona 6 Pokémon</h2>
-                <h2 v-if="selectedPokemonsPlayer.length === 6">Equipo seleccionado</h2>
+                <h2>{{ modalTitle }}</h2>
                 <div class="start-battle">
                     <button @click="fillRandomTeam">Seleccionar equipo aleatorio</button>
                 </div>
                 <div class="selected-team">
-                    <div v-for="(pokemon, index) in selectedPokemonsPlayer" :key="index" class="carta"
+                    <div v-for="(pokemon, index) in currentPlayerTeam" :key="index" class="carta"
                         @click="removePokemon(index)">
                         <img :src="pokemon.sprite" :alt="pokemon.name">
                         <div>{{ pokemon.name }}</div>
                     </div>
                 </div>
 
-                <div class="filters" v-if="selectedPokemonsPlayer.length < 6">
+                <div class="filters" v-if="currentPlayerTeam.length < 6">
                     <input type="text" v-model="searchQuery" class="pokemon-input" placeholder="Buscar Pokémon...">
                     <select v-model="selectedType" class="pokemon-dropdown">
                         <option value="">Todos los tipos</option>
@@ -76,9 +84,9 @@
                     </select>
                 </div>
 
-                <div class="pokemon-grid" v-if="selectedPokemonsPlayer.length < 6">
+                <div class="pokemon-grid" v-if="currentPlayerTeam.length < 6">
                     <div v-for="pokemon in filteredPokemons" :key="pokemon.id" class="carta"
-                        :class="{ 'seleccionada': selectedPokemonsPlayer.includes(pokemon) }"
+                        :class="{ 'seleccionada': currentPlayerTeam.includes(pokemon) }"
                         @click="selectPokemon(pokemon)">
                         <img :src="pokemon.sprite" :alt="pokemon.name">
                         <div>{{ pokemon.name }}</div>
@@ -86,8 +94,9 @@
                 </div>
 
                 <div class="start-battle">
-                    <button v-if="selectedPokemonsPlayer.length === 6" @click="startBattle()" class="Button">¡A
-                        LUCHAR!</button>
+                    <button v-if="currentPlayerTeam.length === 6" @click="confirmTeamSelection()" class="Button">
+                        {{ currentPlayer === 1 ? 'Confirmar equipo Jugador 1' : '¡A LUCHAR!' }}
+                    </button>
                 </div>
             </div>
         </div>
@@ -102,7 +111,11 @@
         <!-- Campo de batalla -->
         <div v-if="battlefieldShown" class="battlefield">
             <div class="player-team">
-                <div v-for="pokemon in selectedPokemonsPlayer" :key="pokemon.id" class="pokemon-entry">
+                <div v-for="(pokemon, index) in selectedPokemonsPlayer1" 
+                :key="pokemon.id" 
+                class="pokemon-entry"
+                :class="{ disabled: pokemon.hp <= 0 }"
+                 @click="selectBattlePokemon(1, index)">
                     <img :src="pokemon.sprite" :alt="pokemon.name">
                     <div class="health-bar" :class="getHealthClass(pokemon)"
                         :style="{ width: getHealthPercentage(pokemon) + '%' }"></div>
@@ -111,65 +124,75 @@
 
             <div class="battle-zone">
                 <div class="pokemon-battle">
-                    <!-- Carta del Pokémon Jugador -->
-                    <div class="fight-card" :class="currentPokemonPlayer ? currentPokemonPlayer.types[0] : ''">
-                        <div class="hp-display">
-                            {{ currentPokemonPlayer.hp }} / {{ currentPokemonPlayer.maxHp }}
+                    <!-- Carta del Pokémon Jugador 1 -->
+                    <div class="fight-card" :class="currentPokemonPlayer1 ? currentPokemonPlayer1.types[0] : ''">
+                        <div class="hp-display" v-if="currentPokemonPlayer1">
+                            {{ currentPokemonPlayer1.hp }} / {{ currentPokemonPlayer1.maxHp }}
                         </div>
-                        <img v-if="currentPokemonPlayer" :src="currentPokemonPlayer.sprite"
-                            :alt="currentPokemonPlayer.name">
-                        <p class="stats" v-if="currentPokemonPlayer">ATK: {{ currentPokemonPlayer.attack }} | DEF: {{
-                            currentPokemonPlayer.defense }}</p>
-
-                        <!-- BOTONES DE MOVIMIENTOS -->
-                        <div class="attack-buttons" v-if="currentPokemonPlayer && currentPokemonPlayer.moves && currentPokemonPlayer.moves.length > 0">
-                            <button v-for="(move, index) in currentPokemonPlayer.moves" :key="index"
-                                @click="attack(move)" :disabled="!isPlayerTurn">
+                        <img v-if="currentPokemonPlayer1" :src="currentPokemonPlayer1.sprite"
+                            :alt="currentPokemonPlayer1.name">
+                        <p class="stats" v-if="currentPokemonPlayer1">
+                            ATK: {{ currentPokemonPlayer1.attack }} | DEF: {{ currentPokemonPlayer1.defense }}
+                        </p>
+                        <div class="attack-buttons" v-if="currentPokemonPlayer1 && activePlayer === 1">
+                            <button v-for="(move, index) in currentPokemonPlayer1.moves" 
+                                    :key="index"
+                                    @click="attack(move)"
+                                    :disabled="activePlayer !== 1">
                                 {{ move.name }} <br> ({{ move.power }})
                             </button>
-
                         </div>
                     </div>
-
+            
                     <h1 class="vs-fight">VS</h1>
-
-                    <!-- Carta del Pokémon Rival -->
-                    <div class="fight-card" :class="currentPokemonRival ? currentPokemonRival.types[0] : ''">
-                        <div class="hp-display">
-                            {{ currentPokemonRival.hp }} / {{ currentPokemonRival.maxHp }}
+            
+                    <!-- Carta del Pokémon Jugador 2 -->
+                    <div class="fight-card" :class="currentPokemonPlayer2 ? currentPokemonPlayer2.types[0] : ''">
+                        <div class="hp-display" v-if="currentPokemonPlayer2">
+                            {{ currentPokemonPlayer2.hp }} / {{ currentPokemonPlayer2.maxHp }}
                         </div>
-                        <img v-if="currentPokemonRival" :src="currentPokemonRival.sprite"
-                            :alt="currentPokemonRival.name">
-                        <p class="stats" v-if="currentPokemonRival">ATK: {{ currentPokemonRival.attack }} | DEF: {{
-                            currentPokemonRival.defense }}</p>
-
-                        <!-- BOTONES DE MOVIMIENTOS DEL RIVAL (DESHABILITADOS) -->
-                        <div class="attack-buttons">
-                            <button v-for="(move, index) in currentPokemonRival.moves" :key="index" disabled>
+                        <img v-if="currentPokemonPlayer2" :src="currentPokemonPlayer2.sprite"
+                            :alt="currentPokemonPlayer2.name">
+                        <p class="stats" v-if="currentPokemonPlayer2">
+                            ATK: {{ currentPokemonPlayer2.attack }} | DEF: {{ currentPokemonPlayer2.defense }}
+                        </p>
+                        <div class="attack-buttons" v-if="currentPokemonPlayer2 && activePlayer === 2 && !isAI">
+                            <button v-for="(move, index) in currentPokemonPlayer2.moves" 
+                                    :key="index"
+                                    @click="attack(move)"
+                                    :disabled="activePlayer !== 2">
                                 {{ move.name }} <br> ({{ move.power }})
                             </button>
-
-
                         </div>
                     </div>
                 </div>
+
                 <div class="battle-log">
                     <p>{{ battleLog }}</p>
                 </div>
-                <!-- BOTÓN PARA REINICIAR EL JUEGO -->
+
                 <div v-if="gameOver" class="restart-container">
                     <button @click="restartGame()" class="restart-button">Volver a jugar</button>
                 </div>
             </div>
 
             <div class="rival-team">
-                <div v-for="pokemon in selectedPokemonsRival" :key="pokemon.id" class="pokemon-entry">
+                <div v-for="(pokemon, index) in selectedPokemonsPlayer2" 
+                     :key="pokemon.id" 
+                     class="pokemon-entry"
+                     :class="{ 'disabled': pokemon.hp <= 0 }"
+                     @click="gameMode !== 'IA' && selectBattlePokemon(2, index)">
                     <img :src="pokemon.sprite" :alt="pokemon.name">
-                    <div class="health-bar" :class="getHealthClass(pokemon)"
-                        :style="{ width: getHealthPercentage(pokemon) + '%' }"></div>
+                    <div class="health-bar" 
+                         :class="getHealthClass(pokemon)"
+                         :style="{ width: getHealthPercentage(pokemon) }">
+                    </div>
                 </div>
             </div>
         </div>
+        <audio id="Inicio" src="audio/Inicio.mp3" loop></audio>
+        <audio id="Combate" src="audio/Combate.mp3" loop></audio>
+        <audio id="Victoria" src="audio/Victoria.mp3" loop></audio>
     </div>
     <script src="js/scripts.js"></script>
 </body>

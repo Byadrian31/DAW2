@@ -12,9 +12,41 @@ html, body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    background-image: url("../img/fondo1.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
+
 /************ MENÚ DE SELECCIÓN DE VS *************/
+.audio-start {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+}
+
+.start-button {
+    padding: 20px 40px;
+    font-size: 1.5em;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.start-button:hover {
+    background-color: #45a049;
+}
+
 .game-mode-selection {
     display: flex;
     flex-direction: column;
@@ -225,6 +257,7 @@ html, body {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    
 }
 
 .start-battle button {
@@ -245,61 +278,61 @@ html, body {
 /************ CAMPO DE BATALLA *************/
 .battlefield {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 120px 1fr 120px;  /* Ancho fijo para los equipos */
     align-items: center;
-    justify-content: center;
-    max-width: 100vw;
+    justify-content: space-between;
+    width: 96vw;
     height: 100vh;
-    width: 100vw;
-    background-color: #f4f4f4;
+    background-image: url("../img/fondo2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     padding: 20px;
-    overflow: hidden;
+    gap: 20px;  /* Espacio uniforme entre elementos */
 }
 
 /************ LISTA DE EQUIPOS *************/
-.player-team {
+.player-team, .rival-team {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    width: 120px;
+    height: 85vh;
     padding: 10px;
-    background-color: rgba(255, 255, 255, 0.6);
-    border-radius: 10px;
-    width: 120px;
-    height: 85vh;
-
-}
-
-.rival-team {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.6);
-    border-radius: 10px;
-    width: 120px;
-    height: 85vh;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10; /* Asegura que los Pokémon estén encima */
-}
-
-.rival-team {
-    position: absolute;
-    right: 10px;
+    margin: 0 20px;  /* Margen uniforme */
 }
 
 .player-team {
-    margin-left: 20px;
+    justify-self: start;  /* Alinea a la izquierda */
+}
+
+.rival-team {
+    justify-self: end;    /* Alinea a la derecha */
 }
 
 /************ CARTAS DE POKÉMON *************/
+.pokemon-entry {
+    cursor: pointer;
+    transition: transform 0.2s;
+    position: relative;
+}
+
+.pokemon-entry:hover {
+    transform: scale(1.1);
+}
+
+.pokemon-entry.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 .pokemon-entry img {
     width: 80px;
-    height: auto;
-    margin-bottom: 5px;
+    height: 80px;
+    object-fit: contain;  /* Mantiene la proporción de la imagen */
 }
 
 /************ CARTA DE POKÉMON COMBATIENTE *************/
@@ -373,28 +406,6 @@ html, body {
 
 
 /************ BARRA DE VIDA *************/
-.health-bar {
-    width: 80px;
-    height: 10px;
-    border-radius: 5px;
-    margin-top: 5px;
-    border: 1px solid black;
-    transition: width 0.5s ease-in-out;
-}
-
-
-.health-bar.green {
-    background-color: green;
-}
-
-.health-bar.orange {
-    background-color: orange;
-}
-
-.health-bar.red {
-    background-color: red;
-}
-
 .hp-info {
     position: absolute;
     bottom: 45px;
@@ -419,30 +430,45 @@ html, body {
 /************ ZONA DE BATALLA *************/
 .battle-zone {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    position: relative;
     width: 100%;
-    height: 90vh;
+    height: 85vh;
+    padding: 20px;
+
 }
 
 .pokemon-battle {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     width: 100%;
-    gap: 60px; /* Más separación entre cartas */
+    gap: 60px;
+    margin-bottom: 30px;  /* Espacio para el log de batalla */
 }
 
 .pokemon-battle .fight-card:first-child {
     margin-right: 160px;
 }
 
+.pokemon-selection-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
 
 /************ TEXTO DE ATAQUES *************/
 .battle-log {
     text-align: center;
+    font-size: 18px;
     background-color: white;
     padding: 15px;
     margin-top: 20px;
@@ -534,7 +560,9 @@ html, body {
 }
 
 .vs-fight {
-    left: 42%;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-left: 40px;
+    margin-top: 20px;
 }
 
 .vs-text {
@@ -578,4 +606,9 @@ html, body {
         transform: translateX(100%);
         opacity: 1;
     }
+}
+
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
