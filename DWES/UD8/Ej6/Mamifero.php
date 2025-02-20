@@ -39,11 +39,11 @@ abstract class Mamifero extends Animal {
      * Solo las hembras pueden amamantar a sus crías.
      */
     public function amamantar() {
-        if ($this->sexo === "H") {
-            echo get_called_class() . " {$this->nombre}: Amamantando a mis crías<br>
+        if ($this->getSexo() === "H") {
+            echo get_called_class() . " {$this->getNombre()}: Amamantando a mis crías<br>
 ";
         } else {
-            echo get_called_class() . " {$this->nombre}: Soy macho, no puedo amamantar<br>
+            echo get_called_class() . " {$this->getNombre()}: Soy macho, no puedo amamantar<br>
 ";
         }
     }

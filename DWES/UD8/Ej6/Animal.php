@@ -141,8 +141,8 @@ abstract class Animal {
      * @return string Nombre de la clase (tipo de animal) y su nombre si lo tiene.
      */
     protected function getAnimalDescripcion() {
-        $sexoStr = ($this->sexo === "H") ? "HEMBRA" : "MACHO";
-        return get_called_class() . " " . ($this->nombre ?: "");
+        $sexoStr = ($this->getSexo() === "H") ? "HEMBRA" : "MACHO";
+        return get_called_class() . " " . ($this->getNombre() ?: "");
     }
 
     /**
@@ -151,13 +151,13 @@ abstract class Animal {
      * @return string Información sobre el animal (tipo, sexo y nombre).
      */
     public function __toString() {
-        $sexoStr = ($this->sexo === "H") ? "HEMBRA" : "MACHO";
+        $sexoStr = ($this->getsexo() === "H") ? "HEMBRA" : "MACHO";
         
         // Determina si el animal es un Ave o un Mamífero.
         $categoria = $this instanceof Ave ? "un Ave" : ($this instanceof Mamifero ? "un Mamífero" : "");
         
         return "Soy un Animal" . ($categoria ? ", $categoria" : "") . ", en concreto un " . get_called_class() . ", con sexo $sexoStr" .
-               ($this->nombre ? ", llamado $this->nombre" : "") . "<br>
+               ($this->getNombre() ? ", llamado " . $this->getNombre() : "") . "<br>
 ";
     }
 }

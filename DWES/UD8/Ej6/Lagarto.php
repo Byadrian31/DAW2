@@ -13,7 +13,7 @@ class Lagarto extends Animal {
      * Simula que el lagarto se alimenta de insectos.
      */
     public function alimentarse() {
-        echo "Lagarto {$this->nombre}: Estoy comiendo insectos<br>
+        echo "Lagarto {$this->getNombre()}: Estoy comiendo insectos<br>
 ";
     }
 
@@ -21,7 +21,7 @@ class Lagarto extends Animal {
      * Método para simular que el lagarto toma el sol.
      */
     public function tomarSol() {
-        echo "Lagarto {$this->nombre}: Estoy tomando el sol<br>
+        echo "Lagarto {$this->getNombre()}: Estoy tomando el sol<br>
 ";
     }
 }

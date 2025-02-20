@@ -39,11 +39,11 @@ abstract class Ave extends Animal {
      * Solo las hembras pueden poner huevos.
      */
     public function ponerHuevo() {
-        if ($this->sexo === "H") {
-            echo get_called_class() . " {$this->nombre}: He puesto un huevo!<br>
+        if ($this->getSexo() === "H") {
+            echo get_called_class() . " {$this->getNombre()}: He puesto un huevo!<br>
 ";
         } else {
-            echo get_called_class() . " {$this->nombre}: Soy macho, no puedo poner huevos<br>
+            echo get_called_class() . " {$this->getNombre()}: Soy macho, no puedo poner huevos<br>
 ";
         }
     }
