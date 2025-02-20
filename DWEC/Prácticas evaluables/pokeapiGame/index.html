@@ -156,7 +156,7 @@
                         <p class="stats" v-if="currentPokemonPlayer2">
                             ATK: {{ currentPokemonPlayer2.attack }} | DEF: {{ currentPokemonPlayer2.defense }}
                         </p>
-                        <div class="attack-buttons" v-if="currentPokemonPlayer2 && activePlayer === 2 && !isAI">
+                        <div class="attack-buttons" v-if="currentPokemonPlayer2 && activePlayer === 2 && (gameMode === 'J2' || (gameMode === 'IA' && !isAI))">
                             <button v-for="(move, index) in currentPokemonPlayer2.moves" 
                                     :key="index"
                                     @click="attack(move)"

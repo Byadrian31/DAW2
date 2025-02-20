@@ -502,6 +502,12 @@ const app = Vue.createApp({
             this.gameOver = false;
             this.currentPlayer = 1;
             this.activePlayer = 1;
+
+            if (this.audioEnabled) {
+                this.stopAllAudio();
+                this.playAudio('inicio');
+            }
+
         }
     },
     mounted() {
