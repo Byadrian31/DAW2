@@ -14,7 +14,7 @@ Este repositorio contiene los proyectos y tareas desarrollados durante el segund
 ## Tecnologías Utilizadas
 
 - **Lenguajes de Programación**: PHP, JavaScript, HTML, CSS.
-- **Frameworks y Librerías**: Dentro de poco...
+- **Frameworks y Librerías**: REACT, Laravel
 - **Bases de Datos**: MySQL.
 - **Herramientas de Desarrollo**: Visual Studio Code, IntelliJ, Git.
 - **Aplicaciones de Despliegue**: AWS(Amazon Web Services), AwardSpace
