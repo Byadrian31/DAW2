@@ -1,4 +1,9 @@
 <?php
+/** 
+ * Fichero de consulta de la base de datos Empresa
+ * @author Adrián Lopez Pascual
+ */
+
 include_once '../db.php';
 
 // Función para obtener la conexión a la base de datos

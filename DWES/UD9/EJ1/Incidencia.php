@@ -8,7 +8,7 @@ include_once "../traitDB.php";
 class Incidencia {
     use traitDB; // Uso del trait para la conexión con la base de datos
 
-    private static $ultimoCodigo = 0;  // Contador para generar códigos únicos
+    public static $ultimoCodigo = 0;  // Contador para generar códigos únicos
     private $codigo;
     private $estado;
     private $puesto;
