@@ -1,0 +1,51 @@
+// Definimos las variables
+$primary-color: #eb9a20;
+$secondary-color: #3498db;
+$text-color: #333;
+$font-stack: Arial, sans-serif;
+$title-size: 24px;
+$text-size: 16px;
+
+// Aplicamos estilos con nesting
+.container {
+  font-family: $font-stack;
+  color: $text-color;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 2px solid $primary-color;
+
+  h1 {
+    font-size: $title-size;
+    color: $primary-color;
+    text-align: center;
+    
+    &:not(.highlight) {
+      color: $secondary-color;
+      text-align: left;
+      text-decoration: underline $secondary-color;
+    }
+  }
+
+  p {
+    font-size: $text-size;
+
+    &:nth-of-type(2) {
+      text-align: left;
+    }
+
+    &:nth-of-type(3)::first-line {
+        font-style: italic;
+    }
+
+    &:nth-of-type(4),
+    &:nth-of-type(5) {
+      text-align: right;
+    }
+
+    &:nth-of-type(4)::first-line,
+    &:nth-of-type(5)::first-line {
+      font-style: italic;
+    }
+  }
+}

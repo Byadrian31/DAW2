@@ -1,0 +1,36 @@
+.container {
+    font-family: Arial, sans-serif;
+    color: #333;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 2px solid #eb9a20;
+  }
+  .container h1 {
+    font-size: 24px;
+    color: #eb9a20;
+    text-align: center;
+  }
+  .container h1:not(.highlight) {
+    color: #3498db;
+    text-align: left;
+    text-decoration: underline #3498db;
+  }
+  .container p {
+    font-size: 16px;
+  }
+  .container p:nth-of-type(2) {
+    text-align: left;
+  }
+  .container p:nth-of-type(3)::first-line {
+    font-style: italic;
+  }
+  .container p:nth-of-type(4), .container p:nth-of-type(5) {
+    text-align: right;
+  }
+  .container p:nth-of-type(4)::first-line, .container p:nth-of-type(5)::first-line {
+    font-style: italic;
+  }
+  
+  /*# sourceMappingURL=style.css.map */
+  
