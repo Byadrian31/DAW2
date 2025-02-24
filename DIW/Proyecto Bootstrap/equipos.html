@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipos - Paiporta Basquet Club</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/equipo.css">
+</head>
+
+<body class="pattern-bg">
+    <div class="content-wrapper">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-primary sticky-top py-3">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <img src="img/logo.png" alt="Logo Paiporta BC" height="50" class="d-inline-block">
+                    <span class="ms-3 fw-bold">Paiporta BC</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item mx-2">
+                            <a class="nav-link  fs-5" href="index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link active fs-5" href="equipos.html">Equipos</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link fs-5" href="galeria.html">Galería</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link fs-5" href="noticias.html">Noticias</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link fs-5" href="conocenos.html">Conócenos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Cabecera -->
+        <div class="team-header text-center">
+            <div class="container">
+                <h1 class="display-4 fw-bold mb-4">Nuestros Equipos</h1>
+                <p class="lead">Descubre todos los equipos del Paiporta Basquet Club</p>
+            </div>
+        </div>
+
+        <!-- Contenido Principal -->
+        <div class="container my-5">
+            <!-- Navegación por pestañas -->
+            <ul class="nav nav-pills justify-content-center mb-4" id="teamsTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="seniorA-tab" data-bs-toggle="tab" data-bs-target="#seniorA"
+                        type="button">Senior A</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="seniorB-tab" data-bs-toggle="tab" data-bs-target="#seniorB"
+                        type="button">Senior B</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="junior-tab" data-bs-toggle="tab" data-bs-target="#junior"
+                        type="button">Junior</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="cadete-tab" data-bs-toggle="tab" data-bs-target="#cadete"
+                        type="button">Cadete</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="infantil-tab" data-bs-toggle="tab" data-bs-target="#infantil"
+                        type="button">Infantil</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="equipacion-tab" data-bs-toggle="tab" data-bs-target="#equipacion"
+                        type="button">Equipaciones</button>
+                </li>
+            </ul>
+
+            <!-- Contenido de las pestañas -->
+            <div class="tab-content" id="teamsTabContent">
+                <!-- Sección Senior A -->
+                <div class="tab-pane fade show active" id="seniorA" role="tabpanel">
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <div class="team-card shadow p-4">
+                                <h3 class="text-center mb-4">Senior Masculino A</h3>
+                                <img src="img/equipos/senior.JPG" class="img-fluid rounded mb-3"
+                                    alt="Equipo Senior Masculino A">
+                                <div class="mt-3">
+                                    <h5>Competición</h5>
+                                    <p>Autonómica</p>
+                                    <h5>Entrenador</h5>
+                                    <p>Aarón Garcia</p>
+                                    <h5>Horarios</h5>
+                                    <p>Miércoles y Jueves 20:30 - 22:00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="tab-pane fade" id="seniorB" role="tabpanel">
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <div class="team-card shadow p-4">
+                                <h3 class="text-center mb-4">Senior Masculino B</h3>
+                                <img src="img/equipos/SeniorB.jpg" class="img-fluid rounded mb-3"
+                                    alt="Equipo Senior Masculino B">
+                                <div class="mt-3">
+                                    <h5>Competición</h5>
+                                    <p>Primera Zonal</p>
+                                    <h5>Entrenador</h5>
+                                    <p>Federico García</p>
+                                    <h5>Horarios</h5>
+                                    <p>Miércoles y Jueves 20:30 - 22:00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección Junior -->
+                <div class="tab-pane fade" id="junior" role="tabpanel">
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <div class="team-card shadow p-4">
+                                <h3 class="text-center mb-4">Junior Masculino</h3>
+                                <img src="img/equipos/junior.JPG" class="img-fluid rounded mb-3"
+                                    alt="Equipo Junior Masculino">
+                                <div class="mt-3">
+                                    <h5>Competición</h5>
+                                    <p>Primera Zonal</p>
+                                    <h5>Entrenador</h5>
+                                    <p>Patrick Perez</p>
+                                    <h5>Horarios</h5>
+                                    <p>Martes y Jueves 20:30 - 22:00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección Cadete -->
+                <div class="tab-pane fade" id="cadete" role="tabpanel">
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <div class="team-card shadow p-4">
+                                <h3 class="text-center mb-4">Cadete Masculino</h3>
+                                <img src="img/equipos/cadete.JPG" class="img-fluid rounded mb-3"
+                                    alt="Equipo Cadete Masculino">
+                                <div class="mt-3">
+                                    <h5>Competición</h5>
+                                    <p>Primera Zonal</p>
+                                    <h5>Entrenador</h5>
+                                    <p>Patrick Perez</p>
+                                    <h5>Horarios</h5>
+                                    <p>Lunes y Jueves 20:30 - 22:00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección Infantil -->
+                <div class="tab-pane fade" id="infantil" role="tabpanel">
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <div class="team-card shadow p-4">
+                                <h3 class="text-center mb-4">Infantil Masculino</h3>
+                                <img src="img/equipos/infantil.JPG" class="img-fluid rounded mb-3"
+                                    alt="Equipo Infantil Masculino">
+                                <div class="mt-3">
+                                    <h5>Competición</h5>
+                                    <p>Segunda Zonal</p>
+                                    <h5>Entrenador</h5>
+                                    <p>Santiago Ocaña</p>
+                                    <h5>Horarios</h5>
+                                    <p>Lunes y Jueves 17:30 - 19:00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección Equipaciones -->
+                <div class="tab-pane fade" id="equipacion" role="tabpanel">
+                    <div id="equipacionCarousel" class="carousel slide equipment-carousel" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#equipacionCarousel" data-bs-slide-to="0"
+                                class="active"></button>
+                            <button type="button" data-bs-target="#equipacionCarousel" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#equipacionCarousel" data-bs-slide-to="2"></button>
+                            <button type="button" data-bs-target="#equipacionCarousel" data-bs-slide-to="3"></button>
+                            <button type="button" data-bs-target="#equipacionCarousel" data-bs-slide-to="4"></button>
+                            <button type="button" data-bs-target="#equipacionCarousel" data-bs-slide-to="5"></button>
+                        </div>
+                        <!-- [El contenido del carousel se mantiene igual] -->
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="equipment-card p-4">
+                                    <h3 class="text-center mb-4">Camiseta Local</h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <img src="img/equipaje/cam_loc_del.jpg" class="img-fluid rounded"
+                                                alt="Camiseta Local Delantera">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <img src="img/equipaje/cam_loc_det.jpg" class="img-fluid rounded"
+                                                alt="Camiseta Local Trasera">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [Resto de items del carousel igual que antes] -->
+                            <div class="carousel-item">
+                                <div class="equipment-card p-4">
+                                    <h3 class="text-center mb-4">Pantalón Local</h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <img src="img/equipaje/pant_loc_del.jpg" class="img-fluid rounded"
+                                                alt="Pantalón Local Delantero">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <img src="img/equipaje/pant_loc_det.jpg" class="img-fluid rounded"
+                                                alt="Pantalón Local Trasero">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="equipment-card p-4">
+                                    <h3 class="text-center mb-4">Camiseta Visitante</h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <img src="img/equipaje/cam_vis_del.jpg" class="img-fluid rounded"
+                                                alt="Camiseta Visitante Delantera">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <img src="img/equipaje/cam_vis_det.jpg" class="img-fluid rounded"
+                                                alt="Camiseta Visitante Trasera">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="equipment-card p-4">
+                                    <h3 class="text-center mb-4">Pantalón Visitante</h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <img src="img/equipaje/pant_vis_del.jpg" class="img-fluid rounded"
+                                                alt="Pantalón Visitante Delantero">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <img src="img/equipaje/pant_vis_del.jpg" class="img-fluid rounded"
+                                                alt="Pantalón Visitante Trasero">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="equipment-card p-4">
+                                    <h3 class="text-center mb-4">Chaqueta de chándal</h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <img src="img/equipaje/chaq_del.jpg" class="img-fluid rounded"
+                                                alt="Chaqueta Delantera">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <img src="img/equipaje/chaq_det.jpg" class="img-fluid rounded"
+                                                alt="Chaqueta Trasera">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="equipment-card p-4">
+                                    <h3 class="text-center mb-4">Pantalón de chándal</h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <img src="img/equipaje/pant_del.jpg" class="img-fluid rounded"
+                                                alt="Pantalón Delante">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <img src="img/equipaje/pant_det.jpg" class="img-fluid rounded"
+                                                alt="Pantalón Trasero">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#equipacionCarousel"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#equipacionCarousel"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-primary text-white py-5">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Logo y descripción -->
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="img/logo.png" alt="Logo" height="60" class="me-3">
+                        <h5 class="mb-0 fw-bold">Paiporta Basquet Club</h5>
+                    </div>
+                    <p class="mb-3">Formando deportistas y personas desde 2015. Más que un club, somos una familia.</p>
+                </div>
+
+                <!-- Enlaces rápidos -->
+                <div class="col-lg-4 d-none d-lg-block mb-4 mb-lg-0">
+                    <h5 class="fw-bold mb-3">Enlaces Rápidos</h5>
+                    <div class="row">
+                        <div class="col-6">
+                            <ul class="list-unstyled footer-links">
+                                <li><a href="index.html">Inicio</a></li>
+                                <li><a href="equipos.html">Equipos</a></li>
+                                <li><a href="galeria.html">Galería</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul class="list-unstyled footer-links">
+                                <li><a href="noticias.html">Noticias</a></li>
+                                <li><a href="conocenos.html">Conócenos</a></li>
+                                <li><a href="conocenos.html#contacto">Contacto</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contacto y redes sociales -->
+                <div class="col-lg-4 d-none d-lg-block">
+                    <h5 class="fw-bold mb-3">Contacto</h5>
+                    <ul class="list-unstyled footer-contact">
+                        <li class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            C. Literat Azorín, 36, 46200 Paiporta
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            610 55 85 70
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-envelope me-2"></i>
+                            paiportabasquetclub@gmail.com
+                        </li>
+                    </ul>
+                    <div class="social-links mt-3">
+                        <a href="https://www.instagram.com/paiportabasquet/?hl=es" target="_blank" class="me-3">
+                            <i class="fab fa-instagram fa-lg"></i>
+                        </a>
+                        <a href="https://www.facebook.com/paiportabasquetclub/?locale=es_ES" target="_blank"
+                            class="me-3">
+                            <i class="fab fa-facebook fa-lg"></i>
+                        </a>
+                        <a href="https://www.twitch.tv/paiportabasketclub" target="_blank" class="me-3">
+                            <i class="fab fa-twitch fa-lg"></i>
+                        </a>
+                        <a href="https://x.com/paiportabasquet" target="_blank">
+                            <i class="fab fa-x fa-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-top border-light mt-4 pt-4 text-center">
+                <p class="mb-0">© 2025 Paiporta Basquet Club. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

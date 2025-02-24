@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería - Paiporta Basquet Club</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/galeria.css">
+</head>
+
+<body class="pattern-bg">
+    <div class="content-wrapper">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-primary sticky-top py-3">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <img src="img/logo.png" alt="Logo Paiporta BC" height="50" class="d-inline-block">
+                    <span class="ms-3 fw-bold">Paiporta BC</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item mx-2">
+                            <a class="nav-link  fs-5" href="index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link fs-5" href="equipos.html">Equipos</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link active fs-5" href="galeria.html">Galería</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link fs-5" href="noticias.html">Noticias</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link fs-5" href="conocenos.html">Conócenos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <div class="hero-section text-center">
+            <div class="container">
+                <h1 class="display-4 fw-bold mb-4">Galería de Imágenes</h1>
+                <p class="lead">Revive los mejores momentos del Paiporta Basquet Club</p>
+            </div>
+        </div>
+
+        <!-- Contenido Principal -->
+        <div class="container my-5">
+            <!-- Filtros -->
+            <div class="row mb-5">
+                <div class="col-md-12 text-center">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-primary filter-btn active"
+                            data-filter="todos">Todos</button>
+                        <button type="button" class="btn btn-outline-primary filter-btn"
+                            data-filter="equipos">Equipos</button>
+                        <button type="button" class="btn btn-outline-primary filter-btn"
+                            data-filter="partidos">Partidos</button>
+                        <button type="button" class="btn btn-outline-primary filter-btn"
+                            data-filter="pistas">Pistas</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid de imágenes -->
+            <div class="row g-4" id="gallery-grid">
+                <div class="col-md-4 gallery-item" data-category="equipos">
+                    <div class="gallery-img-container shadow"
+                        onclick="openImageModal('img/club.jpg', 'Vista del Club')">
+                        <img src="img/club.jpg" alt="Vista del Club">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 gallery-item" data-category="pistas">
+                    <div class="gallery-img-container shadow"
+                        onclick="openImageModal('img/pista.jpg', 'Pista Principal')">
+                        <img src="img/pista.jpg" alt="Pista Principal">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 gallery-item" data-category="equipos">
+                    <div class="gallery-img-container shadow"
+                        onclick="openImageModal('img/equipos/cadete.JPG', 'Equipo Cadete')">
+                        <img src="img/equipos/cadete.JPG" alt="Equipo Cadete">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 gallery-item" data-category="equipos">
+                    <div class="gallery-img-container shadow"
+                        onclick="openImageModal('img/equipos/infantil.JPG', 'Imagen 4')">
+                        <img src="img/equipos/infantil.JPG" alt="Imagen 4">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 gallery-item" data-category="equipos">
+                    <div class="gallery-img-container shadow"
+                        onclick="openImageModal('img/equipos/junior.JPG', 'Imagen 5')">
+                        <img src="img/equipos/junior.JPG" alt="Imagen 5">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 gallery-item" data-category="equipos">
+                    <div class="gallery-img-container shadow"
+                        onclick="openImageModal('img/equipos/senior.JPG', 'Imagen 6')">
+                        <img src="img/equipos/senior.JPG" alt="Imagen 6">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 gallery-item" data-category="equipos">
+                    <div class="gallery-img-container shadow"
+                        onclick="openImageModal('img/equipos/SeniorB.jpg', 'Imagen 7')">
+                        <img src="img/equipos/SeniorB.jpg" alt="Imagen 7">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 gallery-item" data-category="partidos">
+                    <div class="gallery-img-container shadow"
+                        onclick="openImageModal('img/partidos/par1.png', 'Imagen 8')">
+                        <img src="img/partidos/par1.png" alt="Imagen 8">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 gallery-item" data-category="partidos">
+                    <div class="gallery-img-container shadow"
+                        onclick="openImageModal('img/partidos/par2.png', 'Imagen 9')">
+                        <img src="img/partidos/par2.png" alt="Imagen 9">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 gallery-item" data-category="partidos">
+                    <div class="gallery-img-container shadow"
+                        onclick="openImageModal('img/partidos/par3.png', 'Imagen 10')">
+                        <img src="img/partidos/par3.png" alt="Imagen 10">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 gallery-item" data-category="partidos">
+                    <div class="gallery-img-container shadow"
+                        onclick="openImageModal('img/partidos/par4.png', 'Imagen 11')">
+                        <img src="img/partidos/par4.png" alt="Imagen 11">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 gallery-item" data-category="partidos">
+                    <div class="gallery-img-container shadow"
+                        onclick="openImageModal('img/partidos/par5.png', 'Imagen 12')">
+                        <img src="img/partidos/par5.png" alt="Imagen 12">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal de Imagen -->
+            <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header border-0">
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center p-0">
+                            <img id="modalImage" src="" alt="" class="modal-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paginación -->
+            <nav class="mt-5">
+                <ul class="pagination justify-content-center" id="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-primary text-white py-5">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Logo y descripción -->
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="img/logo.png" alt="Logo" height="60" class="me-3">
+                        <h5 class="mb-0 fw-bold">Paiporta Basquet Club</h5>
+                    </div>
+                    <p class="mb-3">Formando deportistas y personas desde 2015. Más que un club, somos una familia.</p>
+                </div>
+
+                <!-- Enlaces rápidos -->
+                <div class="col-lg-4 d-none d-lg-block mb-4 mb-lg-0">
+                    <h5 class="fw-bold mb-3">Enlaces Rápidos</h5>
+                    <div class="row">
+                        <div class="col-6">
+                            <ul class="list-unstyled footer-links">
+                                <li><a href="index.html">Inicio</a></li>
+                                <li><a href="equipos.html">Equipos</a></li>
+                                <li><a href="galeria.html">Galería</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul class="list-unstyled footer-links">
+                                <li><a href="noticias.html">Noticias</a></li>
+                                <li><a href="conocenos.html">Conócenos</a></li>
+                                <li><a href="conocenos.html#contacto">Contacto</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contacto y redes sociales -->
+                <div class="col-lg-4 d-none d-lg-block">
+                    <h5 class="fw-bold mb-3">Contacto</h5>
+                    <ul class="list-unstyled footer-contact">
+                        <li class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            C. Literat Azorín, 36, 46200 Paiporta
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            610 55 85 70
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-envelope me-2"></i>
+                            paiportabasquetclub@gmail.com
+                        </li>
+                    </ul>
+                    <div class="social-links mt-3">
+                        <a href="https://www.instagram.com/paiportabasquet/?hl=es" target="_blank" class="me-3">
+                            <i class="fab fa-instagram fa-lg"></i>
+                        </a>
+                        <a href="https://www.facebook.com/paiportabasquetclub/?locale=es_ES" target="_blank"
+                            class="me-3">
+                            <i class="fab fa-facebook fa-lg"></i>
+                        </a>
+                        <a href="https://www.twitch.tv/paiportabasketclub" target="_blank" class="me-3">
+                            <i class="fab fa-twitch fa-lg"></i>
+                        </a>
+                        <a href="https://x.com/paiportabasquet" target="_blank">
+                            <i class="fab fa-x fa-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-top border-light mt-4 pt-4 text-center">
+                <p class="mb-0">© 2025 Paiporta Basquet Club. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function openImageModal(imgSrc, imgAlt) {
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = imgSrc;
+            modalImage.alt = imgAlt;
+
+            const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+            imageModal.show();
+        }
+
+        // Variables de configuración
+        const itemsPerPage = 6;
+        let currentPage = 1;
+        let currentFilter = 'todos';
+
+        // Función para abrir el modal
+        function openImageModal(imgSrc, imgAlt) {
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = imgSrc;
+            modalImage.alt = imgAlt;
+            const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+            imageModal.show();
+        }
+
+        // Función para filtrar y paginar las imágenes
+        function filterAndPaginate() {
+            const items = document.querySelectorAll('.gallery-item');
+            let filteredItems = Array.from(items).filter(item => {
+                return currentFilter === 'todos' || item.dataset.category === currentFilter;
+            });
+
+            // Ocultar todos los items
+            items.forEach(item => item.style.display = 'none');
+
+            // Mostrar solo los items de la página actual
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            filteredItems.slice(start, end).forEach(item => item.style.display = 'block');
+
+            // Actualizar paginación
+            updatePagination(filteredItems.length);
+        }
+
+        // Función para actualizar la paginación
+        function updatePagination(totalItems) {
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+
+            // Botón anterior
+            const prevBtn = document.createElement('li');
+            prevBtn.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+            prevBtn.innerHTML = `<a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a>`;
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    filterAndPaginate();
+                }
+            });
+            pagination.appendChild(prevBtn);
+
+            // Números de página
+            for (let i = 1; i <= totalPages; i++) {
+                const pageItem = document.createElement('li');
+                pageItem.className = `page-item ${currentPage === i ? 'active' : ''}`;
+                pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                pageItem.addEventListener('click', () => {
+                    currentPage = i;
+                    filterAndPaginate();
+                });
+                pagination.appendChild(pageItem);
+            }
+
+            // Botón siguiente
+            const nextBtn = document.createElement('li');
+            nextBtn.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+            nextBtn.innerHTML = `<a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>`;
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    filterAndPaginate();
+                }
+            });
+            pagination.appendChild(nextBtn);
+        }
+
+        // Configurar los botones de filtro
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Actualizar estado activo de los botones
+                document.querySelector('.filter-btn.active').classList.remove('active');
+                btn.classList.add('active');
+
+                // Actualizar filtro y resetear página
+                currentFilter = btn.dataset.filter;
+                currentPage = 1;
+                filterAndPaginate();
+            });
+        });
+
+        // Inicializar la galería
+        document.addEventListener('DOMContentLoaded', () => {
+            filterAndPaginate();
+        });
+    </script>
+</body>
+
+</html>
