@@ -1,0 +1,531 @@
+{
+	"info": {
+		"_postman_id": "70010c97-fcd4-480c-8de6-b5d4b5e111d3",
+		"name": "Blog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42631966"
+	},
+	"item": [
+		{
+			"name": "Get All Posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/api/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "All Post Checked",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8085/api/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Feb 2025 22:48:05 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.59 (Debian)"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.19"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "XSRF-TOKEN=eyJpdiI6Im0zZ1BMa2o3T0Q1WlBENzdwVGlGTUE9PSIsInZhbHVlIjoiSHg3VmRHQzZFV1pMWEl4ZlY5OTVDVExhb1Ixa1NhdW82NlE5amRoWVVDQkpaNm5zeWpDZGNtbjR2WFFGOG8rNEtWNnBRV3dEUHdIS1l4NjZQZVlMTElNYVlvTHJ1NGtkQzlWVU5EUzVBOVlINWJBNDN3S0kzM04rMkJzQS8reXgiLCJtYWMiOiI1NDIxYjQ2Y2JkNDgxZTkzNTY3MThjNzVjYWZhNmI1NWU5Nzc3ZGYwMDFkOTE4NWM3MGUwMWI4ZTA2MzJiZDc3IiwidGFnIjoiIn0%3D; expires=Wed, 26 Feb 2025 00:48:10 GMT; Max-Age=7200; path=/; samesite=lax"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "blog_session=eyJpdiI6InNiS3ZSV2R2SFBIY3lFZnpZZkxCSVE9PSIsInZhbHVlIjoieVhNc2hJeitaTlhsVEZvRWFQSm9KY05JS3VoNUFjS29PMnlMTkFHQ0kzSk84UXY5eGJNdUtoc3BpZU14cERBNXpLcXJGdmJ1Wm41WUpQYjlvaUcwUkQxcXRROWoreFZQNEtzZTBDR3BWUTdDMHcrNGdPMWk4Sks4cGhQa0NKOG4iLCJtYWMiOiI1ZmY0OWM2ZWM1NTRkODgxYTNiYmM2MTNhNjA4ODU1YjFkNjFhYzA2YzY3NWNjZGQ3OWM4YTcyYzg0YWRiNmQ4IiwidGFnIjoiIn0%3D; expires=Wed, 26 Feb 2025 00:48:10 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 3,\n        \"titulo\": \"Consequatur tempora omnis iste quo.\",\n        \"contenido\": \"Et culpa inventore odit provident laudantium ab nobis. Enim et quibusdam unde reprehenderit suscipit porro eius. Doloremque vel provident aspernatur. Quaerat sed officia amet cupiditate et et non.\\n\\nIn architecto eum non natus. Expedita fugiat facere explicabo nam et.\\n\\nSit odio repellat saepe et. Possimus sequi id est dolor. Qui omnis et similique libero dicta incidunt reprehenderit quod. Illum aspernatur deserunt ullam perferendis debitis libero.\",\n        \"created_at\": \"2025-02-25T21:39:09.000000Z\",\n        \"updated_at\": \"2025-02-25T21:39:09.000000Z\",\n        \"usuario_id\": 1\n    },\n    {\n        \"id\": 5,\n        \"titulo\": \"Corrupti vero voluptatem inventore quo architecto blanditiis nobis.\",\n        \"contenido\": \"Quo cupiditate dolor laboriosam eos. Consequuntur voluptate veniam aperiam qui qui omnis. Adipisci laborum in consectetur.\\n\\nA eos est et quia quas. Qui consequuntur molestiae et quibusdam repudiandae nam. Blanditiis magnam ut eius nemo labore ex repellat.\\n\\nMolestiae similique porro aut quasi et earum perferendis. Non debitis sit rerum quia recusandae quasi nemo dicta. Aspernatur dolorum non odio voluptatem eum. Quis eum esse quia unde maxime officiis et.\",\n        \"created_at\": \"2025-02-25T21:39:09.000000Z\",\n        \"updated_at\": \"2025-02-25T21:39:09.000000Z\",\n        \"usuario_id\": 2\n    },\n    {\n        \"id\": 9,\n        \"titulo\": \"Eos ipsum aperiam enim assumenda minus.\",\n        \"contenido\": \"Aut rem deserunt iusto. Perferendis rerum accusamus explicabo vero nesciunt. Quaerat et sapiente qui et in officia eligendi. Non cupiditate exercitationem excepturi exercitationem totam vero ut.\\n\\nExcepturi recusandae eos inventore deserunt atque facere voluptatum. In veniam et corporis laboriosam aliquam. Ut aut temporibus necessitatibus cumque.\\n\\nUt explicabo illo suscipit odio eum dolore sed. Aperiam incidunt magni rerum. Nemo aperiam dolore est nihil ut facilis est.\",\n        \"created_at\": \"2025-02-25T21:39:09.000000Z\",\n        \"updated_at\": \"2025-02-25T21:39:09.000000Z\",\n        \"usuario_id\": 3\n    },\n    {\n        \"id\": 4,\n        \"titulo\": \"Fugiat doloremque esse et at.\",\n        \"contenido\": \"Reprehenderit sit officia sapiente veniam porro odio illum. Nulla qui qui ratione debitis excepturi. Quis rerum rerum minus ipsum sunt praesentium.\\n\\nEt et officiis asperiores voluptates officiis similique non. Quas in quia itaque distinctio aut quo veritatis aut.\\n\\nEt nesciunt magni aperiam temporibus qui rem. Quaerat nostrum veritatis vitae dolore molestiae. Earum tempora dolore quidem blanditiis voluptatem.\",\n        \"created_at\": \"2025-02-25T21:39:09.000000Z\",\n        \"updated_at\": \"2025-02-25T21:39:09.000000Z\",\n        \"usuario_id\": 2\n    },\n    {\n        \"id\": 8,\n        \"titulo\": \"In voluptatum debitis aut vero soluta non earum aut.\",\n        \"contenido\": \"Quasi praesentium nam aliquam est. Optio natus tempora et illo.\\n\\nCumque earum veritatis saepe et. Eum et eos optio dolore. Sint velit aut enim adipisci occaecati quas quo.\\n\\nAutem quia impedit atque doloremque. Molestiae deleniti nisi repellat quae voluptatem reprehenderit.\",\n        \"created_at\": \"2025-02-25T21:39:09.000000Z\",\n        \"updated_at\": \"2025-02-25T21:39:09.000000Z\",\n        \"usuario_id\": 3\n    },\n    {\n        \"id\": 6,\n        \"titulo\": \"Odit iste ea nostrum incidunt cumque adipisci.\",\n        \"contenido\": \"Doloribus itaque asperiores voluptatum ut. Aut ratione sint aliquam beatae ab eius. Ea accusantium animi distinctio. Qui et ea consequatur fugit fuga.\\n\\nEt natus ipsam rerum quia qui maiores. Adipisci enim esse ut quas voluptatibus magnam.\\n\\nUt similique similique saepe ea nostrum minus. Iusto ipsa qui rem itaque. Ut quo eum laboriosam est.\",\n        \"created_at\": \"2025-02-25T21:39:09.000000Z\",\n        \"updated_at\": \"2025-02-25T21:39:09.000000Z\",\n        \"usuario_id\": 2\n    },\n    {\n        \"id\": 7,\n        \"titulo\": \"Perspiciatis numquam dolores dolores animi.\",\n        \"contenido\": \"Harum provident voluptates amet ratione odio. Itaque dicta et velit iure aut. Consequatur eum qui similique voluptate magnam.\\n\\nImpedit totam quia eum aut at itaque officia. Reiciendis est vel doloribus voluptatibus consequatur. Sequi ratione totam corrupti ut dolore eos eligendi. Doloremque ut voluptatem cum et.\\n\\nQuod officiis itaque dolores magnam distinctio iure rerum. Quidem asperiores a id. Sint a voluptas vel doloribus.\",\n        \"created_at\": \"2025-02-25T21:39:09.000000Z\",\n        \"updated_at\": \"2025-02-25T21:39:09.000000Z\",\n        \"usuario_id\": 3\n    },\n    {\n        \"id\": 1,\n        \"titulo\": \"Quo eum odio soluta quia provident.\",\n        \"contenido\": \"Eum rerum doloribus deleniti ut adipisci. A eligendi maiores libero totam ipsa qui et. Qui quibusdam ducimus minus autem.\\n\\nNostrum sequi aut odio illo id. Maxime quisquam nisi illo ducimus et. Suscipit quia voluptatum ut consequatur dignissimos quod corrupti. Voluptas nobis omnis dignissimos corrupti ab distinctio.\\n\\nSunt dolores molestias quo qui porro. Quo et corrupti nulla et qui corrupti debitis. Eos odit amet ut doloremque. Asperiores veritatis magni iure tenetur ut accusamus itaque.\",\n        \"created_at\": \"2025-02-25T21:39:09.000000Z\",\n        \"updated_at\": \"2025-02-25T21:39:09.000000Z\",\n        \"usuario_id\": 1\n    },\n    {\n        \"id\": 2,\n        \"titulo\": \"Voluptatibus quia rerum laborum ea commodi autem aut commodi.\",\n        \"contenido\": \"Eos debitis sed laboriosam recusandae. Velit aliquid perspiciatis labore eos. Asperiores esse error quidem totam omnis.\\n\\nQuia et omnis voluptates odio rerum ut. Voluptates ab facere unde fugit. Quis magnam et quo modi et suscipit eum. Ut quis dolorem nam voluptas impedit dolor.\\n\\nDolorem accusantium sunt possimus incidunt tempora recusandae libero. Voluptates incidunt eligendi dolor. Itaque consequatur enim in. Quam vitae perspiciatis nobis. Dolor nulla sed odio illo.\",\n        \"created_at\": \"2025-02-25T21:39:09.000000Z\",\n        \"updated_at\": \"2025-02-25T21:39:09.000000Z\",\n        \"usuario_id\": 1\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Single Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/api/posts/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Single Post Checked",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8085/api/posts/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"posts",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Feb 2025 22:48:28 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.59 (Debian)"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.19"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "XSRF-TOKEN=eyJpdiI6InhINDcvR0VNNDYvZnJvNUhWMDE3bGc9PSIsInZhbHVlIjoiK2IxMHNoUDZUMndBejNpMTFNU1RjcTE0UEpWdlE4SThjNVNJdnBCOEY2eXdGMnpPNWFBV25MbVlFdW5YUHlpMWZNenhjNHVlbHNMV0NtRmJ4dDFqQ2NOaTNLc2pPeTlaUnpLSURFVldFOEtTYURBVC9YN050Rzdtc3c1MlRZWEEiLCJtYWMiOiI4MTFjODMzMWYxNTA3NjQ3MThkNWFkYWZkODA0ZThlNTA0N2JjMmY5MGE0ZjExODAxYWFlNjc0ZDY1NjgwYTIyIiwidGFnIjoiIn0%3D; expires=Wed, 26 Feb 2025 00:48:33 GMT; Max-Age=7200; path=/; samesite=lax"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "blog_session=eyJpdiI6IjVjaS9sUG4xMytZbzFJOHpBN1ZPYlE9PSIsInZhbHVlIjoiR2x4eDZuUWJLVXIwQ0JISHF5WUxqeGdUWDVsWit3T1o5VkRuMU4zdmxocHY1azhjdjJMUGFWYlZEVEROTUhVdGlQS0JpOXZNcFZtWXcrK2NiYnFveG9JbzRyUnRSOVZ5dzlWaUpHTkMzR2tncS9pQ0xocnU1S3lKNC9oODZrd1oiLCJtYWMiOiJhNzI3NzkxYzI4YzM0OThiZGQ0YmZjNWUyM2I2YjJhMGNhMTEzOWY1YTZlMzViZjllYTQ4OTBiMzU4YTIxNGY1IiwidGFnIjoiIn0%3D; expires=Wed, 26 Feb 2025 00:48:33 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"titulo\": \"Quo eum odio soluta quia provident.\",\n    \"contenido\": \"Eum rerum doloribus deleniti ut adipisci. A eligendi maiores libero totam ipsa qui et. Qui quibusdam ducimus minus autem.\\n\\nNostrum sequi aut odio illo id. Maxime quisquam nisi illo ducimus et. Suscipit quia voluptatum ut consequatur dignissimos quod corrupti. Voluptas nobis omnis dignissimos corrupti ab distinctio.\\n\\nSunt dolores molestias quo qui porro. Quo et corrupti nulla et qui corrupti debitis. Eos odit amet ut doloremque. Asperiores veritatis magni iure tenetur ut accusamus itaque.\",\n    \"created_at\": \"2025-02-25T21:39:09.000000Z\",\n    \"updated_at\": \"2025-02-25T21:39:09.000000Z\",\n    \"usuario_id\": 1\n}"
+				}
+			]
+		},
+		{
+			"name": "Create Post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"Nuevo post de prueba\",\r\n    \"contenido\": \"Este es un contenido de prueba para la API. Debe tener al menos 50 caracteres para pasar la validación del form request.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create Post Checked",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Nuevo post de prueba\",\r\n    \"contenido\": \"Este es un contenido de prueba para la API. Debe tener al menos 50 caracteres para pasar la validación del form request.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8085/api/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Feb 2025 23:02:52 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.59 (Debian)"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.19"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "blog_session=eyJpdiI6Ik1YbnY5cUIvdXBJME9TdTN5VVlYYVE9PSIsInZhbHVlIjoidWpxMXZWSjF3eVJHMml1Y2puR0F3S0tOS0x4V0tlN2VqY3NRbGFrRmVicXhIS3dEZFdIMVNlVG9ySkxiTXpFeG9qd2xmM2hZall2SzE3YjZiRG54cm1JWjVIeUhmRXJyRGNzN1JTSFFYbUxCUHhsQ2hobDVhM3Q2NXRKNEEvRXUiLCJtYWMiOiIxZGQ1M2VkNDk1ZjFjOGY5NmY0ZjBkYTc3YzQ0NWViNjU2OWYzZWU4YWMxNDJiODIzZDU4NjA2N2VkNGIxMjFhIiwidGFnIjoiIn0%3D; expires=Wed, 26 Feb 2025 01:02:58 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"titulo\": \"Nuevo post de prueba\",\n    \"contenido\": \"Este es un contenido de prueba para la API. Debe tener al menos 50 caracteres para pasar la validación del form request.\",\n    \"usuario_id\": 1,\n    \"updated_at\": \"2025-02-25T23:02:58.000000Z\",\n    \"created_at\": \"2025-02-25T23:02:58.000000Z\",\n    \"id\": 10\n}"
+				}
+			]
+		},
+		{
+			"name": "Update Post",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"Post actualizado\",\r\n    \"contenido\": \"Este es el contenido actualizado del post. Se ha modificado a través de la API REST con método PUT. Texto con más de 50 caracteres.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/posts/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update Post Checked",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Post actualizado\",\r\n    \"contenido\": \"Este es el contenido actualizado del post. Se ha modificado a través de la API REST con método PUT. Texto con más de 50 caracteres.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8085/api/posts/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"posts",
+								"10"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Feb 2025 23:03:44 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.59 (Debian)"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.19"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "blog_session=eyJpdiI6ImdSZUdrOTduS3hrS3hwMStNQlZ2SEE9PSIsInZhbHVlIjoiR3JBVzN1Q2lwYkhrMEhJcEVpRU8yWVJmQVA4NzJNMVFYVGV5M0xDcU04dEQxU0htMWNDVTMySE8xSEtZWVNaRjVUcnlka0l5UGhPWE1FMktpS2EveW1zekFxajVQVHI1WnhLaExXT3RtQXM3dHR2T0RGWnBXakVlalcwci9LelUiLCJtYWMiOiI0MjhmYWIzMTNkMjk4MjVmNTg0OWFhOTI1Y2VhZDE2ODgwZGI4OWFmZjQzNGJhZDA1NDY3ZmNhMDQ1M2QzMWFlIiwidGFnIjoiIn0%3D; expires=Wed, 26 Feb 2025 01:03:49 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 10,\n    \"titulo\": \"Post actualizado\",\n    \"contenido\": \"Este es el contenido actualizado del post. Se ha modificado a través de la API REST con método PUT. Texto con más de 50 caracteres.\",\n    \"created_at\": \"2025-02-25T23:02:58.000000Z\",\n    \"updated_at\": \"2025-02-25T23:03:49.000000Z\",\n    \"usuario_id\": 1\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete Post",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/api/posts/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete Post Checked",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8085/api/posts/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"api",
+								"posts",
+								"10"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Feb 2025 23:04:00 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.59 (Debian)"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.19"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "blog_session=eyJpdiI6Ikl2dWpkNnJua0NpcjYrZHJmVVh0SFE9PSIsInZhbHVlIjoiWW1GQThsRVJvWlMxVW9LZmF4dWY2T3FDOTJDVk10U0pTL2E4UmNDVmc0V2JOQ21GdExGZVBnbE1kUGhWLy9KNXBnNkEyNEZ1TlBtMGwzaTZWc0RTRmxFU0d1QzRraUFYa0VZcW9jekp4TVJXMGxwKzl3a0ZmQVJsQ2FHTWI1YzkiLCJtYWMiOiIyNjA0Y2NmZThkZDZiOGU4NjNiMzZjMDEzYzhhNzBhODU2OTE2ODEwMWE4NDQ1MTg2ODczZjZkNzljMTViNzRhIiwidGFnIjoiIn0%3D; expires=Wed, 26 Feb 2025 01:04:05 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}
