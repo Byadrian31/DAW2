@@ -19,6 +19,13 @@ Este repositorio contiene los proyectos y tareas desarrollados durante el segund
 - **Herramientas de Desarrollo**: Visual Studio Code, IntelliJ, Git.
 - **Aplicaciones de Despliegue**: AWS(Amazon Web Services), AwardSpace
 
+## Instalación
+
+1. Clona este repositorio:
+```bash
+git clone https://github.com/byadrian31/DAW2.git
+```
+
 ## Autor
 
 - Adrián López Pascual
