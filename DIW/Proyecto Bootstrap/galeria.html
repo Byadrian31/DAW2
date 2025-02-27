@@ -56,21 +56,21 @@
 
         <!-- Contenido Principal -->
         <div class="container my-5">
-            <!-- Filtros -->
-            <div class="row mb-5">
-                <div class="col-md-12 text-center">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-outline-primary filter-btn active"
-                            data-filter="todos">Todos</button>
-                        <button type="button" class="btn btn-outline-primary filter-btn"
-                            data-filter="equipos">Equipos</button>
-                        <button type="button" class="btn btn-outline-primary filter-btn"
-                            data-filter="partidos">Partidos</button>
-                        <button type="button" class="btn btn-outline-primary filter-btn"
-                            data-filter="pistas">Pistas</button>
-                    </div>
-                </div>
+<!-- Filtros -->
+<div class="row mb-5">
+    <div class="col-md-12 text-center">
+        <div class="filter-buttons">
+            <div class="d-inline-block mb-2 mb-md-0">
+                <button type="button" class="btn btn-outline-primary filter-btn active me-2" data-filter="todos">Todos</button>
+                <button type="button" class="btn btn-outline-primary filter-btn" data-filter="equipos">Equipos</button>
             </div>
+            <div class="d-inline-block">
+                <button type="button" class="btn btn-outline-primary filter-btn me-2" data-filter="partidos">Partidos</button>
+                <button type="button" class="btn btn-outline-primary filter-btn" data-filter="pistas">Pistas</button>
+            </div>
+        </div>
+    </div>
+</div>
 
             <!-- Grid de imágenes -->
             <div class="row g-4" id="gallery-grid">
